@@ -6,7 +6,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       body: Center(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -14,7 +14,14 @@ class HomeScreen extends StatelessWidget {
           FloatingActionButton(
               child: Icon(color: Colors.pink, Icons.favorite_rounded),
               onPressed: () => {print("I Love You")}),
-          Text("PINK iS RARE")
+          Container(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontStyle: FontStyle.normal,
+                      color: Colors.red),
+                  "PINK iS RARE"))
         ],
       )),
     );
