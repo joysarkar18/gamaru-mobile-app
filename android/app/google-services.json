@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "119833315096",
+    "project_id": "gamaru-mobile-app",
+    "storage_bucket": "gamaru-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119833315096:android:3b6f4fd488b2f98bf0806d",
+        "android_client_info": {
+          "package_name": "com.gamaru.gamaru_mobile_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119833315096-b4jd2u4avfar80emmg8dlmd2eetnqpi9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi5dKocY8FMDdp7YmHv6RtuDG7PjoANmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119833315096-b4jd2u4avfar80emmg8dlmd2eetnqpi9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

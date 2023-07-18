@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>119833315096-3pk8781mf9p0gnbj6qd34qdk11blqdmn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.119833315096-3pk8781mf9p0gnbj6qd34qdk11blqdmn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAqjBbp6mnMT7YB0jpvvB6pAdXq5TEPWbc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>119833315096</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.gamaruMobileApp</string>
+	<key>PROJECT_ID</key>
+	<string>gamaru-mobile-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gamaru-mobile-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:119833315096:ios:1bd9a5bc74a9072df0806d</string>
+</dict>
+</plist>
