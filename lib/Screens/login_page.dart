@@ -10,13 +10,23 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.blue[100],
       body: SafeArea(
           child: Container(
-        // color: Colors.blue,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.blue[100]),
-        width: 400, margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.blue,
+              Colors.white,
+              Colors.blue,
+            ],
+          ),
+        ),
+        width: 400,
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Column(
           children: [
             Padding(
@@ -130,7 +140,7 @@ class Login extends StatelessWidget {
                     child: Text(
                       "Signup",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 106, 255, 0),
                       ),
                     ),
                   ),
