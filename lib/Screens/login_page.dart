@@ -111,28 +111,31 @@ class Login extends StatelessWidget {
             SizedBox(
               height: 265,
             ),
-            Row(
-              children: [
-                SizedBox(
-                  width: Get.width / 5,
-                ),
-                Text(
-                  style: TextStyle(),
-                  "Don't have an account?",
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    "Signup",
-                    style: TextStyle(
-                      color: Colors.blue,
+            Container(
+              margin: EdgeInsets.only(top: Get.height - 820),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: Get.width / 5,
+                  ),
+                  Text(
+                    style: TextStyle(),
+                    "Don't have an account?",
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "Signup",
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
