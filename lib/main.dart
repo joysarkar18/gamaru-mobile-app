@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:gamaru_mobile_app/Screens/login_page.dart';
+import 'package:gamaru_mobile_app/Screens/signup_page.dart';
 import 'package:get/get.dart';
 
 import 'Controllers/Login-Contollers/autehntication.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
