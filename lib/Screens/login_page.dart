@@ -123,7 +123,7 @@ class Login extends StatelessWidget {
                 height: 265,
               ),
               Container(
-                margin: EdgeInsets.only(top: Get.height - 820),
+                margin: EdgeInsets.only(top: Get.height * 0.02),
                 child: Row(
                   children: [
                     SizedBox(
