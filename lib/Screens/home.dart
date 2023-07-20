@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/login_page.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,7 +15,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           FloatingActionButton(
               child: Icon(color: Colors.pink, Icons.favorite_rounded),
-              onPressed: () => {print("I Love You")}),
+              onPressed: () => {Get.to(Login())}),
           Container(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Text(

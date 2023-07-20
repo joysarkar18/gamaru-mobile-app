@@ -21,10 +21,10 @@ class Authentication extends GetxController {
 
   _setInitScreen(User? user) {
     Timer(const Duration(seconds: 4), () {
-      user == null
-          ? Get.offAll(() =>
-              const WellcomeScreen()) //should change this to wellcome screen
-          : Get.offAll(() => const HomeScreen());
+      // user == null
+      //     ? Get.offAll(() =>
+      //         const WellcomeScreen()) //should change this to wellcome screen
+      //     : Get.offAll(() => const HomeScreen());
     });
   }
 
