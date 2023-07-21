@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:get/get.dart';
+
+import 'login-singup-screen/login_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

@@ -1,10 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:get/get.dart';
 
 import '../../Componants/glossyEffect.dart';
+import '../../Controllers/Login-Contollers/signinSignupController.dart';
+import 'login_page.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
