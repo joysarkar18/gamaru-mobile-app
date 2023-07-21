@@ -1,11 +1,25 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/signup_page.dart';
 import 'package:get/get.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool _isVisible1 = false;
+  final fromKey = GlobalKey<FormState>();
+  void updateStatus1() {
+    setState(() {
+      _isVisible1 = !_isVisible1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,100 +58,120 @@ class Login extends StatelessWidget {
                           height: 15,
                         ),
                         Form(
+                            key: fromKey,
                             child: Column(
-                          children: [
-                            TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              autofillHints: const [AutofillHints.email],
-                              // validator: (email) => email != null &&
-                              //         !EmailValidator.validate(email)
-                              //     ? "Enter a valid email"
-                              //     : null,
-                              style: TextStyle(
-                                  color: Colors.white60,
-                                  decoration: TextDecoration.none),
-                              decoration: const InputDecoration(
-                                fillColor: Colors.transparent,
-                                hintText: "Enter your Email",
-                                hintStyle: TextStyle(color: Colors.white60),
-                                prefixIcon: Icon(
-                                  Icons.email_rounded,
-                                  color: Colors.white60,
+                              children: [
+                                TextFormField(
+                                  keyboardType: TextInputType.emailAddress,
+                                  autofillHints: const [AutofillHints.email],
+                                  validator: (email) => email != null &&
+                                          !EmailValidator.validate(email)
+                                      ? "Enter a valid email"
+                                      : null,
+                                  style: TextStyle(
+                                      color: Colors.white60,
+                                      decoration: TextDecoration.none),
+                                  decoration: const InputDecoration(
+                                    fillColor: Colors.transparent,
+                                    hintText: "Enter your Email",
+                                    hintStyle: TextStyle(color: Colors.white60),
+                                    prefixIcon: Icon(
+                                      Icons.email_rounded,
+                                      color: Colors.white60,
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.white60)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.purple)),
+                                  ),
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide:
-                                        BorderSide(color: Colors.white60)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide:
-                                        BorderSide(color: Colors.purple)),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              autofillHints: const [AutofillHints.email],
-                              obscureText: true,
-                              // validator: (email) => email != null &&
-                              //         !EmailValidator.validate(email)
-                              //     ? "Enter a valid email"
-                              //     : null,
-                              style: TextStyle(
-                                  color: Colors.white60,
-                                  decoration: TextDecoration.none),
-                              decoration: const InputDecoration(
-                                fillColor: Colors.transparent,
-                                hintText: "Enter your psaaword",
-                                hintStyle: TextStyle(color: Colors.white60),
-                                prefixIcon: const Icon(
-                                  Icons.lock,
-                                  color: Colors.white60,
+                                SizedBox(
+                                  height: 15,
                                 ),
-                                suffixIcon: Icon(
-                                  Icons.remove_red_eye_rounded,
-                                  color: Colors.white60,
+                                TextFormField(
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: !_isVisible1,
+                                  validator: (value) => validatePassword(value),
+                                  style: TextStyle(
+                                      color: Colors.white60,
+                                      decoration: TextDecoration.none),
+                                  decoration: InputDecoration(
+                                    fillColor: Colors.transparent,
+                                    hintText: "Enter your psaaword",
+                                    hintStyle: TextStyle(color: Colors.white60),
+                                    prefixIcon: const Icon(
+                                      Icons.lock,
+                                      color: Colors.white60,
+                                    ),
+                                    suffixIcon: IconButton(
+                                        color: Colors.white60,
+                                        onPressed: () => updateStatus1(),
+                                        icon: Icon(_isVisible1
+                                            ? Icons.visibility
+                                            : Icons.visibility_off)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.white60)),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.purple)),
+                                  ),
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide:
-                                        BorderSide(color: Colors.white60)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide:
-                                        BorderSide(color: Colors.purple)),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Container(
-                              width: Get.width * 0.79,
-                              height: 50,
-                              decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [Colors.blue, Colors.purple]),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              child: Center(
-                                  child: Text(
-                                "Login",
-                                style: TextStyle(
-                                    color: Colors.white60,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18),
-                              )),
-                            )
-                          ],
-                        )),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    final from = fromKey.currentState!;
+                                    if (from.validate()) {
+                                      print("sign up complete");
+                                    }
+                                  },
+                                  child: Container(
+                                    width: Get.width * 0.79,
+                                    height: 50,
+                                    decoration: const BoxDecoration(
+                                        gradient: LinearGradient(
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            colors: [
+                                              Colors.blue,
+                                              Colors.purple
+                                            ]),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10))),
+                                    child: Center(
+                                        child: Text(
+                                      "Login",
+                                      style: TextStyle(
+                                          color: Colors.white60,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 18),
+                                    )),
+                                  ),
+                                )
+                              ],
+                            )),
                         SizedBox(
                           height: 10,
                         ),
@@ -230,4 +264,16 @@ class Login extends StatelessWidget {
       ),
     );
   }
+}
+
+String? validatePassword(String? pass) {
+  if (pass == null || pass.isEmpty) {
+    return "please enter the password";
+  }
+
+  if (pass.length < 5) {
+    return "password can't be to short";
+  }
+
+  return null;
 }
