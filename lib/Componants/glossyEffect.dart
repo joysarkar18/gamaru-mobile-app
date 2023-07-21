@@ -7,13 +7,16 @@ class GlossyCard extends StatelessWidget {
   final width;
   final borderRadius;
   final child;
+  final borderWith;
 
-  const GlossyCard(
-      {super.key,
-      required this.height,
-      required this.width,
-      required this.borderRadius,
-      required this.child});
+  const GlossyCard({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.borderRadius,
+    required this.child,
+    required this.borderWith,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class GlossyCard extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(borderRadius),
                 border: Border.all(
-                  width: 0.8,
+                  width: borderWith,
                   color: Colors.white.withOpacity(0.43),
                 ),
                 gradient: LinearGradient(
