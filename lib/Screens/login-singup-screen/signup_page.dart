@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Componants/glossyEffect.dart';
+import '../../Controllers/Login-Contollers/signinSignupController.dart';
 import 'login_page.dart';
 
 class SignUp extends StatefulWidget {
