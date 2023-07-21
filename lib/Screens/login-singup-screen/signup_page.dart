@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:get/get.dart';
 
 import '../../Componants/glossyEffect.dart';
@@ -49,9 +47,8 @@ class SignUp extends StatelessWidget {
                             child: Column(
                           children: [
                             TextFormField(
-                              controller:
-                                  signupController.phoneNumberController,
-                              keyboardType: TextInputType.phone,
+                              keyboardType: TextInputType.emailAddress,
+                              autofillHints: const [AutofillHints.email],
                               // validator: (email) => email != null &&
                               //         !EmailValidator.validate(email)
                               //     ? "Enter a valid email"
@@ -83,7 +80,6 @@ class SignUp extends StatelessWidget {
                               height: 15,
                             ),
                             TextFormField(
-                              controller: signupController.emailController,
                               keyboardType: TextInputType.emailAddress,
                               autofillHints: const [AutofillHints.email],
                               // validator: (email) => email != null &&
@@ -117,9 +113,8 @@ class SignUp extends StatelessWidget {
                               height: 15,
                             ),
                             TextFormField(
-                              controller: signupController.passwordController1,
-                              keyboardType: TextInputType.visiblePassword,
-
+                              keyboardType: TextInputType.emailAddress,
+                              autofillHints: const [AutofillHints.email],
                               obscureText: true,
                               // validator: (email) => email != null &&
                               //         !EmailValidator.validate(email)
@@ -156,9 +151,8 @@ class SignUp extends StatelessWidget {
                               height: 15,
                             ),
                             TextFormField(
-                              controller: signupController.passwordController2,
-                              keyboardType: TextInputType.visiblePassword,
-
+                              keyboardType: TextInputType.emailAddress,
+                              autofillHints: const [AutofillHints.email],
                               obscureText: true,
                               // validator: (email) => email != null &&
                               //         !EmailValidator.validate(email)
@@ -194,36 +188,24 @@ class SignUp extends StatelessWidget {
                             SizedBox(
                               height: 15,
                             ),
-                            InkWell(
-                              onTap: () {
-                                signupController.registerUser(
-                                    signupController.emailController.text,
-                                    signupController.passwordController1.text);
-
-                                print("sign up complete");
-                              },
-                              child: Container(
-                                width: Get.width * 0.79,
-                                height: 50,
-                                decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                        colors: [
-                                          Colors.purple,
-                                          Colors.blue,
-                                        ]),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: Center(
-                                    child: Text(
-                                  "Signup",
-                                  style: TextStyle(
-                                      color: Colors.white60,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 18),
-                                )),
-                              ),
+                            Container(
+                              width: Get.width * 0.79,
+                              height: 50,
+                              decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [Colors.blue, Colors.purple]),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Center(
+                                  child: Text(
+                                "Signup",
+                                style: TextStyle(
+                                    color: Colors.white60,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18),
+                              )),
                             )
                           ],
                         )),
@@ -267,10 +249,6 @@ class SignUp extends StatelessWidget {
                               style: TextStyle(color: Colors.white60),
                             ),
                             InkWell(
-                              onTap: () {
-                                Get.off(Login(),
-                                    transition: Transition.rightToLeft);
-                              },
                               child: Text(
                                 "  Login",
                                 style: TextStyle(color: Colors.blue),
