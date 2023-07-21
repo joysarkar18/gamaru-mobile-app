@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
+import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:get/get.dart';
 
 import '../../Componants/glossyEffect.dart';
@@ -8,11 +10,13 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final signupController = Get.put(SignupController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("Assets/BgLogin1.png"), fit: BoxFit.cover)),
+                image: AssetImage("Assets/bgsignin.png"), fit: BoxFit.cover)),
         child: Container(
           padding: EdgeInsets.only(top: 30),
           child: Center(
@@ -45,8 +49,9 @@ class SignUp extends StatelessWidget {
                             child: Column(
                           children: [
                             TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              autofillHints: const [AutofillHints.email],
+                              controller:
+                                  signupController.phoneNumberController,
+                              keyboardType: TextInputType.phone,
                               // validator: (email) => email != null &&
                               //         !EmailValidator.validate(email)
                               //     ? "Enter a valid email"
@@ -78,6 +83,7 @@ class SignUp extends StatelessWidget {
                               height: 15,
                             ),
                             TextFormField(
+                              controller: signupController.emailController,
                               keyboardType: TextInputType.emailAddress,
                               autofillHints: const [AutofillHints.email],
                               // validator: (email) => email != null &&
@@ -111,8 +117,9 @@ class SignUp extends StatelessWidget {
                               height: 15,
                             ),
                             TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              autofillHints: const [AutofillHints.email],
+                              controller: signupController.passwordController1,
+                              keyboardType: TextInputType.visiblePassword,
+
                               obscureText: true,
                               // validator: (email) => email != null &&
                               //         !EmailValidator.validate(email)
@@ -149,8 +156,9 @@ class SignUp extends StatelessWidget {
                               height: 15,
                             ),
                             TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              autofillHints: const [AutofillHints.email],
+                              controller: signupController.passwordController2,
+                              keyboardType: TextInputType.visiblePassword,
+
                               obscureText: true,
                               // validator: (email) => email != null &&
                               //         !EmailValidator.validate(email)
@@ -186,24 +194,36 @@ class SignUp extends StatelessWidget {
                             SizedBox(
                               height: 15,
                             ),
-                            Container(
-                              width: Get.width * 0.79,
-                              height: 50,
-                              decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [Colors.blue, Colors.purple]),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              child: Center(
-                                  child: Text(
-                                "Signup",
-                                style: TextStyle(
-                                    color: Colors.white60,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18),
-                              )),
+                            InkWell(
+                              onTap: () {
+                                signupController.registerUser(
+                                    signupController.emailController.text,
+                                    signupController.passwordController1.text);
+
+                                print("sign up complete");
+                              },
+                              child: Container(
+                                width: Get.width * 0.79,
+                                height: 50,
+                                decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: [
+                                          Colors.purple,
+                                          Colors.blue,
+                                        ]),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: Center(
+                                    child: Text(
+                                  "Signup",
+                                  style: TextStyle(
+                                      color: Colors.white60,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18),
+                                )),
+                              ),
                             )
                           ],
                         )),
@@ -247,6 +267,10 @@ class SignUp extends StatelessWidget {
                               style: TextStyle(color: Colors.white60),
                             ),
                             InkWell(
+                              onTap: () {
+                                Get.off(Login(),
+                                    transition: Transition.rightToLeft);
+                              },
                               child: Text(
                                 "  Login",
                                 style: TextStyle(color: Colors.blue),

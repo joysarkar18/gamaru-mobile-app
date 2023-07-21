@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Screens/login_page.dart';
+import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {

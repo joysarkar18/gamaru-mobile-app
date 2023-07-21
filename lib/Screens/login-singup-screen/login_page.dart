@@ -10,6 +10,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -187,6 +188,12 @@ class Login extends StatelessWidget {
                               style: TextStyle(color: Colors.white60),
                             ),
                             InkWell(
+                              onTap: () {
+                                Get.off(
+                                  SignUp(),
+                                  transition: Transition.leftToRight,
+                                );
+                              },
                               child: Text(
                                 "  Signup",
                                 style: TextStyle(color: Colors.blue),

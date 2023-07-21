@@ -9,8 +9,10 @@ class SignupController extends GetxController {
   //Testfield controllers to get data from textfield
 
   var nameController = TextEditingController();
+  var phoneNumberController = TextEditingController();
   var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  var passwordController1 = TextEditingController();
+  var passwordController2 = TextEditingController();
 
   void registerUser(String email, String password) {
     Authentication.instance.createUserWithEmailPassword(email, password);
