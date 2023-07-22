@@ -1,5 +1,7 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/otp_page.dart';
 import 'package:get/get.dart';
 
 import '../../Componants/glossyEffect.dart';
@@ -242,16 +244,34 @@ class _SignUpState extends State<SignUp> {
                                     height: 15,
                                   ),
                                   InkWell(
-                                    onTap: () {
+                                    onTap: () async {
                                       final from = fromKey.currentState!;
                                       if (from.validate()) {
-                                        signupController.registerUser(
-                                            signupController
-                                                .emailController.text,
-                                            signupController
-                                                .passwordController1.text);
+                                        // signupController.registerUser(
+                                        //     signupController
+                                        //         .emailController.text,
+                                        //     signupController
+                                        //         .passwordController1.text);
 
-                                        print("sign up complete");
+                                        await FirebaseAuth.instance
+                                            .verifyPhoneNumber(
+                                          phoneNumber: "+91" +
+                                              signupController
+                                                  .phoneNumberController.text,
+                                          verificationCompleted:
+                                              (PhoneAuthCredential
+                                                  credential) {},
+                                          verificationFailed:
+                                              (FirebaseAuthException e) {},
+                                          codeSent: (String verificationId,
+                                              int? resendToken) {},
+                                          codeAutoRetrievalTimeout:
+                                              (String verificationId) {},
+                                        )
+                                            .then((value) {
+                                          print("sign up complete");
+                                          Get.to(OtpPage());
+                                        });
                                       }
                                     },
                                     child: Container(
@@ -315,7 +335,7 @@ class _SignUpState extends State<SignUp> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Don't have account ?",
+                                "Already have account ?",
                                 style: TextStyle(color: Colors.white60),
                               ),
                               InkWell(
