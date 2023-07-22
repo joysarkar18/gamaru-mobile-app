@@ -83,43 +83,43 @@ class _SignUpState extends State<SignUp> {
                               key: fromKey,
                               child: Column(
                                 children: [
-                                  TextFormField(
-                                    controller:
-                                        signupController.phoneNumberController,
-                                    keyboardType: TextInputType.phone,
-                                    validator: (value) => validatePhone(value),
-                                    style: TextStyle(
-                                        color: Colors.white60,
-                                        decoration: TextDecoration.none),
-                                    decoration: const InputDecoration(
-                                      fillColor: Colors.transparent,
-                                      hintText: "Phone no",
-                                      hintStyle:
-                                          TextStyle(color: Colors.white60),
-                                      prefixIcon: Icon(
-                                        Icons.phone_android,
-                                        color: Colors.white60,
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          borderSide: BorderSide(
-                                              color: Colors.white60)),
-                                      errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          borderSide:
-                                              BorderSide(color: Colors.red)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          borderSide:
-                                              BorderSide(color: Colors.purple)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
+                                  // TextFormField(
+                                  //   controller:
+                                  //       signupController.phoneNumberController,
+                                  //   keyboardType: TextInputType.phone,
+                                  //   validator: (value) => validatePhone(value),
+                                  //   style: TextStyle(
+                                  //       color: Colors.white60,
+                                  //       decoration: TextDecoration.none),
+                                  //   decoration: const InputDecoration(
+                                  //     fillColor: Colors.transparent,
+                                  //     hintText: "Phone no",
+                                  //     hintStyle:
+                                  //         TextStyle(color: Colors.white60),
+                                  //     prefixIcon: Icon(
+                                  //       Icons.phone_android,
+                                  //       color: Colors.white60,
+                                  //     ),
+                                  //     enabledBorder: OutlineInputBorder(
+                                  //         borderRadius: BorderRadius.all(
+                                  //             Radius.circular(10)),
+                                  //         borderSide: BorderSide(
+                                  //             color: Colors.white60)),
+                                  //     errorBorder: OutlineInputBorder(
+                                  //         borderRadius: BorderRadius.all(
+                                  //             Radius.circular(10)),
+                                  //         borderSide:
+                                  //             BorderSide(color: Colors.red)),
+                                  //     focusedBorder: OutlineInputBorder(
+                                  //         borderRadius: BorderRadius.all(
+                                  //             Radius.circular(10)),
+                                  //         borderSide:
+                                  //             BorderSide(color: Colors.purple)),
+                                  //   ),
+                                  // ),
+                                  // SizedBox(
+                                  //   height: 15,
+                                  // ),
                                   TextFormField(
                                     controller:
                                         signupController.emailController,
@@ -253,7 +253,14 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 15,
+                                    height: 5,
+                                  ),
+                                  Obx(() => Text(
+                                        authentication.errorMsgup!.value,
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 5,
                                   ),
                                   InkWell(
                                     onTap: () async {
@@ -263,26 +270,11 @@ class _SignUpState extends State<SignUp> {
                                                 .passwordController1.text ==
                                             signupController
                                                 .passwordController2.text) {
-                                          await FirebaseAuth.instance
-                                              .verifyPhoneNumber(
-                                            phoneNumber: "+91" +
-                                                signupController
-                                                    .phoneNumberController.text,
-                                            verificationCompleted:
-                                                (PhoneAuthCredential
-                                                    credential) {},
-                                            verificationFailed:
-                                                (FirebaseAuthException e) {},
-                                            codeSent: (String verificationId,
-                                                int? resendToken) {
-                                              signupController.verificationId =
-                                                  verificationId;
-                                              print("sign up complete");
-                                              Get.to(OtpPage());
-                                            },
-                                            codeAutoRetrievalTimeout:
-                                                (String verificationId) {},
-                                          );
+                                          signupController.registerUser(
+                                              signupController
+                                                  .emailController.text,
+                                              signupController
+                                                  .passwordController1.text);
                                         } else {
                                           setState(() {
                                             equalOrnot = false;
@@ -344,6 +336,30 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ]),
                           ]),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  authentication.handleSignIn();
+                                },
+                                child: GlossyCard(
+                                  height: 50.0,
+                                  width: 50.0,
+                                  borderRadius: 15.0,
+                                  borderWith: 1.1,
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "Assets/googleLogo.png"))),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 20,
                           ),

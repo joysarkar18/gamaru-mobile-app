@@ -236,8 +236,32 @@ class _LoginState extends State<Login> {
                             ),
                           ]),
                         ]),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                authentication.handleSignIn();
+                              },
+                              child: GlossyCard(
+                                height: 50.0,
+                                width: 50.0,
+                                borderRadius: 15.0,
+                                borderWith: 1.1,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "Assets/googleLogo.png"))),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         SizedBox(
-                          height: 20,
+                          height: 40,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -261,7 +285,7 @@ class _LoginState extends State<Login> {
                           ],
                         ),
                         SizedBox(
-                          height: 25,
+                          height: 20,
                         ),
                         Container(
                           width: Get.width * 0.79,

@@ -5,6 +5,7 @@ import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:gamaru_mobile_app/Screens/otp_page.dart';
 import 'package:gamaru_mobile_app/Screens/splash_scree.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication extends GetxController {
   static Authentication get instance => Get.find();
@@ -23,7 +24,7 @@ class Authentication extends GetxController {
   }
 
   _setInitScreen(User? user) {
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 1), () {
       user == null
           ? Get.offAll(
               () => const Login()) //should change this to wellcome screen
@@ -38,7 +39,7 @@ class Authentication extends GetxController {
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
-        errorMsgup!.value = "Already have account! Sign In";
+        errorMsgup!.value = "Already have account! Login";
       } else if (e.code == "wrong-password") {
         errorMsgup!.value = "Wrong password";
       } else {
@@ -58,6 +59,23 @@ class Authentication extends GetxController {
       } else {
         errorMsg!.value = "An error occourd";
       }
+    }
+  }
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+
+  Future<void> handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      errorMsg!.value = "An error occourd";
+      errorMsgup!.value = "An error occourd";
+      print(error);
     }
   }
 
