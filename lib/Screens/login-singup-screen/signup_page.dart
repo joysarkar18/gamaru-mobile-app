@@ -341,7 +341,7 @@ class _SignUpState extends State<SignUp> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  authentication.handleSignIn();
+                                  authentication.googleSignIn();
                                 },
                                 child: GlossyCard(
                                   height: 50.0,

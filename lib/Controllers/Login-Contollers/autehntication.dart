@@ -62,21 +62,15 @@ class Authentication extends GetxController {
     }
   }
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
+  googleSignIn() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-  Future<void> handleSignIn() async {
-    try {
-      await _googleSignIn.signIn();
-    } catch (error) {
-      errorMsg!.value = "An error occourd";
-      errorMsgup!.value = "An error occourd";
-      print(error);
-    }
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    _auth.signInWithCredential(credential);
   }
 
   Future<void> logOut() async => await _auth.signOut();
