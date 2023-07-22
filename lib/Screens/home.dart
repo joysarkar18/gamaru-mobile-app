@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Controllers/Login-Contollers/autehntication.dart';
+import '../Controllers/Login-Contollers/signinSignupController.dart';
 import 'login-singup-screen/login_page.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,6 +10,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final signupController = Get.put(SignupController());
+    final Authentication authentication = Get.put(Authentication());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -16,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           FloatingActionButton(
               child: Icon(color: Colors.pink, Icons.favorite_rounded),
-              onPressed: () => {Get.to(Login())}),
+              onPressed: () => {authentication.logOut()}),
           Container(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Text(

@@ -22,12 +22,17 @@ class SplashState extends State<Splash> {
   // ignore: non_constant_identifier_names
   static String KEYLOGIN = "login";
 
-  @override
   void initState() {
     super.initState();
-
-    whereToGo();
+    Timer(const Duration(milliseconds: 300), () {});
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   whereToGo();
+  // }
 
   @override
   Widget build(BuildContext context) {

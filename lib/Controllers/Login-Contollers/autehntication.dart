@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:gamaru_mobile_app/Screens/otp_page.dart';
+import 'package:gamaru_mobile_app/Screens/splash_scree.dart';
 import 'package:get/get.dart';
 
 class Authentication extends GetxController {
@@ -22,9 +23,10 @@ class Authentication extends GetxController {
   }
 
   _setInitScreen(User? user) {
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 3), () {
       user == null
-          ? Get.offAll(() => Login()) //should change this to wellcome screen
+          ? Get.offAll(
+              () => const Login()) //should change this to wellcome screen
           : Get.offAll(() => const HomeScreen());
     });
   }
