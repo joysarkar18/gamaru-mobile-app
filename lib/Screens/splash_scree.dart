@@ -35,38 +35,33 @@ class SplashState extends State<Splash> {
       resizeToAvoidBottomInset: true,
 
       // backgroundColor: Colors.blue,
-      body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(color: Color.fromARGB(255, 113, 111, 111)),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 82, 25, 103),
+                // Color.fromARGB(78, 41, 36, 36),
+                Color.fromARGB(140, 108, 50, 255),
+                Color.fromARGB(232, 42, 42, 42),
+              ]),
+        ),
+        child: Center(
           child: Center(
-            child: GlossyCard(
-              borderWith: 0.0,
-              height: Get.height * 0.85,
-              width: Get.width * 0.89,
-              borderRadius: 15.0,
-              child: Center(
-                child: Container(
-                  color: Colors.transparent,
-                  height: Get.height * .85,
-                  width: Get.width * 75,
-                  // decoration: BoxDecoration(color: Colors.white60
-                  //     // gradient: LinearGradient(
-                  //     //   begin: Alignment.bottomLeft,
-                  //     //   end: Alignment.bottomRight,
-                  //     //   colors: [Colors.blue, Colors.purple],
-                  //     // ),
-                  //     ),
-                  child: SafeArea(
-                    child: Center(
-                      child: Image(
-                        image: AssetImage(
-                          "Assets/AI ENHANCED.png",
-                        ),
-                      ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("Assets/aro boro baal.png"),
                     ),
                   ),
+                  height: Get.height * .85,
+                  width: Get.width * 75,
                 ),
-              ),
+              ],
             ),
           ),
         ),
