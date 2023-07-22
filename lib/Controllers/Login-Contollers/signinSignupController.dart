@@ -13,12 +13,13 @@ class SignupController extends GetxController {
   var emailController = TextEditingController();
   var passwordController1 = TextEditingController();
   var passwordController2 = TextEditingController();
+  String verificationId = "";
 
   void registerUser(String email, String password) {
     Authentication.instance.createUserWithEmailPassword(email, password);
   }
 
-  void loginUser(String email, String password) {
-    Authentication.instance.loginUserWithEmailPassword(email, password);
+  void loginUser(String email, String password) async {
+    await Authentication.instance.loginUserWithEmailPassword(email, password);
   }
 }

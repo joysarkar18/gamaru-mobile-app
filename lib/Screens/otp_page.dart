@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:get/get.dart';
+
+import '../Controllers/Login-Contollers/signinSignupController.dart';
 
 class OtpPage extends StatefulWidget {
   @override
@@ -8,6 +12,8 @@ class OtpPage extends StatefulWidget {
 }
 
 class _OtpPageState extends State<OtpPage> {
+  final signupController = Get.put(SignupController());
+  final auth = FirebaseAuth.instance;
   final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
   final List<TextEditingController> _controllers =
       List.generate(6, (index) => TextEditingController());
@@ -27,13 +33,23 @@ class _OtpPageState extends State<OtpPage> {
     }
   }
 
-  void _verifyOtp() {
+  void _verifyOtp() async {
     String enteredOtp = '';
     for (var controller in _controllers) {
       enteredOtp += controller.text;
     }
-    // Implement your OTP verification logic here
-    // For simplicity, we will just print the entered OTP for now.
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: signupController.verificationId, smsCode: enteredOtp);
+    try {
+      await auth.signInWithCredential(credential).then((value) {
+        signupController.registerUser(signupController.emailController.text,
+            signupController.passwordController1.text);
+        Get.offAll(HomeScreen());
+      });
+    } catch (e) {
+      print("verification faild");
+    }
+
     print('Entered OTP: $enteredOtp');
   }
 
@@ -80,9 +96,9 @@ class _OtpPageState extends State<OtpPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
-                        4,
+                        6,
                         (index) => SizedBox(
-                          width: 60,
+                          width: 50,
                           height: 60,
                           child: AnimatedBuilder(
                             animation: _focusNodes[index],

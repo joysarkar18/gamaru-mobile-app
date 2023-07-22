@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Screens/otp_page.dart';
 import 'package:get/get.dart';
-
 import '../../Componants/glossyEffect.dart';
+import '../../Controllers/Login-Contollers/autehntication.dart';
 import '../../Controllers/Login-Contollers/signinSignupController.dart';
 import 'login_page.dart';
 
@@ -16,6 +16,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool equalOrnot = true;
+  final Authentication authentication = Get.put(Authentication());
+  final signupController = Get.put(SignupController());
   bool _isVisible1 = false;
   bool _isVisible2 = false;
   final fromKey = GlobalKey<FormState>();
@@ -32,8 +35,13 @@ class _SignUpState extends State<SignUp> {
   }
 
   @override
+  void dispose() {
+    authentication.errorMsgup!.value = "";
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final signupController = Get.put(SignupController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -232,46 +240,61 @@ class _SignUpState extends State<SignUp> {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)),
                                           borderSide: BorderSide(
-                                              color: Colors.white60)),
+                                              color: equalOrnot
+                                                  ? Colors.white60
+                                                  : Colors.red)),
                                       focusedBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)),
-                                          borderSide:
-                                              BorderSide(color: Colors.purple)),
+                                          borderSide: BorderSide(
+                                              color: equalOrnot
+                                                  ? Colors.purple
+                                                  : Colors.red)),
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 15,
+                                    height: 10,
+                                  ),
+                                  Obx(() => Text(
+                                        authentication.errorMsgup!.value,
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  SizedBox(
+                                    height: 5,
                                   ),
                                   InkWell(
                                     onTap: () async {
                                       final from = fromKey.currentState!;
                                       if (from.validate()) {
-                                        // signupController.registerUser(
-                                        //     signupController
-                                        //         .emailController.text,
-                                        //     signupController
-                                        //         .passwordController1.text);
-
-                                        await FirebaseAuth.instance
-                                            .verifyPhoneNumber(
-                                          phoneNumber: "+91" +
-                                              signupController
-                                                  .phoneNumberController.text,
-                                          verificationCompleted:
-                                              (PhoneAuthCredential
-                                                  credential) {},
-                                          verificationFailed:
-                                              (FirebaseAuthException e) {},
-                                          codeSent: (String verificationId,
-                                              int? resendToken) {},
-                                          codeAutoRetrievalTimeout:
-                                              (String verificationId) {},
-                                        )
-                                            .then((value) {
-                                          print("sign up complete");
-                                          Get.to(OtpPage());
-                                        });
+                                        if (signupController
+                                                .passwordController1.text ==
+                                            signupController
+                                                .passwordController2.text) {
+                                          await FirebaseAuth.instance
+                                              .verifyPhoneNumber(
+                                            phoneNumber: "+91" +
+                                                signupController
+                                                    .phoneNumberController.text,
+                                            verificationCompleted:
+                                                (PhoneAuthCredential
+                                                    credential) {},
+                                            verificationFailed:
+                                                (FirebaseAuthException e) {},
+                                            codeSent: (String verificationId,
+                                                int? resendToken) {
+                                              signupController.verificationId =
+                                                  verificationId;
+                                              print("sign up complete");
+                                              Get.to(OtpPage());
+                                            },
+                                            codeAutoRetrievalTimeout:
+                                                (String verificationId) {},
+                                          );
+                                        } else {
+                                          setState(() {
+                                            equalOrnot = false;
+                                          });
+                                        }
                                       }
                                     },
                                     child: Container(
@@ -401,6 +424,9 @@ String? validatePhone(String? pass) {
   }
 
   if (pass.length < 10) {
+    return "wrong number please check!";
+  }
+  if (pass.length > 10) {
     return "wrong number please check!";
   }
 

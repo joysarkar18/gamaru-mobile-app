@@ -2,6 +2,9 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Controllers/Login-Contollers/autehntication.dart';
+import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
+import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/signup_page.dart';
 import 'package:get/get.dart';
 
@@ -13,12 +16,20 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final signupController = Get.put(SignupController());
+  final Authentication authentication = Get.put(Authentication());
   bool _isVisible1 = false;
   final fromKey = GlobalKey<FormState>();
   void updateStatus1() {
     setState(() {
       _isVisible1 = !_isVisible1;
     });
+  }
+
+  @override
+  void dispose() {
+    authentication.errorMsg!.value = "";
+    super.dispose();
   }
 
   @override
@@ -62,6 +73,7 @@ class _LoginState extends State<Login> {
                             child: Column(
                               children: [
                                 TextFormField(
+                                  controller: signupController.emailController,
                                   keyboardType: TextInputType.emailAddress,
                                   autofillHints: const [AutofillHints.email],
                                   validator: (email) => email != null &&
@@ -100,6 +112,8 @@ class _LoginState extends State<Login> {
                                   height: 15,
                                 ),
                                 TextFormField(
+                                  controller:
+                                      signupController.passwordController1,
                                   keyboardType: TextInputType.visiblePassword,
                                   obscureText: !_isVisible1,
                                   validator: (value) => validatePassword(value),
@@ -138,12 +152,23 @@ class _LoginState extends State<Login> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 15,
+                                  height: 10,
+                                ),
+                                Obx(() => Text(
+                                      authentication.errorMsg!.value,
+                                      style: TextStyle(color: Colors.red),
+                                    )),
+                                SizedBox(
+                                  height: 5,
                                 ),
                                 InkWell(
                                   onTap: () {
                                     final from = fromKey.currentState!;
                                     if (from.validate()) {
+                                      signupController.loginUser(
+                                          signupController.emailController.text,
+                                          signupController
+                                              .passwordController1.text);
                                       print("sign up complete");
                                     }
                                   },
