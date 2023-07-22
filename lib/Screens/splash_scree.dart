@@ -27,13 +27,6 @@ class SplashState extends State<Splash> {
     Timer(const Duration(milliseconds: 300), () {});
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   whereToGo();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

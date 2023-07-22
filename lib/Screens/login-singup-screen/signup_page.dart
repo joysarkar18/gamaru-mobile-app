@@ -253,14 +253,7 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 10,
-                                  ),
-                                  Obx(() => Text(
-                                        authentication.errorMsgup!.value,
-                                        style: TextStyle(color: Colors.red),
-                                      )),
-                                  SizedBox(
-                                    height: 5,
+                                    height: 15,
                                   ),
                                   InkWell(
                                     onTap: () async {

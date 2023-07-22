@@ -4,6 +4,7 @@ import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:get/get.dart';
 
+import '../Controllers/Login-Contollers/autehntication.dart';
 import '../Controllers/Login-Contollers/signinSignupController.dart';
 
 class OtpPage extends StatefulWidget {
@@ -12,6 +13,7 @@ class OtpPage extends StatefulWidget {
 }
 
 class _OtpPageState extends State<OtpPage> {
+  final Authentication authentication = Get.put(Authentication());
   final signupController = Get.put(SignupController());
   final auth = FirebaseAuth.instance;
   final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
@@ -44,10 +46,9 @@ class _OtpPageState extends State<OtpPage> {
       await auth.signInWithCredential(credential).then((value) {
         signupController.registerUser(signupController.emailController.text,
             signupController.passwordController1.text);
-        Get.offAll(HomeScreen());
       });
     } catch (e) {
-      print("verification faild");
+      authentication.errorMsgup!.value = "Wrong otp";
     }
 
     print('Entered OTP: $enteredOtp');
@@ -138,7 +139,12 @@ class _OtpPageState extends State<OtpPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
+                    Obx(() => Text(
+                          authentication.errorMsgup!.value,
+                          style: TextStyle(color: Colors.red),
+                        )),
+                    SizedBox(height: 10),
                     InkWell(
                       onTap: _verifyOtp,
                       child: Container(
