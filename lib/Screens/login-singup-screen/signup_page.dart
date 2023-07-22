@@ -247,31 +247,13 @@ class _SignUpState extends State<SignUp> {
                                     onTap: () async {
                                       final from = fromKey.currentState!;
                                       if (from.validate()) {
-                                        // signupController.registerUser(
-                                        //     signupController
-                                        //         .emailController.text,
-                                        //     signupController
-                                        //         .passwordController1.text);
+                                        signupController.registerUser(
+                                            signupController
+                                                .emailController.text,
+                                            signupController
+                                                .passwordController1.text);
 
-                                        await FirebaseAuth.instance
-                                            .verifyPhoneNumber(
-                                          phoneNumber: "+91" +
-                                              signupController
-                                                  .phoneNumberController.text,
-                                          verificationCompleted:
-                                              (PhoneAuthCredential
-                                                  credential) {},
-                                          verificationFailed:
-                                              (FirebaseAuthException e) {},
-                                          codeSent: (String verificationId,
-                                              int? resendToken) {},
-                                          codeAutoRetrievalTimeout:
-                                              (String verificationId) {},
-                                        )
-                                            .then((value) {
-                                          print("sign up complete");
-                                          Get.to(OtpPage());
-                                        });
+                                        print("sign up complete");
                                       }
                                     },
                                     child: Container(
