@@ -39,37 +39,37 @@ class _LoginState extends State<Login> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("Assets/BgLogin1.png"),
                     fit: BoxFit.cover)),
             child: Container(
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               child: Center(
                 child: GlossyCard(
                     borderWith: 0.4,
                     height: Get.height * 0.75,
                     width: Get.width * 0.89,
                     borderRadius: 15.0,
-                    child: Container(
+                    child: SizedBox(
                         width: Get.width * 0.79,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               "Login",
                               style: TextStyle(
                                   color: Colors.white70,
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(
+                            const Text(
                               "Glad you're back!",
                               style: TextStyle(
                                   color: Colors.white70, fontSize: 16),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             Form(
@@ -87,7 +87,7 @@ class _LoginState extends State<Login> {
                                               !EmailValidator.validate(email)
                                           ? "Enter a valid email"
                                           : null,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white60,
                                           decoration: TextDecoration.none),
                                       decoration: const InputDecoration(
@@ -116,7 +116,7 @@ class _LoginState extends State<Login> {
                                                 color: Colors.purple)),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     TextFormField(
@@ -127,14 +127,14 @@ class _LoginState extends State<Login> {
                                       obscureText: !_isVisible1,
                                       validator: (value) =>
                                           validatePassword(value),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white60,
                                           decoration: TextDecoration.none),
                                       decoration: InputDecoration(
                                         fillColor: Colors.transparent,
                                         hintText: "Enter your psaaword",
-                                        hintStyle:
-                                            TextStyle(color: Colors.white60),
+                                        hintStyle: const TextStyle(
+                                            color: Colors.white60),
                                         prefixIcon: const Icon(
                                           Icons.lock,
                                           color: Colors.white60,
@@ -145,31 +145,32 @@ class _LoginState extends State<Login> {
                                             icon: Icon(_isVisible1
                                                 ? Icons.visibility
                                                 : Icons.visibility_off)),
-                                        enabledBorder: OutlineInputBorder(
+                                        enabledBorder: const OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10)),
                                             borderSide: BorderSide(
                                                 color: Colors.white60)),
-                                        errorBorder: OutlineInputBorder(
+                                        errorBorder: const OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10)),
                                             borderSide:
                                                 BorderSide(color: Colors.red)),
-                                        focusedBorder: OutlineInputBorder(
+                                        focusedBorder: const OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10)),
                                             borderSide: BorderSide(
                                                 color: Colors.purple)),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Obx(() => Text(
                                           authentication.errorMsg!.value,
-                                          style: TextStyle(color: Colors.red),
+                                          style: const TextStyle(
+                                              color: Colors.red),
                                         )),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     InkWell(
@@ -183,7 +184,6 @@ class _LoginState extends State<Login> {
                                                   .emailController.text,
                                               signupController
                                                   .passwordController1.text);
-                                          print("sign up complete");
                                         }
                                       },
                                       child: Container(
@@ -199,7 +199,7 @@ class _LoginState extends State<Login> {
                                                 ]),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
-                                        child: Center(
+                                        child: const Center(
                                             child: Text(
                                           "Login",
                                           style: TextStyle(
@@ -211,39 +211,39 @@ class _LoginState extends State<Login> {
                                     )
                                   ],
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            InkWell(
+                            const InkWell(
                               child: Center(
                                   child: Text(
                                 "Forgot password ?",
                                 style: TextStyle(color: Colors.blue),
                               )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Column(children: <Widget>[
                               Row(children: <Widget>[
                                 Expanded(
-                                  child: new Container(
+                                  child: Container(
                                       margin: const EdgeInsets.only(
                                           left: 10.0, right: 20.0),
-                                      child: Divider(
+                                      child: const Divider(
                                         color: Colors.white30,
                                         height: 36,
                                       )),
                                 ),
-                                Text(
+                                const Text(
                                   "or",
                                   style: TextStyle(color: Colors.white30),
                                 ),
                                 Expanded(
-                                  child: new Container(
+                                  child: Container(
                                       margin: const EdgeInsets.only(
                                           left: 20.0, right: 10.0),
-                                      child: Divider(
+                                      child: const Divider(
                                         color: Colors.white30,
                                         height: 36,
                                       )),
@@ -266,7 +266,7 @@ class _LoginState extends State<Login> {
                                     child: Container(
                                       height: 30,
                                       width: 30,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                   "Assets/googleLogo.png"))),
@@ -275,13 +275,13 @@ class _LoginState extends State<Login> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 40,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Don't have account ?",
                                   style: TextStyle(color: Colors.white60),
                                 ),
@@ -292,19 +292,19 @@ class _LoginState extends State<Login> {
                                       transition: Transition.leftToRight,
                                     );
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "  Signup",
                                     style: TextStyle(color: Colors.blue),
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
                               width: Get.width * 0.79,
-                              child: Row(
+                              child: const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -330,16 +330,16 @@ class _LoginState extends State<Login> {
           Obx(
             () => authentication.is_loading.value
                 ? Container(
-                    color: Color.fromARGB(39, 158, 158, 158),
+                    color: const Color.fromARGB(39, 158, 158, 158),
                     height: Get.height,
                     width: Get.width,
-                    child: Center(
+                    child: const Center(
                         child: CircularProgressIndicator(
                       color: Colors.purple,
-                      backgroundColor: const Color.fromARGB(255, 9, 113, 198),
+                      backgroundColor: Color.fromARGB(255, 9, 113, 198),
                     )),
                   )
-                : Text(""),
+                : const Text(""),
           ),
         ],
       ),
