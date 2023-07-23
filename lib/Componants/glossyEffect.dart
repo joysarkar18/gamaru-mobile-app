@@ -1,12 +1,18 @@
+// ignore: file_names
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 class GlossyCard extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final height;
+  // ignore: prefer_typing_uninitialized_variables
   final width;
+  // ignore: prefer_typing_uninitialized_variables
   final borderRadius;
+  // ignore: prefer_typing_uninitialized_variables
   final child;
+  // ignore: prefer_typing_uninitialized_variables
   final borderWith;
 
   const GlossyCard({
@@ -45,8 +51,10 @@ class GlossyCard extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color.fromARGB(255, 125, 125, 125).withOpacity(0.003),
-                      Color.fromARGB(255, 112, 112, 112).withOpacity(0.003),
+                      const Color.fromARGB(255, 125, 125, 125)
+                          .withOpacity(0.003),
+                      const Color.fromARGB(255, 112, 112, 112)
+                          .withOpacity(0.003),
                     ])),
           ),
           Center(

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:get/get.dart';
@@ -22,6 +21,7 @@ class SplashState extends State<Splash> {
   // ignore: non_constant_identifier_names
   static String KEYLOGIN = "login";
 
+  @override
   void initState() {
     super.initState();
     Timer(const Duration(milliseconds: 300), () {});
@@ -78,14 +78,14 @@ class SplashState extends State<Splash> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => SignUp(),
+              builder: (context) => const SignUp(),
             ),
           );
         } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Login(),
+              builder: (context) => const Login(),
             ),
           );
         }
@@ -93,7 +93,7 @@ class SplashState extends State<Splash> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Login(),
+            builder: (context) => const Login(),
           ),
         );
       }

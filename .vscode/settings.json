@@ -1,5 +1,6 @@
 {
     "cmake.configureOnOpen": true,
     "java.configuration.updateBuildConfiguration": "disabled",
-    "cmake.sourceDirectory": "/home/tanmoy/Desktop/flutter/gamaru-mobile-app/linux"
+    "cmake.sourceDirectory": "/home/alok/Desktop/git/gamaru-mobile-app/linux",
+    "C_Cpp.errorSquiggles": "disabled"
 }

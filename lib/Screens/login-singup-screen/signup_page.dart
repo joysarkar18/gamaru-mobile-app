@@ -181,8 +181,8 @@ class _SignUpState extends State<SignUp> {
                                         decoration: InputDecoration(
                                           fillColor: Colors.transparent,
                                           hintText: "password",
-                                          hintStyle:
-                                              TextStyle(color: Colors.white60),
+                                          hintStyle: const TextStyle(
+                                              color: Colors.white60),
                                           prefixIcon: const Icon(
                                             Icons.lock,
                                             color: Colors.white60,
@@ -231,9 +231,9 @@ class _SignUpState extends State<SignUp> {
                                         decoration: InputDecoration(
                                           fillColor: Colors.transparent,
                                           hintText: "Confirm password",
-                                          hintStyle:
-                                              TextStyle(color: Colors.white60),
-                                          prefixIcon: Icon(
+                                          hintStyle: const TextStyle(
+                                              color: Colors.white60),
+                                          prefixIcon: const Icon(
                                             Icons.lock,
                                             color: Colors.white60,
                                           ),
@@ -404,7 +404,7 @@ class _SignUpState extends State<SignUp> {
                               const SizedBox(
                                 height: 25,
                               ),
-                              Container(
+                              SizedBox(
                                 width: Get.width * 0.79,
                                 child: const Row(
                                     mainAxisAlignment:

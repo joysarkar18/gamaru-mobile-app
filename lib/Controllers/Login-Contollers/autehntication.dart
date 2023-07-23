@@ -13,6 +13,7 @@ class Authentication extends GetxController {
   late Rx<User?> firebaseUser;
   RxString? errorMsg = "".obs;
   RxString? errorMsgup = "".obs;
+  // ignore: non_constant_identifier_names
   var is_loading = false.obs;
 
   @override
