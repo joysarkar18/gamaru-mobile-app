@@ -41,6 +41,7 @@ dependencies:
   email_validator: ^2.1.17
   shared_preferences: ^2.2.0
   google_sign_in: ^6.1.4
+  lottie: ^2.5.0
   # google_sign_in: ^6.1.4
 
 dev_dependencies:
