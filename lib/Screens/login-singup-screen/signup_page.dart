@@ -47,12 +47,12 @@ class _SignUpState extends State<SignUp> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("Assets/bgSignup.jpg"),
                     fit: BoxFit.cover)),
             child: Container(
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               child: Center(
                 child: GlossyCard(
                     borderWith: 0.4,
@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
                     borderRadius: 15.0,
                     child: SingleChildScrollView(
                       child: Container(
-                          padding: EdgeInsets.only(top: 15, bottom: 10),
+                          padding: const EdgeInsets.only(top: 15, bottom: 10),
                           width: Get.width * 0.79,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +135,7 @@ class _SignUpState extends State<SignUp> {
                                                 !EmailValidator.validate(email)
                                             ? "Enter a valid email"
                                             : null,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white60,
                                             decoration: TextDecoration.none),
                                         decoration: const InputDecoration(
@@ -164,7 +164,7 @@ class _SignUpState extends State<SignUp> {
                                                   color: Colors.purple)),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 15,
                                       ),
                                       TextFormField(
@@ -175,14 +175,14 @@ class _SignUpState extends State<SignUp> {
                                         obscureText: !_isVisible1,
                                         validator: (value) =>
                                             validatePassword(value),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white60,
                                             decoration: TextDecoration.none),
                                         decoration: InputDecoration(
                                           fillColor: Colors.transparent,
                                           hintText: "psaaword",
-                                          hintStyle:
-                                              TextStyle(color: Colors.white60),
+                                          hintStyle: const TextStyle(
+                                              color: Colors.white60),
                                           prefixIcon: const Icon(
                                             Icons.lock,
                                             color: Colors.white60,
@@ -193,24 +193,28 @@ class _SignUpState extends State<SignUp> {
                                               icon: Icon(_isVisible1
                                                   ? Icons.visibility
                                                   : Icons.visibility_off)),
-                                          errorBorder: OutlineInputBorder(
+                                          errorBorder: const OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10)),
                                               borderSide: BorderSide(
                                                   color: Colors.red)),
-                                          enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              borderSide: BorderSide(
-                                                  color: Colors.white60)),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              borderSide: BorderSide(
-                                                  color: Colors.purple)),
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.white60)),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.purple)),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 15,
                                       ),
                                       TextFormField(
@@ -221,15 +225,15 @@ class _SignUpState extends State<SignUp> {
                                         obscureText: !_isVisible2,
                                         validator: (value) =>
                                             validatePassword(value),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white60,
                                             decoration: TextDecoration.none),
                                         decoration: InputDecoration(
                                           fillColor: Colors.transparent,
                                           hintText: "Confirm psaaword",
-                                          hintStyle:
-                                              TextStyle(color: Colors.white60),
-                                          prefixIcon: Icon(
+                                          hintStyle: const TextStyle(
+                                              color: Colors.white60),
+                                          prefixIcon: const Icon(
                                             Icons.lock,
                                             color: Colors.white60,
                                           ),
@@ -239,35 +243,38 @@ class _SignUpState extends State<SignUp> {
                                               icon: Icon(_isVisible2
                                                   ? Icons.visibility
                                                   : Icons.visibility_off)),
-                                          errorBorder: OutlineInputBorder(
+                                          errorBorder: const OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10)),
                                               borderSide: BorderSide(
                                                   color: Colors.red)),
                                           enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10)),
                                               borderSide: BorderSide(
                                                   color: equalOrnot
                                                       ? Colors.white60
                                                       : Colors.red)),
                                           focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10)),
                                               borderSide: BorderSide(
                                                   color: equalOrnot
                                                       ? Colors.purple
                                                       : Colors.red)),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Obx(() => Text(
                                             authentication.errorMsgup!.value,
-                                            style: TextStyle(color: Colors.red),
+                                            style: const TextStyle(
+                                                color: Colors.red),
                                           )),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       InkWell(
@@ -306,7 +313,7 @@ class _SignUpState extends State<SignUp> {
                                                   ]),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
-                                          child: Center(
+                                          child: const Center(
                                               child: Text(
                                             "Signup",
                                             style: TextStyle(
@@ -318,29 +325,29 @@ class _SignUpState extends State<SignUp> {
                                       )
                                     ],
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Column(children: <Widget>[
                                 Row(children: <Widget>[
                                   Expanded(
-                                    child: new Container(
+                                    child: Container(
                                         margin: const EdgeInsets.only(
                                             left: 10.0, right: 20.0),
-                                        child: Divider(
+                                        child: const Divider(
                                           color: Colors.white30,
                                           height: 36,
                                         )),
                                   ),
-                                  Text(
+                                  const Text(
                                     "or",
                                     style: TextStyle(color: Colors.white30),
                                   ),
                                   Expanded(
-                                    child: new Container(
+                                    child: Container(
                                         margin: const EdgeInsets.only(
                                             left: 20.0, right: 10.0),
-                                        child: Divider(
+                                        child: const Divider(
                                           color: Colors.white30,
                                           height: 36,
                                         )),
@@ -363,7 +370,7 @@ class _SignUpState extends State<SignUp> {
                                       child: Container(
                                         height: 30,
                                         width: 30,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
                                                     "Assets/googleLogo.png"))),
@@ -372,34 +379,34 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Already have account ?",
                                     style: TextStyle(color: Colors.white60),
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Get.off(Login(),
+                                      Get.off(const Login(),
                                           transition: Transition.rightToLeft);
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "  Login",
                                       style: TextStyle(color: Colors.blue),
                                     ),
                                   )
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Container(
                                 width: Get.width * 0.79,
-                                child: Row(
+                                child: const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
@@ -426,16 +433,16 @@ class _SignUpState extends State<SignUp> {
           Obx(
             () => authentication.is_loading.value
                 ? Container(
-                    color: Color.fromARGB(39, 158, 158, 158),
+                    color: const Color.fromARGB(39, 158, 158, 158),
                     height: Get.height,
                     width: Get.width,
-                    child: Center(
+                    child: const Center(
                         child: CircularProgressIndicator(
                       color: Colors.purple,
-                      backgroundColor: const Color.fromARGB(255, 9, 113, 198),
+                      backgroundColor: Color.fromARGB(255, 9, 113, 198),
                     )),
                   )
-                : Text(""),
+                : const Text(""),
           ),
         ],
       ),

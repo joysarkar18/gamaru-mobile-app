@@ -59,7 +59,7 @@ class _OtpPageState extends State<OtpPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("Assets/BgLogin1.png"), fit: BoxFit.cover)),
         child: Center(
@@ -79,21 +79,21 @@ class _OtpPageState extends State<OtpPage> {
                     //   width: 200,
                     //   height: 200,
                     // ),
-                    SizedBox(height: 5),
-                    Text(
+                    const SizedBox(height: 5),
+                    const Text(
                       'Enter OTP',
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'We have sent you an OTP on your mobile number',
                       style: TextStyle(color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
@@ -112,18 +112,18 @@ class _OtpPageState extends State<OtpPage> {
                                   keyboardType: TextInputType.number,
                                   textAlign: TextAlign.center,
                                   maxLength: 1,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.zero,
-                                    enabledBorder: OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide:
                                           BorderSide(color: Colors.grey),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderSide:
                                           BorderSide(color: Colors.blue),
                                     ),
@@ -139,12 +139,12 @@ class _OtpPageState extends State<OtpPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Obx(() => Text(
                           authentication.errorMsgup!.value,
-                          style: TextStyle(color: Colors.red),
+                          style: const TextStyle(color: Colors.red),
                         )),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     InkWell(
                       onTap: _verifyOtp,
                       child: Container(
@@ -157,7 +157,7 @@ class _OtpPageState extends State<OtpPage> {
                                 colors: [Colors.blue, Colors.purple]),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(25))),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Verify OTP',
                             style: TextStyle(fontSize: 18, color: Colors.white),

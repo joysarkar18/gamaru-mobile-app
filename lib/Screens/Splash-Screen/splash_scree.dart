@@ -34,7 +34,7 @@ class SplashState extends State<Splash> {
 
       // backgroundColor: Colors.blue,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomLeft,
@@ -51,7 +51,7 @@ class SplashState extends State<Splash> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("Assets/aro boro baal.png"),
                     ),

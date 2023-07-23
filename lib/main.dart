@@ -1,12 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Screens/home.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/signup_page.dart';
-import 'package:gamaru_mobile_app/Screens/Splash-Screen/splash_scree.dart';
+//import 'package:gamaru_mobile_app/Screens/splash_scree.dart';
 import 'package:get/get.dart';
 
 import 'Controllers/Login-Contollers/autehntication.dart';
+import 'Screens/Splash-Screen/splash_scree.dart';
 import 'firebase_options.dart';
 
 void main() async {
