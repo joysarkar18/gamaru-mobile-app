@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "Singup",
+                                "Signup",
                                 style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 30,
@@ -180,7 +180,7 @@ class _SignUpState extends State<SignUp> {
                                             decoration: TextDecoration.none),
                                         decoration: InputDecoration(
                                           fillColor: Colors.transparent,
-                                          hintText: "psaaword",
+                                          hintText: "password",
                                           hintStyle:
                                               TextStyle(color: Colors.white60),
                                           prefixIcon: const Icon(
@@ -226,7 +226,7 @@ class _SignUpState extends State<SignUp> {
                                             decoration: TextDecoration.none),
                                         decoration: InputDecoration(
                                           fillColor: Colors.transparent,
-                                          hintText: "Confirm psaaword",
+                                          hintText: "Confirm password",
                                           hintStyle:
                                               TextStyle(color: Colors.white60),
                                           prefixIcon: Icon(

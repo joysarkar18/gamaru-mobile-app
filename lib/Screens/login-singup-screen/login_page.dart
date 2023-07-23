@@ -132,7 +132,7 @@ class _LoginState extends State<Login> {
                                           decoration: TextDecoration.none),
                                       decoration: InputDecoration(
                                         fillColor: Colors.transparent,
-                                        hintText: "Enter your psaaword",
+                                        hintText: "Enter your password",
                                         hintStyle: const TextStyle(
                                             color: Colors.white60),
                                         prefixIcon: const Icon(
