@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
+import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/otp_page.dart';
 import 'package:gamaru_mobile_app/Screens/Splash-Screen/splash_scree.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:uuid/uuid.dart';
 
 class Authentication extends GetxController {
   static Authentication get instance => Get.find();
@@ -15,6 +18,7 @@ class Authentication extends GetxController {
   RxString? errorMsgup = "".obs;
   // ignore: non_constant_identifier_names
   var is_loading = false.obs;
+  final userController = Get.put(UserController());
 
   @override
   void onReady() {
@@ -39,7 +43,8 @@ class Authentication extends GetxController {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) {
+          .then((value) async {
+        await userController.createUserDataUsingSignin(Uuid().v1(), email);
         is_loading.value = false;
       });
     } on FirebaseAuthException catch (e) {
@@ -81,10 +86,15 @@ class Authentication extends GetxController {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    _auth.signInWithCredential(credential).then((value) {
+    _auth.signInWithCredential(credential).then((value) async {
+      print("hiiiii ${value.user!.email}");
+      await userController.createUserDataUsingGoogleSignin(
+          Uuid().v1(), value.user!.email.toString().trim());
       is_loading.value = false;
     });
   }
 
-  Future<void> logOut() async => await _auth.signOut();
+  Future<void> logOut() async => await _auth.signOut().then((value) {
+        is_loading.value = false;
+      });
 }

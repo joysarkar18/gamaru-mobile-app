@@ -43,6 +43,7 @@ dependencies:
   google_sign_in: ^6.1.4
   lottie: ^2.5.0
   uuid: ^3.0.7
+  cloud_firestore: ^4.8.3
   # google_sign_in: ^6.1.4
 
 dev_dependencies:
