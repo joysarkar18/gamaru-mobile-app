@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final signupController = Get.put(SignupController());
     final Authentication authentication = Get.put(Authentication());
     return Scaffold(
       backgroundColor: Colors.white,
@@ -19,11 +18,11 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FloatingActionButton(
-              child: Icon(color: Colors.pink, Icons.favorite_rounded),
+              child: const Icon(color: Colors.pink, Icons.favorite_rounded),
               onPressed: () => {authentication.logOut()}),
           Container(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: const Text(
                   style: TextStyle(
                       fontSize: 18,
                       fontStyle: FontStyle.normal,
