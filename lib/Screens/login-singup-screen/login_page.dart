@@ -36,280 +36,312 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("Assets/BgLogin1.png"), fit: BoxFit.cover)),
-        child: Container(
-          padding: EdgeInsets.only(top: 30),
-          child: Center(
-            child: GlossyCard(
-                borderWith: 0.4,
-                height: Get.height * 0.75,
-                width: Get.width * 0.89,
-                borderRadius: 15.0,
-                child: Container(
-                    width: Get.width * 0.79,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Login",
-                          style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Glad you're back!",
-                          style: TextStyle(color: Colors.white70, fontSize: 16),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Form(
-                            key: fromKey,
-                            child: Column(
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("Assets/BgLogin1.png"),
+                    fit: BoxFit.cover)),
+            child: Container(
+              padding: EdgeInsets.only(top: 30),
+              child: Center(
+                child: GlossyCard(
+                    borderWith: 0.4,
+                    height: Get.height * 0.75,
+                    width: Get.width * 0.89,
+                    borderRadius: 15.0,
+                    child: Container(
+                        width: Get.width * 0.79,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Glad you're back!",
+                              style: TextStyle(
+                                  color: Colors.white70, fontSize: 16),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Form(
+                                key: fromKey,
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      controller:
+                                          signupController.emailController,
+                                      keyboardType: TextInputType.emailAddress,
+                                      autofillHints: const [
+                                        AutofillHints.email
+                                      ],
+                                      validator: (email) => email != null &&
+                                              !EmailValidator.validate(email)
+                                          ? "Enter a valid email"
+                                          : null,
+                                      style: TextStyle(
+                                          color: Colors.white60,
+                                          decoration: TextDecoration.none),
+                                      decoration: const InputDecoration(
+                                        fillColor: Colors.transparent,
+                                        hintText: "Enter your Email",
+                                        hintStyle:
+                                            TextStyle(color: Colors.white60),
+                                        prefixIcon: Icon(
+                                          Icons.email_rounded,
+                                          color: Colors.white60,
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            borderSide:
+                                                BorderSide(color: Colors.red)),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            borderSide: BorderSide(
+                                                color: Colors.white60)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            borderSide: BorderSide(
+                                                color: Colors.purple)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    TextFormField(
+                                      controller:
+                                          signupController.passwordController1,
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      obscureText: !_isVisible1,
+                                      validator: (value) =>
+                                          validatePassword(value),
+                                      style: TextStyle(
+                                          color: Colors.white60,
+                                          decoration: TextDecoration.none),
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.transparent,
+                                        hintText: "Enter your psaaword",
+                                        hintStyle:
+                                            TextStyle(color: Colors.white60),
+                                        prefixIcon: const Icon(
+                                          Icons.lock,
+                                          color: Colors.white60,
+                                        ),
+                                        suffixIcon: IconButton(
+                                            color: Colors.white60,
+                                            onPressed: () => updateStatus1(),
+                                            icon: Icon(_isVisible1
+                                                ? Icons.visibility
+                                                : Icons.visibility_off)),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            borderSide: BorderSide(
+                                                color: Colors.white60)),
+                                        errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            borderSide:
+                                                BorderSide(color: Colors.red)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            borderSide: BorderSide(
+                                                color: Colors.purple)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Obx(() => Text(
+                                          authentication.errorMsg!.value,
+                                          style: TextStyle(color: Colors.red),
+                                        )),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        final from = fromKey.currentState!;
+                                        if (from.validate()) {
+                                          authentication.is_loading.value =
+                                              true;
+                                          signupController.loginUser(
+                                              signupController
+                                                  .emailController.text,
+                                              signupController
+                                                  .passwordController1.text);
+                                          print("sign up complete");
+                                        }
+                                      },
+                                      child: Container(
+                                        width: Get.width * 0.79,
+                                        height: 50,
+                                        decoration: const BoxDecoration(
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  Colors.blue,
+                                                  Colors.purple
+                                                ]),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        child: Center(
+                                            child: Text(
+                                          "Login",
+                                          style: TextStyle(
+                                              color: Colors.white60,
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 18),
+                                        )),
+                                      ),
+                                    )
+                                  ],
+                                )),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            InkWell(
+                              child: Center(
+                                  child: Text(
+                                "Forgot password ?",
+                                style: TextStyle(color: Colors.blue),
+                              )),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Column(children: <Widget>[
+                              Row(children: <Widget>[
+                                Expanded(
+                                  child: new Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 10.0, right: 20.0),
+                                      child: Divider(
+                                        color: Colors.white30,
+                                        height: 36,
+                                      )),
+                                ),
+                                Text(
+                                  "or",
+                                  style: TextStyle(color: Colors.white30),
+                                ),
+                                Expanded(
+                                  child: new Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 20.0, right: 10.0),
+                                      child: Divider(
+                                        color: Colors.white30,
+                                        height: 36,
+                                      )),
+                                ),
+                              ]),
+                            ]),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                TextFormField(
-                                  controller: signupController.emailController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  autofillHints: const [AutofillHints.email],
-                                  validator: (email) => email != null &&
-                                          !EmailValidator.validate(email)
-                                      ? "Enter a valid email"
-                                      : null,
-                                  style: TextStyle(
-                                      color: Colors.white60,
-                                      decoration: TextDecoration.none),
-                                  decoration: const InputDecoration(
-                                    fillColor: Colors.transparent,
-                                    hintText: "Enter your Email",
-                                    hintStyle: TextStyle(color: Colors.white60),
-                                    prefixIcon: Icon(
-                                      Icons.email_rounded,
-                                      color: Colors.white60,
+                                InkWell(
+                                  onTap: () {
+                                    authentication.is_loading.value = true;
+                                    authentication.googleSignIn();
+                                  },
+                                  child: GlossyCard(
+                                    height: 50.0,
+                                    width: 50.0,
+                                    borderRadius: 15.0,
+                                    borderWith: 1.1,
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  "Assets/googleLogo.png"))),
                                     ),
-                                    errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        borderSide:
-                                            BorderSide(color: Colors.red)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        borderSide:
-                                            BorderSide(color: Colors.white60)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                TextFormField(
-                                  controller:
-                                      signupController.passwordController1,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  obscureText: !_isVisible1,
-                                  validator: (value) => validatePassword(value),
-                                  style: TextStyle(
-                                      color: Colors.white60,
-                                      decoration: TextDecoration.none),
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.transparent,
-                                    hintText: "Enter your psaaword",
-                                    hintStyle: TextStyle(color: Colors.white60),
-                                    prefixIcon: const Icon(
-                                      Icons.lock,
-                                      color: Colors.white60,
-                                    ),
-                                    suffixIcon: IconButton(
-                                        color: Colors.white60,
-                                        onPressed: () => updateStatus1(),
-                                        icon: Icon(_isVisible1
-                                            ? Icons.visibility
-                                            : Icons.visibility_off)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        borderSide:
-                                            BorderSide(color: Colors.white60)),
-                                    errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        borderSide:
-                                            BorderSide(color: Colors.red)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Obx(() => Text(
-                                      authentication.errorMsg!.value,
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                SizedBox(
-                                  height: 5,
+                              ],
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Don't have account ?",
+                                  style: TextStyle(color: Colors.white60),
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    final from = fromKey.currentState!;
-                                    if (from.validate()) {
-                                      signupController.loginUser(
-                                          signupController.emailController.text,
-                                          signupController
-                                              .passwordController1.text);
-                                      print("sign up complete");
-                                    }
+                                    Get.off(
+                                      SignUp(),
+                                      transition: Transition.leftToRight,
+                                    );
                                   },
-                                  child: Container(
-                                    width: Get.width * 0.79,
-                                    height: 50,
-                                    decoration: const BoxDecoration(
-                                        gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            colors: [
-                                              Colors.blue,
-                                              Colors.purple
-                                            ]),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                        child: Text(
-                                      "Login",
-                                      style: TextStyle(
-                                          color: Colors.white60,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 18),
-                                    )),
+                                  child: Text(
+                                    "  Signup",
+                                    style: TextStyle(color: Colors.blue),
                                   ),
                                 )
                               ],
-                            )),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          child: Center(
-                              child: Text(
-                            "Forgot password ?",
-                            style: TextStyle(color: Colors.blue),
-                          )),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Column(children: <Widget>[
-                          Row(children: <Widget>[
-                            Expanded(
-                              child: new Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 10.0, right: 20.0),
-                                  child: Divider(
-                                    color: Colors.white30,
-                                    height: 36,
-                                  )),
                             ),
-                            Text(
-                              "or",
-                              style: TextStyle(color: Colors.white30),
+                            SizedBox(
+                              height: 20,
                             ),
-                            Expanded(
-                              child: new Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 20.0, right: 10.0),
-                                  child: Divider(
-                                    color: Colors.white30,
-                                    height: 36,
-                                  )),
-                            ),
-                          ]),
-                        ]),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                authentication.googleSignIn();
-                              },
-                              child: GlossyCard(
-                                height: 50.0,
-                                width: 50.0,
-                                borderRadius: 15.0,
-                                borderWith: 1.1,
-                                child: Container(
-                                  height: 30,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              "Assets/googleLogo.png"))),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have account ?",
-                              style: TextStyle(color: Colors.white60),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.off(
-                                  SignUp(),
-                                  transition: Transition.leftToRight,
-                                );
-                              },
-                              child: Text(
-                                "  Signup",
-                                style: TextStyle(color: Colors.blue),
-                              ),
+                            Container(
+                              width: Get.width * 0.79,
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Terms & Conditions",
+                                      style: TextStyle(color: Colors.white60),
+                                    ),
+                                    Text(
+                                      "Support",
+                                      style: TextStyle(color: Colors.white60),
+                                    ),
+                                    Text(
+                                      "Customer Care",
+                                      style: TextStyle(color: Colors.white60),
+                                    ),
+                                  ]),
                             )
                           ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: Get.width * 0.79,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Terms & Conditions",
-                                  style: TextStyle(color: Colors.white60),
-                                ),
-                                Text(
-                                  "Support",
-                                  style: TextStyle(color: Colors.white60),
-                                ),
-                                Text(
-                                  "Customer Care",
-                                  style: TextStyle(color: Colors.white60),
-                                ),
-                              ]),
-                        )
-                      ],
-                    ))),
+                        ))),
+              ),
+            ),
           ),
-        ),
+          Obx(
+            () => authentication.is_loading.value
+                ? Container(
+                    color: Color.fromARGB(39, 158, 158, 158),
+                    height: Get.height,
+                    width: Get.width,
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.purple,
+                      backgroundColor: const Color.fromARGB(255, 9, 113, 198),
+                    )),
+                  )
+                : Text(""),
+          ),
+        ],
       ),
     );
   }

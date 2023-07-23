@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'login-singup-screen/login_page.dart';
-import 'login-singup-screen/signup_page.dart';
+import '../login-singup-screen/login_page.dart';
+import '../login-singup-screen/signup_page.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

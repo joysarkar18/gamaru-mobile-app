@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
-import 'package:gamaru_mobile_app/Screens/otp_page.dart';
-import 'package:gamaru_mobile_app/Screens/splash_scree.dart';
+import 'package:gamaru_mobile_app/Screens/login-singup-screen/otp_page.dart';
+import 'package:gamaru_mobile_app/Screens/Splash-Screen/splash_scree.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -13,6 +13,7 @@ class Authentication extends GetxController {
   late Rx<User?> firebaseUser;
   RxString? errorMsg = "".obs;
   RxString? errorMsgup = "".obs;
+  var is_loading = false.obs;
 
   @override
   void onReady() {
@@ -35,8 +36,11 @@ class Authentication extends GetxController {
   Future<void> createUserWithEmailPassword(
       String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        is_loading.value = false;
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
         errorMsgup!.value = "Already have account! Login";
@@ -45,12 +49,17 @@ class Authentication extends GetxController {
       } else {
         errorMsgup!.value = "An error occourd";
       }
+      is_loading.value = false;
     }
   }
 
   Future<void> loginUserWithEmailPassword(String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        is_loading.value = false;
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
         errorMsg!.value = "user not exits! Sign Up";
@@ -59,6 +68,7 @@ class Authentication extends GetxController {
       } else {
         errorMsg!.value = "An error occourd";
       }
+      is_loading.value = false;
     }
   }
 
@@ -70,7 +80,9 @@ class Authentication extends GetxController {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    _auth.signInWithCredential(credential);
+    _auth.signInWithCredential(credential).then((value) {
+      is_loading.value = false;
+    });
   }
 
   Future<void> logOut() async => await _auth.signOut();

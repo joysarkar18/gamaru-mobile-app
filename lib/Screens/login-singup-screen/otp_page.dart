@@ -4,8 +4,8 @@ import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:get/get.dart';
 
-import '../Controllers/Login-Contollers/autehntication.dart';
-import '../Controllers/Login-Contollers/signinSignupController.dart';
+import '../../Controllers/Login-Contollers/autehntication.dart';
+import '../../Controllers/Login-Contollers/signinSignupController.dart';
 
 class OtpPage extends StatefulWidget {
   @override
