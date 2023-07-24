@@ -1,10 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Login-Contollers/autehntication.dart';
 import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
-import 'package:gamaru_mobile_app/Screens/home.dart';
+import 'package:gamaru_mobile_app/Screens/login-singup-screen/forget_password_page.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/signup_page.dart';
 import 'package:get/get.dart';
 
@@ -214,7 +213,11 @@ class _LoginState extends State<Login> {
                             const SizedBox(
                               height: 10,
                             ),
-                            const InkWell(
+                            InkWell(
+                              onTap: () {
+                                Get.off(const ForgetPass(),
+                                    transition: Transition.leftToRight);
+                              },
                               child: Center(
                                   child: Text(
                                 "Forgot password ?",
@@ -288,7 +291,7 @@ class _LoginState extends State<Login> {
                                 InkWell(
                                   onTap: () {
                                     Get.off(
-                                      SignUp(),
+                                      const SignUp(),
                                       transition: Transition.leftToRight,
                                     );
                                   },

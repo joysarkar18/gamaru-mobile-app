@@ -1,7 +1,5 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/otp_page.dart';
 import 'package:get/get.dart';
 import '../../Componants/glossyEffect.dart';
 import '../../Controllers/Login-Contollers/autehntication.dart';

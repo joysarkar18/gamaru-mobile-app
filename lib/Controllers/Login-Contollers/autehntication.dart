@@ -4,8 +4,6 @@ import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupContr
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/otp_page.dart';
-import 'package:gamaru_mobile_app/Screens/Splash-Screen/splash_scree.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uuid/uuid.dart';
