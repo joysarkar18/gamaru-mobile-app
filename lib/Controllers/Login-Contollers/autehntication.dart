@@ -78,19 +78,23 @@ class Authentication extends GetxController {
   }
 
   googleSignIn() async {
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    try {
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-    AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-    _auth.signInWithCredential(credential).then((value) async {
-      print("hiiiii ${value.user!.email}");
-      await userController.createUserDataUsingGoogleSignin(
-          Uuid().v1(), value.user!.email.toString().trim());
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      _auth.signInWithCredential(credential).then((value) async {
+        print("hiiiii ${value.user!.email}");
+        await userController.createUserDataUsingGoogleSignin(
+            Uuid().v1(), value.user!.email.toString().trim());
+        is_loading.value = false;
+      });
+    } catch (e) {
       is_loading.value = false;
-    });
+    }
   }
 
   Future<void> logOut() async => await _auth.signOut().then((value) {
