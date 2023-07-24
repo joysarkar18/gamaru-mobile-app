@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
+import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/home.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
+import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uuid/uuid.dart';
@@ -32,7 +33,7 @@ class Authentication extends GetxController {
       user == null
           ? Get.offAll(
               () => const Login()) //should change this to wellcome screen
-          : Get.offAll(() => const HomeScreen());
+          : Get.offAll(() => MainScreen());
     });
   }
 
