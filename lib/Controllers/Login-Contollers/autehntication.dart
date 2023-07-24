@@ -97,6 +97,38 @@ class Authentication extends GetxController {
     }
   }
 
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email).then((value) {
+        print("email sent");
+        Get.dialog(
+          AlertDialog(
+            backgroundColor: Color.fromARGB(255, 245, 117, 13),
+
+            // title: const Text(""),
+            content: const Text(
+              'An email has been sent please reset the password and try again!',
+              style: TextStyle(color: Colors.white70, fontSize: 20),
+            ),
+            actions: [
+              TextButton(
+                child: const Text(
+                  "ok",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 160, 2, 239), fontSize: 20),
+                ),
+                onPressed: () => Get.to(Login()),
+              ),
+            ],
+          ),
+        );
+        // Get.off(Login());
+      });
+    } catch (e) {
+      print("error happens");
+    }
+  }
+
   Future<void> logOut() async => await _auth.signOut().then((value) {
         is_loading.value = false;
       });
