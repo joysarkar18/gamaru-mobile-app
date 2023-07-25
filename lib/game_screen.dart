@@ -1,5 +1,5 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -9,106 +9,78 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  int _currentIndex = 0;
-  List _pages = [
-    CurrentPage(),
-    UpcommingPage(),
-  ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              height: Get.height * .05,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        const Color.fromARGB(255, 7, 66, 113),
-                        Colors.purple
-                      ]),
-                  shape: BoxShape.rectangle),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "GAMARU",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
-                  SizedBox(
-                    width: Get.width * .57,
-                  ),
-                  Icon(
-                    Icons.currency_rupee,
-                    color: Colors.white,
-                  )
-                ],
-              ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          extendBodyBehindAppBar: false,
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+            leading: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                )),
+            title: Text(
+              "G A M A R U",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
             ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        // backgroundBlendMode: BlendMode.colorDodge,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 31, 9, 120)
-                                .withOpacity(0.79),
-                            blurRadius: 25.0,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(7),
-                        color: Colors.amber),
-                    child: TextButton(
-                      onPressed: () {
-                        Get.to(_pages[_currentIndex]);
-                        currentIndex =_currentIndex,
-
-                      },
-                      child: Text(
-                        "Current Event",
-                        style: TextStyle(fontSize: 20),
-                      ),
+            actions: [
+              Icon(
+                Icons.notifications,
+                color: Colors.white,
+              )
+            ],
+            centerTitle: true,
+            titleSpacing: 5,
+            // elevation: 20,
+            bottom: TabBar(
+                indicatorColor: Colors.purple,
+                indicatorWeight: 3,
+                tabs: [
+                  Tab(
+                    // text: "Current Event",
+                    child: Text(
+                      "Current Event",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 31, 9, 120)
-                                .withOpacity(0.79),
-                            blurRadius: 25.0,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(7),
-                        color: Colors.amber),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Upcomming Event",
-                        style: TextStyle(fontSize: 20),
-                      ),
+                  Tab(
+                    // text: "Upcomming Event",
+                    child: Text(
+                      "Upcomming Event",
+                      style: TextStyle(color: Colors.white),
                     ),
+                  )
+                ]),
+          ),
+          body: TabBarView(
+            physics: BouncingScrollPhysics(),
+            dragStartBehavior: DragStartBehavior.down,
+            children: [
+              Container(
+                color: Colors.black,
+                child: Center(
+                  child: Text(
+                    "Current",
+                    style: TextStyle(color: Colors.white, fontSize: 35),
                   ),
-                ],
+                ),
               ),
-            )
-          ],
-        ),
-      ),
+              Container(
+                color: Colors.black,
+                child: Center(
+                  child: Text(
+                    "Upcomming",
+                    style: TextStyle(color: Colors.white, fontSize: 35),
+                  ),
+                ),
+              )
+            ],
+          )),
     );
   }
 }
-
-class UpcommingPage {}
-
-class CurrentPage {}

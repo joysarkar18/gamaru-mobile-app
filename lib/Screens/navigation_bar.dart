@@ -13,7 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 1;
 
   List<Widget> _pages = [
-    EarnScreen(),  
+    EarnScreen(),
     GameScreen(),
     ProfileScreen(),
   ];
@@ -21,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: _pages[_currentIndex],
       bottomNavigationBar: EnhancedNavigationBar(
         currentIndex: _currentIndex,
@@ -65,8 +66,8 @@ class EnhancedNavigationBar extends StatelessWidget {
                 colors: [const Color.fromARGB(255, 7, 66, 113), Colors.purple]),
             boxShadow: [
               BoxShadow(
-                color: Color.fromARGB(255, 31, 9, 120).withOpacity(0.79),
-                blurRadius: 25.0,
+                color: Colors.white,
+                blurRadius: 0.0,
               ),
             ],
           ),
