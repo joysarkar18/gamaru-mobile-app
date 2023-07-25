@@ -22,6 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      backgroundColor: Colors.black,
       body: _pages[_currentIndex],
       bottomNavigationBar: EnhancedNavigationBar(
         currentIndex: _currentIndex,
@@ -43,45 +44,43 @@ class EnhancedNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
+    return
         // Container(
         //   height: 80.0,
         //   color: Colors.white,
         // ),
         Container(
-          decoration: BoxDecoration(
-            // border: Border.all(
-            //   strokeAlign: 0.1,
-            // ),
-            // backgroundBlendMode: BlendMode.color,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25),
-            ),
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [const Color.fromARGB(255, 7, 66, 113), Colors.purple]),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.white,
-                blurRadius: 0.0,
-              ),
-            ],
-          ),
-          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(Icons.currency_rupee, "Earn", 0),
-              _buildNavItem(Icons.games, "Games", 1),
-              _buildNavItem(Icons.person, "Profile", 2),
-            ],
-          ),
+      decoration: BoxDecoration(
+        // border: Border.all(
+        //   strokeAlign: 0.1,
+        // ),
+        // backgroundBlendMode: BlendMode.color,
+
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
         ),
-      ],
+
+        gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [const Color.fromARGB(255, 7, 66, 113), Colors.purple]),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(255, 31, 9, 120).withOpacity(0.79),
+            blurRadius: 25.0,
+          ),
+        ],
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildNavItem(Icons.currency_rupee_rounded, "Earn", 0),
+          _buildNavItem(Icons.games_rounded, "Games", 1),
+          _buildNavItem(Icons.person_rounded, "Profile", 2),
+        ],
+      ),
     );
   }
 
@@ -95,14 +94,16 @@ class EnhancedNavigationBar extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: currentIndex == index ? Colors.white : Colors.grey,
+            color: currentIndex == index ? Colors.white : Colors.white38,
+
             // size: currentIndex == index ? Size(12, 12) : Size(10, 10),
           ),
-          SizedBox(height: 4.0),
+          SizedBox(height: 2.0),
           Text(
             label,
             style: TextStyle(
-              color: currentIndex == index ? Colors.white : Colors.grey,
+              color: currentIndex == index ? Colors.white : Colors.white38,
+              fontSize: currentIndex == index ? 14 : 13,
             ),
           ),
         ],
