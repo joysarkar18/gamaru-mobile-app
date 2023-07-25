@@ -13,7 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 1;
 
   List<Widget> _pages = [
-    EarnScreen(),
+    EarnScreen(),  
     GameScreen(),
     ProfileScreen(),
   ];
