@@ -22,7 +22,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      backgroundColor: Colors.black,
       body: _pages[_currentIndex],
       bottomNavigationBar: EnhancedNavigationBar(
         currentIndex: _currentIndex,
