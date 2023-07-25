@@ -93,6 +93,8 @@ class Authentication extends GetxController {
         is_loading.value = false;
       });
     } catch (e) {
+      print(e);
+      print("error");
       is_loading.value = false;
     }
   }

@@ -10,7 +10,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   List<Widget> _pages = [
     EarnScreen(),
@@ -51,9 +51,9 @@ class EnhancedNavigationBar extends StatelessWidget {
         // ),
         Container(
           decoration: BoxDecoration(
-            border: Border.all(
-              strokeAlign: 0.1,
-            ),
+            // border: Border.all(
+            //   strokeAlign: 0.1,
+            // ),
             // backgroundBlendMode: BlendMode.color,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(25),
