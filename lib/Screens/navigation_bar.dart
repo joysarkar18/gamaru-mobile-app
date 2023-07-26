@@ -84,28 +84,31 @@ class EnhancedNavigationBar extends StatelessWidget {
   }
 
   Widget _buildNavItem(IconData icon, String label, int index) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onTap(index);
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: currentIndex == index ? Colors.white : Colors.white38,
-
-            // size: currentIndex == index ? Size(12, 12) : Size(10, 10),
-          ),
-          SizedBox(height: 2.0),
-          Text(
-            label,
-            style: TextStyle(
+      child: Container(
+        width: 80,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
               color: currentIndex == index ? Colors.white : Colors.white38,
-              fontSize: currentIndex == index ? 14 : 13,
+
+              // size: currentIndex == index ? Size(12, 12) : Size(10, 10),
             ),
-          ),
-        ],
+            SizedBox(height: 2.0),
+            Text(
+              label,
+              style: TextStyle(
+                color: currentIndex == index ? Colors.white : Colors.white38,
+                fontSize: currentIndex == index ? 14 : 13,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
