@@ -9,7 +9,6 @@ class TopDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 5, left: 10, right: 10),
-      height: Get.height,
       child: Column(
         children: [
           SizedBox(
