@@ -5,6 +5,9 @@ import 'package:gamaru_mobile_app/Screens/Top-section-every/top-part.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import 'Screens/refer_screen/refer_earn_screen.dart';
+import 'Screens/watchAndEarn/watchEarn.dart';
+
 class EarnScreen extends StatelessWidget {
   const EarnScreen({super.key});
 
