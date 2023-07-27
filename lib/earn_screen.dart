@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Login-Contollers/autehntication.dart';
 import 'package:gamaru_mobile_app/Screens/Top-section-every/top-part.dart';
-import 'package:gamaru_mobile_app/watchAndEarn/watchEarn.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -28,48 +27,54 @@ class EarnScreen extends StatelessWidget {
                         width: Get.width * 0.95,
                         borderRadius: 10.0,
                         borderWith: 1.0,
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                child: LottieBuilder.asset(
-                                  "Assets/refer.json",
-                                  height: 180,
-                                  width: 180,
-                                  repeat: false,
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(ReferAndEarn());
+                          },
+                          child: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: LottieBuilder.asset(
+                                    "Assets/refer.json",
+                                    height: 180,
+                                    width: 180,
+                                    repeat: false,
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(right: 10),
-                                child: const Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Refer and Earn",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Text(
-                                        "Tell your mates about this app",
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 14),
-                                      ),
-                                      Text(
-                                        "and get exciting reward",
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 14),
-                                      )
-                                    ]),
-                              )
-                            ],
+                                Container(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: const Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Refer and Earn",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 4,
+                                        ),
+                                        Text(
+                                          "Tell your mates about this app",
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontSize: 14),
+                                        ),
+                                        Text(
+                                          "and get exciting reward",
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontSize: 14),
+                                        )
+                                      ]),
+                                )
+                              ],
+                            ),
                           ),
                         )),
                     SizedBox(
