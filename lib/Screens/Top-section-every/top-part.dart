@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -7,6 +10,7 @@ class TopDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userController = Get.put(UserController());
     return Container(
       padding: EdgeInsets.only(top: 5, left: 10, right: 10),
       child: Column(
@@ -44,12 +48,12 @@ class TopDetails extends StatelessWidget {
                             frameRate: FrameRate.max,
                           ),
                           SizedBox(
-                            width: 1,
+                            width: 2,
                           ),
-                          Text(
-                            "100",
-                            style: TextStyle(color: Colors.yellow),
-                          ),
+                          Obx(() => Text(
+                                userController.totalCoins.value.toString(),
+                                style: TextStyle(color: Colors.yellow),
+                              ))
                         ],
                       ),
                     ),

@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class GameScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  final userController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -55,19 +58,21 @@ class _GameScreenState extends State<GameScreen> {
                           frameRate: FrameRate.max,
                         ),
                         SizedBox(
-                          width: 1,
+                          width: 2,
                         ),
-                        Text(
-                          "100",
-                          style: TextStyle(color: Colors.yellow),
-                        ),
+                        Obx(
+                          () => Text(
+                            userController.totalCoins.value.toString(),
+                            style: TextStyle(color: Colors.yellow),
+                          ),
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
+                padding: const EdgeInsets.only(left: 12, right: 10, bottom: 5),
                 child: Icon(
                   Icons.notifications_none_rounded,
                   color: Colors.white,

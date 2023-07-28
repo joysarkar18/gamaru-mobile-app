@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Controllers/AdController/adController.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lottie/lottie.dart';
@@ -12,6 +13,7 @@ class WatchAndEarn extends StatefulWidget {
 }
 
 class _WatchAndEarnState extends State<WatchAndEarn> {
+  AdController adController = Get.put(AdController());
   final adUnitId = 'ca-app-pub-3940256099942544/5224354917';
   RewardedAd? _rewardedAd = null;
 
@@ -48,6 +50,7 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
             debugPrint('$ad loaded.');
             // Keep a reference to the ad so you can show it later.
             _rewardedAd = ad;
+            adController.ad_isLoading.value = true;
           },
           // Called when an ad request failed.
           onAdFailedToLoad: (LoadAdError error) {
@@ -82,13 +85,13 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                           image: AssetImage("Assets/wathandEarnPhoto.jpg"))),
                 ),
                 Container(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.yellow, width: 1),
@@ -99,8 +102,8 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                         ),
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(10),
@@ -116,17 +119,17 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 14,
             ),
-            Text(
+            const Text(
               "TOTAL EARNING",
               style: TextStyle(
                   color: Colors.white70,
                   fontSize: 24,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             GlossyCard(
@@ -148,10 +151,10 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                           height: 22,
                           width: 22,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 1,
                         ),
-                        Text(
+                        const Text(
                           "100",
                           style: TextStyle(color: Colors.yellow, fontSize: 24),
                         ),
@@ -166,7 +169,7 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
               children: [
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     LottieBuilder.asset(
@@ -175,7 +178,7 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                       width: 80,
                       fit: BoxFit.cover,
                     ),
-                    Text(
+                    const Text(
                       "WATCH",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
@@ -190,7 +193,7 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                 ),
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     LottieBuilder.asset(
@@ -198,11 +201,12 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                       height: 60,
                       width: 60,
                       fit: BoxFit.cover,
+                      frameRate: FrameRate.max,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Text(
+                    const Text(
                       "EARN",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
@@ -217,7 +221,7 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                 ),
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     LottieBuilder.asset(
@@ -226,10 +230,10 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                       width: 60,
                       fit: BoxFit.cover,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Text(
+                    const Text(
                       "PLAY",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
@@ -238,17 +242,17 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text(
+            const Text(
               "Watch more to earn more!",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 26,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             InkWell(
@@ -258,24 +262,36 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                 );
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.yellow, width: 1),
-                ),
-                child: const Text(
-                  "WATCH NOW",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+                  height: 40,
+                  width: 120,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.yellow, width: 1),
+                  ),
+                  child: Obx(() => adController.ad_isLoading.value
+                      ? const Center(
+                          child: Text(
+                            "WATCH NOW",
+                            style: TextStyle(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      : LottieBuilder.asset(
+                          "Assets/adlod.json",
+                          height: 40,
+                          width: 40,
+                        ))),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: const Column(
                 children: [
                   Text(
                     "*NOTE - You have to click the install button after finishing the ad to ensure the reward.",
