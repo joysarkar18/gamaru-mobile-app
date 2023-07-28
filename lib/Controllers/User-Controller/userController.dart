@@ -9,7 +9,10 @@ class UserController extends GetxController {
   var firebaseUser = FirebaseAuth.instance.currentUser;
 
   createUserDataUsingSignin(String id, String email) async {
-    await _db.collection("user").doc(email).set({"id": id, "email": email});
+    await _db
+        .collection("user")
+        .doc(email)
+        .set({"id": id, "email": email, "coins": 0});
   }
 
   createUserDataUsingGoogleSignin(String id, String email) async {

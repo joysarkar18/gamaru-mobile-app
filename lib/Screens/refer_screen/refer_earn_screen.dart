@@ -16,7 +16,7 @@ class ReferAndEarn extends StatelessWidget {
           color: Colors.white,
         ),
         title: Text(
-          "Refer and Invite",
+          "Refer and Earn",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
