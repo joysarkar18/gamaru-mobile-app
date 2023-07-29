@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/AdController/adController.dart';
@@ -14,7 +15,7 @@ class WatchAndEarn extends StatefulWidget {
 
 class _WatchAndEarnState extends State<WatchAndEarn> {
   AdController adController = Get.put(AdController());
-  final adUnitId = 'ca-app-pub-3940256099942544/5224354917';
+  final adUnitId = 'ca-app-pub-8716259971846266/3489646966';
   RewardedAd? _rewardedAd = null;
 
   @override
@@ -45,6 +46,7 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                 // Called when a click is recorded for an ad.
                 onAdClicked: (ad) {
                   print("user click on ad");
+                  adController.updateWinCoins();
                 });
 
             debugPrint('$ad loaded.');
@@ -154,10 +156,28 @@ class _WatchAndEarnState extends State<WatchAndEarn> {
                         const SizedBox(
                           width: 1,
                         ),
-                        const Text(
-                          "100",
-                          style: TextStyle(color: Colors.yellow, fontSize: 24),
-                        ),
+                        StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("user")
+                              .doc(adController.firebaseUser!.email.toString())
+                              .collection("watchCoinsWin")
+                              .doc("watchCoins")
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                snapshot.data!.data()!["coinsAd"].toString(),
+                                style: const TextStyle(
+                                    color: Colors.yellow, fontSize: 24),
+                              );
+                            }
+                            return const Text(
+                              "00",
+                              style:
+                                  TextStyle(color: Colors.yellow, fontSize: 24),
+                            );
+                          },
+                        )
                       ],
                     ),
                   ],

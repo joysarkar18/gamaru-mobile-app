@@ -17,10 +17,18 @@ class UserController extends GetxController {
   }
 
   createUserDataUsingSignin(String id, String email) async {
-    await _db
-        .collection("user")
-        .doc(email)
-        .set({"id": id, "email": email, "coins": 0, "coinAd": 0});
+    await _db.collection("user").doc(email).set({
+      "id": id,
+      "email": email,
+      "coins": 0,
+    }).then((_) {
+      _db
+          .collection("user")
+          .doc(email)
+          .collection("watchCoinsWin")
+          .doc("watchCoins")
+          .set({"coinsAd": 0});
+    });
   }
 
   createUserDataUsingGoogleSignin(String id, String email) async {
@@ -30,10 +38,18 @@ class UserController extends GetxController {
     if (a.exists) {
       print("data already exists");
     } else {
-      await _db
-          .collection("user")
-          .doc(email)
-          .set({"id": id, "email": email, "coins": 0, "coinAd": 0});
+      await _db.collection("user").doc(email).set({
+        "id": id,
+        "email": email,
+        "coins": 0,
+      }).then((_) {
+        _db
+            .collection("user")
+            .doc(email)
+            .collection("watchCoinsWin")
+            .doc("watchCoins")
+            .set({"coinsAd": 0});
+      });
     }
   }
 }
