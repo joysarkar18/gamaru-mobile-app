@@ -26,17 +26,19 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(top: 20),
             child: ListView(children: [
               Container(
-                height: 100,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                height: 90,
                 width: Get.width,
                 child: AnotherCarousel(
                   images: [
-                    AssetImage("Assets/telegram.png"),
-                    AssetImage("Assets/aro boro baal.png"),
-                    AssetImage("Assets/aro boro baal.png"),
-                    AssetImage("Assets/aro boro baal.png"),
-                    AssetImage("Assets/aro boro baal.png"),
+                    AssetImage("Assets/ref_banner.png"),
+                    AssetImage("Assets/customer_banner.png"),
+                    // AssetImage("Assets/ref_banner.png"),
                   ],
-                  dotBgColor: Colors.transparent,
+                  showIndicator: false,
+                  borderRadius: true,
                 ),
               )
             ]),
