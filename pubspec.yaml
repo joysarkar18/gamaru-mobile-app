@@ -45,6 +45,7 @@ dependencies:
   uuid: ^3.0.7
   cloud_firestore: ^4.8.3
   google_mobile_ads: ^3.0.0
+  another_carousel_pro: ^1.0.0
   # google_sign_in: ^6.1.4
 
 dev_dependencies:

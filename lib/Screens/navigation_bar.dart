@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../earn_screen.dart';
 import '../game_screen.dart';
 import '../profile_screen.dart';
+import 'Home-Screen/homeScreen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> _pages = [
     EarnScreen(),
-    GameScreen(),
+    HomeScreen(),
     ProfileScreen(),
   ];
 
