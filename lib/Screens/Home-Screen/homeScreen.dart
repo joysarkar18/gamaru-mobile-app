@@ -40,6 +40,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   showIndicator: false,
                   borderRadius: true,
                 ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 240,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("Assets/bgmi_home.png"),
+                        fit: BoxFit.cover)),
               )
             ]),
           )
