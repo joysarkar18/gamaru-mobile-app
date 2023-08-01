@@ -51,10 +51,8 @@ class GlossyCard extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      const Color.fromARGB(255, 125, 125, 125)
-                          .withOpacity(0.153),
-                      const Color.fromARGB(255, 112, 112, 112)
-                          .withOpacity(0.103),
+                      Color.fromARGB(255, 107, 106, 106).withOpacity(0.153),
+                      Color.fromARGB(255, 88, 88, 88).withOpacity(0.103),
                     ])),
           ),
           Center(

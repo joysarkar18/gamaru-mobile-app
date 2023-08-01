@@ -390,7 +390,8 @@ class _SignUpState extends State<SignUp> {
                                   InkWell(
                                     onTap: () {
                                       Get.off(const Login(),
-                                          transition: Transition.rightToLeft);
+                                          transition:
+                                              Transition.cupertinoDialog);
                                     },
                                     child: const Text(
                                       "  Login",

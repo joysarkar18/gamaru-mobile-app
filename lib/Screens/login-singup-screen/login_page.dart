@@ -216,7 +216,7 @@ class _LoginState extends State<Login> {
                             InkWell(
                               onTap: () {
                                 Get.off(const ForgetPass(),
-                                    transition: Transition.leftToRight);
+                                    transition: Transition.cupertinoDialog);
                               },
                               child: Center(
                                   child: Text(
@@ -292,7 +292,7 @@ class _LoginState extends State<Login> {
                                   onTap: () {
                                     Get.off(
                                       const SignUp(),
-                                      transition: Transition.leftToRight,
+                                      transition: Transition.cupertinoDialog,
                                     );
                                   },
                                   child: const Text(

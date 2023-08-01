@@ -138,7 +138,8 @@ class ForgetPass extends StatelessWidget {
                                 TextButton(
                                     onPressed: () {
                                       Get.off(const SignUp(),
-                                          transition: Transition.rightToLeft);
+                                          transition:
+                                              Transition.cupertinoDialog);
                                       ;
                                     },
                                     child: Text(
