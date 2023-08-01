@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
+import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
 import '../earn_screen.dart';
 import '../game_screen.dart';
 import '../profile_screen.dart';
@@ -48,37 +51,21 @@ class EnhancedNavigationBar extends StatelessWidget {
         //   height: 80.0,
         //   color: Colors.white,
         // ),
-        Container(
-      decoration: BoxDecoration(
-        // border: Border.all(
-        //   strokeAlign: 0.1,
-        // ),
-        // backgroundBlendMode: BlendMode.color,
-
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25),
-          topRight: Radius.circular(25),
+        GlossyCardDark(
+      height: 62.5,
+      width: Get.width,
+      borderRadius: 0.0,
+      borderWith: 0.0000001,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildNavItem(HeroIcons.fire, "Earn", 0),
+            _buildNavItem(Iconsax.game, "Games", 1),
+            _buildNavItem(Iconsax.profile_circle, "Profile", 2),
+          ],
         ),
-
-        gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [const Color.fromARGB(255, 7, 66, 113), Colors.purple]),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 31, 9, 120).withOpacity(0.79),
-            blurRadius: 25.0,
-          ),
-        ],
-      ),
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildNavItem(Icons.currency_rupee_rounded, "Earn", 0),
-          _buildNavItem(Icons.games_rounded, "Games", 1),
-          _buildNavItem(Icons.person_rounded, "Profile", 2),
-        ],
       ),
     );
   }
@@ -95,7 +82,7 @@ class EnhancedNavigationBar extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: currentIndex == index ? Colors.white : Colors.white38,
+              color: currentIndex == index ? Colors.green : Colors.white60,
 
               // size: currentIndex == index ? Size(12, 12) : Size(10, 10),
             ),
@@ -103,7 +90,7 @@ class EnhancedNavigationBar extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                color: currentIndex == index ? Colors.white : Colors.white38,
+                color: currentIndex == index ? Colors.green : Colors.white60,
                 fontSize: currentIndex == index ? 14 : 13,
               ),
             ),

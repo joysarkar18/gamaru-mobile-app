@@ -1,5 +1,4 @@
 import 'package:another_carousel_pro/another_carousel_pro.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
