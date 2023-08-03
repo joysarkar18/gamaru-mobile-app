@@ -1,6 +1,6 @@
-import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_carousel_slider/flutter_custom_carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -14,6 +14,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<CarouselItem> itemList = [
+    CarouselItem(
+      image: AssetImage("Assets/refer_cover_home.png"),
+      boxDecoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: FractionalOffset.bottomCenter,
+          end: FractionalOffset.topCenter,
+          colors: [
+            Colors.blueAccent.withOpacity(1),
+            Colors.black.withOpacity(.3),
+          ],
+          stops: const [0.0, 1.0],
+        ),
+      ),
+      title:
+          'Push your creativity to its limits by reimagining this classic puzzle!',
+      titleTextStyle: const TextStyle(
+        fontSize: 12,
+        color: Colors.white,
+      ),
+      leftSubtitle: '\$51,046 in prizes',
+      rightSubtitle: '4882 participants',
+      rightSubtitleTextStyle: const TextStyle(
+        fontSize: 12,
+        color: Colors.black,
+      ),
+      onImageTap: (i) {},
+    ),
+    CarouselItem(
+      image: AssetImage("Assets/service.jpeg"),
+      title: '@coskuncay published flutter_custom_carousel_slider!',
+      titleTextStyle: const TextStyle(
+        fontSize: 12,
+        color: Colors.white,
+      ),
+      leftSubtitle: '11 Feb 2022',
+      rightSubtitle: 'v1.0.0',
+      onImageTap: (i) {},
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,16 +72,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 height: 85,
                 width: Get.width,
-                child: AnotherCarousel(
-                  images: [
-                    AssetImage("Assets/refer_cover_home.png"),
-                    AssetImage("Assets/service.jpeg"),
-                  ],
-                  showIndicator: false,
-                  onImageChange: (p0, p1) {
-                    print("${p1}");
-                  },
-                  borderRadius: true,
+                child: CustomCarouselSlider(
+                  items: itemList,
+                  subHeight: 50,
+                  width: MediaQuery.of(context).size.width * .9,
+                  autoplay: true,
+                  showText: false,
+                  showSubBackground: false,
+                  indicatorShape: BoxShape.rectangle,
+                  selectedDotColor: Colors.red,
+                  unselectedDotColor: Colors.white,
                 ),
               ),
               SizedBox(
