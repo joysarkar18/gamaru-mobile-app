@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_carousel_slider/flutter_custom_carousel_slider.dart';
-import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -168,6 +167,126 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(
                     height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white24,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              "How to ?",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 0,
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Divider(
+                              height: 20,
+                              thickness: 0.3,
+                              indent: 15,
+                              endIndent: 0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: GlossyCard(
+                      borderWith: 0.4,
+                      height: Get.height * 0.15,
+                      width: Get.width * 0.89,
+                      borderRadius: 15.0,
+                      child: Container(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                print('I love you');
+                              },
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  LottieBuilder.asset(
+                                    "Assets/howToJoinLogo.json",
+                                    height: 70,
+                                    width: 70,
+                                    repeat: true,
+                                  ),
+                                  Text(
+                                    "Join",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                print('I love you');
+                              },
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  LottieBuilder.asset(
+                                    "Assets/play_home_screen.json",
+                                    height: 70,
+                                    width: 70,
+                                    repeat: true,
+                                  ),
+                                  Text(
+                                    "Play",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                print('I love you');
+                              },
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  LottieBuilder.asset(
+                                    "Assets/earn_home_screen.json",
+                                    height: 70,
+                                    width: 70,
+                                    repeat: true,
+                                  ),
+                                  Text(
+                                    "Earn",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
