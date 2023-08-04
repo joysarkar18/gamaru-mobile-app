@@ -37,7 +37,10 @@ class SupportScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(125),
                 ),
                 child: Center(
-                    child: LottieBuilder.asset("Assets/support_lot.json")),
+                    child: LottieBuilder.asset(
+                  "Assets/support_lot.json",
+                  frameRate: FrameRate.max,
+                )),
               ),
               const Text(
                 "How Can We Help You",
