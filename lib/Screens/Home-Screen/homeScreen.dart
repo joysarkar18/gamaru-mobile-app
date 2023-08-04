@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_carousel_slider/flutter_custom_carousel_slider.dart';
+import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -51,7 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       leftSubtitle: '11 Feb 2022',
       rightSubtitle: 'v1.0.0',
-      onImageTap: (i) {},
+      onImageTap: (i) {
+        Get.to(SupportScreen());
+      },
     ),
   ];
   @override
