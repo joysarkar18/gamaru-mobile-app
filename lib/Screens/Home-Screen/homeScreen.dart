@@ -59,73 +59,119 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-          child: Column(
-        children: [
-          TopDetails(),
-          Container(
-            height: Get.height - 145,
-            padding: EdgeInsets.only(top: 20),
-            child: ListView(children: [
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 5,
-                ),
-                height: 85,
-                width: Get.width,
-                child: CustomCarouselSlider(
-                  items: itemList,
-                  subHeight: 50,
-                  width: MediaQuery.of(context).size.width * .9,
-                  autoplay: true,
-                  showText: false,
-                  showSubBackground: false,
-                  indicatorShape: BoxShape.rectangle,
-                  selectedDotColor: Colors.red,
-                  unselectedDotColor: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
+        child: Column(
+          children: [
+            TopDetails(),
+            Container(
+              height: Get.height - 145,
+              padding: EdgeInsets.only(top: 20),
+              child: ListView(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: const Text(
-                      " GAMES FOR YOU",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 5,
+                    ),
+                    height: 85,
+                    width: Get.width,
+                    child: CustomCarouselSlider(
+                      items: itemList,
+                      subHeight: 50,
+                      width: MediaQuery.of(context).size.width * .9,
+                      autoplay: true,
+                      showText: false,
+                      showSubBackground: false,
+                      indicatorShape: BoxShape.rectangle,
+                      selectedDotColor: Colors.white,
+                      unselectedDotColor: Colors.white60,
                     ),
                   ),
-                  LottieBuilder.asset(
-                    "Assets/fire.json",
+                  SizedBox(
                     height: 30,
-                    frameRate: FrameRate.max,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: const Text(
+                          " GAMES FOR YOU",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      LottieBuilder.asset(
+                        "Assets/fire.json",
+                        height: 30,
+                        frameRate: FrameRate.max,
+                      )
+                    ],
+                  ),
+                  Container(
+                    height: 220,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                              "Assets/bgmi_home.png",
+                            ),
+                            fit: BoxFit.cover)),
+                  ),
+                  Container(
+                    height: 200,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("Assets/FreeFire_home.png"),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 18,
+                    ),
+                    child: Container(
+                      height: 220,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("Assets/ludo_home_screen.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 27,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          height: 175,
+                          width: Get.width - 40,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            image: DecorationImage(
+                              image:
+                                  AssetImage("Assets/carrom_home_screen.jpg"),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
                   )
                 ],
               ),
-              Container(
-                height: 220,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          "Assets/bgmi_home.png",
-                        ),
-                        fit: BoxFit.cover)),
-              ),
-              Container(
-                height: 200,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: AssetImage("Assets/FreeFire_home.png"),
-                )),
-              )
-            ]),
-          )
-        ],
-      )),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
