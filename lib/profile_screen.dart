@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
+import 'package:gamaru_mobile_app/Screens/refer_screen/refer_earn_screen.dart';
+import 'package:gamaru_mobile_app/earn_screen.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
@@ -75,13 +78,13 @@ class ProfileScreen extends StatelessWidget {
                       Icon(
                         HeroIcons.wallet,
                         color: Colors.white70,
-                        size: 40,
+                        size: 35,
                       ),
                       SizedBox(
                         width: 20,
                       ),
                       Text(
-                        "Wallet",
+                        "My Wallet",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ],
@@ -94,6 +97,7 @@ class ProfileScreen extends StatelessWidget {
               InkWell(
                 onTap: () {
                   print('I love you');
+                  Get.to(ReferAndEarn());
                 },
                 child: Container(
                   child: Row(
@@ -104,13 +108,13 @@ class ProfileScreen extends StatelessWidget {
                       Icon(
                         HeroIcons.chat_bubble_bottom_center_text,
                         color: Colors.white70,
-                        size: 40,
+                        size: 35,
                       ),
                       SizedBox(
                         width: 20,
                       ),
                       Text(
-                        "Refer & Invite",
+                        "Refer & Earn",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ],
@@ -123,6 +127,37 @@ class ProfileScreen extends StatelessWidget {
               InkWell(
                 onTap: () {
                   print('I love you');
+                  Get.to(ReferAndEarn());
+                },
+                child: Container(
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Icon(
+                        Icons.notifications_rounded,
+                        color: Colors.white70,
+                        size: 35,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "Notifications",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              InkWell(
+                onTap: () {
+                  print('I love you');
+                  Get.to(SupportScreen());
                 },
                 child: Container(
                   child: Row(
@@ -133,13 +168,13 @@ class ProfileScreen extends StatelessWidget {
                       Icon(
                         Icons.help,
                         color: Colors.white70,
-                        size: 40,
+                        size: 35,
                       ),
                       SizedBox(
                         width: 20,
                       ),
                       Text(
-                        "Help Center",
+                        "Customer Support",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ],
@@ -163,7 +198,7 @@ class ProfileScreen extends StatelessWidget {
                       Icon(
                         Icons.logout,
                         color: Colors.white70,
-                        size: 40,
+                        size: 35,
                       ),
                       SizedBox(
                         width: 20,
@@ -177,7 +212,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: Get.height * .2,
+                height: Get.height * .14,
               ),
               Text(
                 "Follow us on",
