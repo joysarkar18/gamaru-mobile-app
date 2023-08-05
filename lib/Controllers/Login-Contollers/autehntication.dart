@@ -14,6 +14,7 @@ class Authentication extends GetxController {
   late Rx<User?> firebaseUser;
   RxString? errorMsg = "".obs;
   RxString? errorMsgup = "".obs;
+  RxString userEmail = "".obs;
   // ignore: non_constant_identifier_names
   var is_loading = false.obs;
   final userController = Get.put(UserController());
@@ -29,10 +30,12 @@ class Authentication extends GetxController {
 
   _setInitScreen(User? user) {
     Timer(const Duration(seconds: 1), () {
-      user == null
-          ? Get.offAll(
-              () => const Login()) //should change this to wellcome screen
-          : Get.offAll(() => MainScreen());
+      if (user == null) {
+        Get.offAll(() => const Login());
+      } else {
+        userEmail.value = _auth.currentUser!.email.toString();
+        Get.offAll(() => MainScreen());
+      }
     });
   }
 

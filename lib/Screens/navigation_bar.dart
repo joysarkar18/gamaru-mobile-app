@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
+import 'package:gamaru_mobile_app/Screens/Profile-Screen/profileScreen.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../earn_screen.dart';
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _pages = [
     EarnScreen(),
     HomeScreen(),
-    ProfileScreen(),
+    ProfileScreen1(),
   ];
 
   @override
