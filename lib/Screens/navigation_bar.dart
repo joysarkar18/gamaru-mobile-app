@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../earn_screen.dart';
 import '../game_screen.dart';
-import '../profile_screen.dart';
 import 'Home-Screen/homeScreen.dart';
 
 class MainScreen extends StatefulWidget {
