@@ -187,14 +187,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Container(
                             height: 175,
-                            width: Get.width - 40,
+                            width: Get.width - 60,
                             decoration: const BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
                               image: DecorationImage(
                                   image: AssetImage(
                                       "Assets/carrom_home_screen.jpg"),
-                                  fit: BoxFit.contain),
+                                  fit: BoxFit.fitWidth),
                             ),
                           ),
                         ],

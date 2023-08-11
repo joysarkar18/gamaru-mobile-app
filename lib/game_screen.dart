@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
+import 'package:gamaru_mobile_app/Screens/Game-Screen/event.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 class GameScreen extends StatefulWidget {
   final gameName;
@@ -76,24 +74,27 @@ class _GameScreenState extends State<GameScreen> {
               children: [
                 // FOR CURRENT PAGE
                 Container(
-                  color: Colors.black,
-                  child: Center(
-                    child: Text(
-                      "Current",
-                      style: TextStyle(color: Colors.white, fontSize: 35),
-                    ),
-                  ),
-                ),
+                    color: Colors.black,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        EventCard(),
+                      ],
+                    )),
 
                 // FOR UPCOMMING PAGE
 
                 Container(
                   color: Colors.black,
-                  child: Center(
-                    child: Text(
-                      "Upcomming",
-                      style: TextStyle(color: Colors.white, fontSize: 35),
-                    ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      EventCard(),
+                    ],
                   ),
                 ),
 
