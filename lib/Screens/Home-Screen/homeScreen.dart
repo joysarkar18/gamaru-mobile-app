@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_carousel_slider/flutter_custom_carousel_slider.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/game_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -111,36 +112,60 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  Container(
-                    height: 220,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                              "Assets/bgmi_home.png",
-                            ),
-                            fit: BoxFit.cover)),
+                  InkWell(
+                    splashFactory: NoSplash.splashFactory,
+                    onTap: () {
+                      Get.to(GameScreen(
+                        gameName: "BATTLE GROUND MOBILR INDIA",
+                      ));
+                    },
+                    child: Container(
+                      height: 220,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                "Assets/bgmi_home.png",
+                              ),
+                              fit: BoxFit.cover)),
+                    ),
                   ),
-                  Container(
-                    height: 200,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("Assets/FreeFire_home.png"),
+                  InkWell(
+                    splashFactory: NoSplash.splashFactory,
+                    onTap: () {
+                      Get.to(GameScreen(
+                        gameName: "FREE FIRE",
+                      ));
+                    },
+                    child: Container(
+                      height: 200,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("Assets/FreeFire_home.png"),
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(
                     height: 8.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 18,
-                    ),
-                    child: Container(
-                      height: 220,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("Assets/ludo_home_screen.png"),
-                          fit: BoxFit.cover,
+                  InkWell(
+                    splashFactory: NoSplash.splashFactory,
+                    onTap: () {
+                      Get.to(GameScreen(
+                        gameName: "LUDO",
+                      ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        right: 18,
+                      ),
+                      child: Container(
+                        height: 220,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("Assets/ludo_home_screen.png"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -148,23 +173,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: 27,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          height: 175,
-                          width: Get.width - 40,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            image: DecorationImage(
-                              image:
-                                  AssetImage("Assets/carrom_home_screen.jpg"),
+                  InkWell(
+                    splashFactory: NoSplash.splashFactory,
+                    onTap: () {
+                      Get.to(GameScreen(
+                        gameName: "CARROM",
+                      ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            height: 175,
+                            width: Get.width - 40,
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "Assets/carrom_home_screen.jpg"),
+                                  fit: BoxFit.contain),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
