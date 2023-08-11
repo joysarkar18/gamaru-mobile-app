@@ -47,6 +47,7 @@ dependencies:
   google_mobile_ads: ^3.0.0
   icons_plus: ^4.0.0
   flutter_custom_carousel_slider: ^1.2.0
+  random_avatar: ^0.0.8
   # google_sign_in: ^6.1.4
 
 dev_dependencies:

@@ -5,6 +5,7 @@ import 'package:gamaru_mobile_app/Componants/glossy_prof.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
+import 'package:random_avatar/random_avatar.dart';
 
 import '../../Controllers/Login-Contollers/autehntication.dart';
 import '../Customer Support/SupportScreen.dart';
@@ -46,10 +47,12 @@ class ProfileScreen1 extends StatelessWidget {
                         spreadRadius: 0.2, //extend the shadow
                       )
                     ],
-                    color: Colors.white54,
+                    color: Colors.transparent,
                     border: Border.all(color: Colors.black, width: 5),
                     borderRadius: BorderRadius.all(Radius.circular(75))),
-                child: LottieBuilder.asset("Assets/gamer_profile_page.json"),
+                child: RandomAvatar(
+                  authentication.userEmail.value,
+                ),
               )),
           Positioned(
             top: Get.height - Get.height * 0.65,

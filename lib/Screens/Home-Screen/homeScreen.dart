@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             TopDetails(),
             Container(
-              height: Get.height - 145,
+              height: Get.height - 146,
               padding: EdgeInsets.only(top: 20),
               child: ListView(
                 children: [
