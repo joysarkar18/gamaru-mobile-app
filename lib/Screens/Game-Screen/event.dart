@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../Componants/glossyEffect.dart';
 
@@ -17,7 +18,7 @@ class EventCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 2.2, vertical: 2),
+              margin: EdgeInsets.symmetric(horizontal: 2.1, vertical: 2),
               width: Get.width * 0.95,
               height: 220,
               decoration: BoxDecoration(
@@ -63,6 +64,75 @@ class EventCard extends StatelessWidget {
                 SizedBox(
                   width: 30,
                 ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    GlossyCard(
+                      borderRadius: 5.0,
+                      borderWith: 1.0,
+                      height: 40.0,
+                      width: 150.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.map_rounded,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            "MAP - ",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            "ERANGLE",
+                            style: TextStyle(color: Colors.blue),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                GlossyCard(
+                  borderRadius: 5.0,
+                  borderWith: 1.0,
+                  height: 40.0,
+                  width: 150.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                          height: 22,
+                          width: 22,
+                          image: AssetImage("Assets/trophy-128.png")),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        "WINNER - ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      LottieBuilder.asset(
+                        "Assets/coin.json",
+                        frameRate: FrameRate.max,
+                      ),
+                      Text(
+                        "300",
+                        style:
+                            TextStyle(color: Color.fromARGB(255, 255, 234, 45)),
+                      )
+                    ],
+                  ),
+                )
               ],
             )
           ],
