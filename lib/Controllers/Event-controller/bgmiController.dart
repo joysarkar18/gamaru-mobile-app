@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 class BgmiController extends GetxController {
   static BgmiController get instance => Get.find();
   final _db = FirebaseFirestore.instance;
-  RxList<Map> eventListBgmiUpcoming = <Map>[].obs;
+  RxList eventListBgmiUpcoming = [].obs;
+  RxBool upcoming_loading = true.obs;
 
   Future<void> getUpcoming() async {
     await _db
@@ -12,7 +13,8 @@ class BgmiController extends GetxController {
         .doc("upcoming")
         .get()
         .then((value) {
-      eventListBgmiUpcoming = value["events"];
+      eventListBgmiUpcoming.value = value["events"];
+      upcoming_loading.value = false;
     });
   }
 }

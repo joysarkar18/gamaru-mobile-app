@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Controllers/Event-controller/bgmiController.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/Game-Screen/event.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,13 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final userController = Get.put(UserController());
+  final bgmiController = Get.put(BgmiController());
+  @override
+  void initState() {
+    super.initState();
+    bgmiController.getUpcoming();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -86,16 +94,22 @@ class _GameScreenState extends State<GameScreen> {
 
                 // FOR UPCOMMING PAGE
 
-                Container(
-                  color: Colors.black,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      EventCard(),
-                    ],
-                  ),
+                Obx(
+                  () => bgmiController.upcoming_loading.value
+                      ? Container(
+                          color: Colors.black,
+                          child:
+                              const Center(child: CircularProgressIndicator()))
+                      : Container(
+                          color: Colors.black,
+                          child: ListView.builder(
+                            itemCount: bgmiController
+                                .eventListBgmiUpcoming.value.length,
+                            itemBuilder: (context, index) {
+                              return EventCard();
+                            },
+                          ),
+                        ),
                 ),
 
                 // FOR RESULT PAGE
