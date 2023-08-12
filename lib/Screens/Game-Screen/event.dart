@@ -11,7 +11,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlossyCard(
-        height: 400.0,
+        height: 500.0,
         width: Get.width * 0.95,
         borderRadius: 10.0,
         borderWith: 2.0,
@@ -69,71 +69,210 @@ class EventCard extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  children: [
-                    GlossyCard(
-                      borderRadius: 5.0,
-                      borderWith: 1.0,
-                      height: 40.0,
-                      width: 150.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.map_rounded,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            "MAP - ",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "ERANGLE",
-                            style: TextStyle(color: Colors.blue),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                GlossyCard(
-                  borderRadius: 5.0,
-                  borderWith: 1.0,
-                  height: 40.0,
-                  width: 150.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
                     children: [
-                      Image(
-                          height: 22,
-                          width: 22,
-                          image: AssetImage("Assets/trophy-128.png")),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        "WINNER - ",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      LottieBuilder.asset(
-                        "Assets/coin.json",
-                        frameRate: FrameRate.max,
-                      ),
-                      Text(
-                        "300",
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 255, 234, 45)),
+                      GlossyCard(
+                        borderRadius: 5.0,
+                        borderWith: 1.0,
+                        height: 40.0,
+                        width: 150.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.map_rounded,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              "MAP - ",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              "ERANGLE",
+                              style: TextStyle(color: Colors.blue),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
-                )
-              ],
+                  GlossyCard(
+                    borderRadius: 5.0,
+                    borderWith: 1.0,
+                    height: 40.0,
+                    width: 150.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                            height: 22,
+                            width: 22,
+                            image: AssetImage("Assets/trophy-128.png")),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          "WINNER - ",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        LottieBuilder.asset(
+                          "Assets/coin.json",
+                          frameRate: FrameRate.max,
+                        ),
+                        Text(
+                          "300",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 234, 45)),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      GlossyCard(
+                        borderRadius: 5.0,
+                        borderWith: 1.0,
+                        height: 40.0,
+                        width: 150.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.tag_rounded,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              "PER KILL - ",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            LottieBuilder.asset(
+                              "Assets/coin.json",
+                              animate: false,
+                            ),
+                            Text(
+                              "7",
+                              style: TextStyle(color: Colors.yellow),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  GlossyCard(
+                    borderRadius: 5.0,
+                    borderWith: 1.0,
+                    height: 40.0,
+                    width: 150.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          "ENTRY FEE - ",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        LottieBuilder.asset(
+                          "Assets/coin.json",
+                          animate: false,
+                        ),
+                        Text(
+                          "10",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 234, 45)),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                children: [
+                  LinearProgressIndicator(
+                    minHeight: 8,
+                    value: 0.7,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "34/50",
+                        style: TextStyle(color: Colors.white60),
+                      ),
+                      Text(
+                        "Only 16 spots left",
+                        style: TextStyle(color: Colors.white60),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      side: BorderSide(color: Colors.blue))),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.blue),
+                              foregroundColor:
+                                  MaterialStatePropertyAll(Colors.white)),
+                          onPressed: () {},
+                          child: Text("DETAILS")),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      side: BorderSide(color: Colors.green))),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.green),
+                              foregroundColor:
+                                  MaterialStatePropertyAll(Colors.white)),
+                          onPressed: () {},
+                          child: Text("JOIN NOW")),
+                    ],
+                  )
+                ],
+              ),
             )
           ],
         ));

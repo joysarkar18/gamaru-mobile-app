@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     splashFactory: NoSplash.splashFactory,
                     onTap: () {
                       Get.to(GameScreen(
-                        gameName: "BATTLE GROUND MOBILR INDIA",
+                        gameName: "BATTLE GROUNDS MOBILE INDIA",
                       ));
                     },
                     child: Container(
