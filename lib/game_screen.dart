@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Controllers/Event-controller/bgmiController.dart';
@@ -19,48 +20,35 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-    bgmiController.getUpcoming();
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: DefaultTabController(
-        length: 3,
-        initialIndex: 1,
+        length: 2,
+        initialIndex: 0,
         child: Scaffold(
             extendBodyBehindAppBar: false,
             appBar: AppBar(
               backgroundColor: Colors.black,
               title: Text(
                 widget.gameName,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              leading: BackButton(
+              leading: const BackButton(
                 color: Colors.white,
               ),
 
               centerTitle: true,
               titleSpacing: 5,
               // elevation: 20,
-              bottom: TabBar(
+              bottom: const TabBar(
                   indicatorColor: Colors.purple,
-                  indicatorWeight: 3,
+                  indicatorWeight: 2,
                   tabs: [
-                    // FOR CURRENT SCREEN
-
-                    Tab(
-                      // text: "Current Event",
-                      child: Text(
-                        "Current",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-
-                    // FOR UPCOMMING SCREEN
-
                     Tab(
                       // text: "Upcomming Event",
                       child: Text(
@@ -77,40 +65,48 @@ class _GameScreenState extends State<GameScreen> {
                   ]),
             ),
             body: TabBarView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               dragStartBehavior: DragStartBehavior.down,
               children: [
-                // FOR CURRENT PAGE
                 Container(
                     color: Colors.black,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        EventCard(),
-                      ],
-                    )),
-
-                // FOR UPCOMMING PAGE
-
-                Obx(
-                  () => bgmiController.upcoming_loading.value
-                      ? Container(
-                          color: Colors.black,
-                          child:
-                              const Center(child: CircularProgressIndicator()))
-                      : Container(
-                          color: Colors.black,
-                          child: ListView.builder(
-                            itemCount: bgmiController
-                                .eventListBgmiUpcoming.value.length,
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection(widget.gameName.toString())
+                          .doc("upcoming")
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          List arr = snapshot.data!.data()!["events"];
+                          return ListView.builder(
+                            itemCount: arr.length,
                             itemBuilder: (context, index) {
-                              return EventCard();
+                              var l = arr[index];
+                              Timestamp t = l["eventTime"];
+                              DateTime dt = t.toDate();
+                              List rList = l["eventRegisteredPlayers"];
+
+                              return EventCard(
+                                registerList: rList,
+                                eventEntryFee: l["eventEntryFee"],
+                                eventMap: l["eventMap"],
+                                eventName: l["eventName"],
+                                eventPerKill: l["eventPerKill"],
+                                eventRegisteredPlayers: rList.length,
+                                eventTime: dt,
+                                eventTotalPlayers: l["eventTotalPlayers"],
+                                eventWinner: l["eventWinner"],
+                              );
                             },
-                          ),
-                        ),
-                ),
+                          );
+                        } else {
+                          return const SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: CircularProgressIndicator());
+                        }
+                      },
+                    )),
 
                 // FOR RESULT PAGE
 
@@ -123,11 +119,11 @@ class _GameScreenState extends State<GameScreen> {
                     focusColor: Colors.amber,
                     // horizontalTitleGap: 10,
                     hoverColor: Colors.amber,
-                    title: Text(
+                    title: const Text(
                       "Name of player",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    subtitle: Text(
+                    subtitle: const Text(
                       "Name of event",
                       style: TextStyle(color: Colors.purple, fontSize: 15),
                     ),
@@ -139,11 +135,11 @@ class _GameScreenState extends State<GameScreen> {
                         borderRadius: BorderRadius.circular(30),
                         color: Color.fromARGB(255, 78, 78, 78).withOpacity(0.9),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: EdgeInsets.all(0.0),
                             child: Icon(
                               Icons.currency_rupee,
                               color: Colors.green,

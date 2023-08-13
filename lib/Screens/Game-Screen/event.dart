@@ -1,12 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../Componants/glossyEffect.dart';
 
 class EventCard extends StatelessWidget {
-  const EventCard({super.key});
+  final eventName;
+  final DateTime eventTime;
+  final List registerList;
+  final eventMap;
+  final eventWinner;
+  final eventPerKill;
+  final eventEntryFee;
+  final eventTotalPlayers;
+  final eventRegisteredPlayers;
+  const EventCard(
+      {super.key,
+      required this.eventEntryFee,
+      required this.eventMap,
+      required this.eventName,
+      required this.eventPerKill,
+      required this.eventRegisteredPlayers,
+      required this.eventTime,
+      required this.eventTotalPlayers,
+      required this.registerList,
+      required this.eventWinner});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +37,7 @@ class EventCard extends StatelessWidget {
           height: 20,
         ),
         GlossyCard(
-            height: 500.0,
+            height: 510.0,
             width: Get.width * 0.95,
             borderRadius: 10.0,
             borderWith: 2.0,
@@ -31,7 +52,7 @@ class EventCard extends StatelessWidget {
                           topLeft: Radius.circular(8),
                           topRight: Radius.circular(8)),
                       image: DecorationImage(
-                          image: AssetImage("Assets/squad_bgmi.png"),
+                          image: AssetImage("Assets/${this.eventName}.png"),
                           fit: BoxFit.cover)),
                 ),
                 SizedBox(
@@ -54,14 +75,14 @@ class EventCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "BGMI SQUAD MATCH",
+                          this.eventName.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "Time - 11/09/23 , 10 AM",
+                          DateFormat.yMMMEd().add_jm().format(this.eventTime),
                           style: TextStyle(color: Colors.white60),
                         )
                       ],
@@ -101,7 +122,7 @@ class EventCard extends StatelessWidget {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Text(
-                                  "ERANGLE",
+                                  this.eventMap.toString(),
                                   style: TextStyle(color: Colors.blue),
                                 )
                               ],
@@ -133,7 +154,7 @@ class EventCard extends StatelessWidget {
                               frameRate: FrameRate.max,
                             ),
                             Text(
-                              "300",
+                              this.eventWinner.toString(),
                               style: TextStyle(
                                   color: Color.fromARGB(255, 255, 234, 45)),
                             )
@@ -177,7 +198,7 @@ class EventCard extends StatelessWidget {
                                   animate: false,
                                 ),
                                 Text(
-                                  "7",
+                                  this.eventPerKill.toString(),
                                   style: TextStyle(color: Colors.yellow),
                                 )
                               ],
@@ -205,7 +226,7 @@ class EventCard extends StatelessWidget {
                               animate: false,
                             ),
                             Text(
-                              "10",
+                              this.eventEntryFee.toString(),
                               style: TextStyle(
                                   color: Color.fromARGB(255, 255, 234, 45)),
                             )
@@ -224,7 +245,8 @@ class EventCard extends StatelessWidget {
                     children: [
                       LinearProgressIndicator(
                         minHeight: 8,
-                        value: 0.7,
+                        value: this.eventRegisteredPlayers /
+                            this.eventTotalPlayers,
                       ),
                       SizedBox(
                         height: 4,
@@ -233,11 +255,11 @@ class EventCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "34/50",
+                            "${this.eventRegisteredPlayers.toString()}/${this.eventTotalPlayers.toString()}",
                             style: TextStyle(color: Colors.white60),
                           ),
                           Text(
-                            "Only 16 spots left",
+                            "Only ${this.eventTotalPlayers - this.eventRegisteredPlayers} spots left",
                             style: TextStyle(color: Colors.white60),
                           )
                         ],
@@ -265,21 +287,43 @@ class EventCard extends StatelessWidget {
                               child: Text("DETAILS")),
                           ElevatedButton(
                               style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          side:
-                                              BorderSide(color: Colors.green))),
-                                  backgroundColor:
-                                      MaterialStatePropertyAll(Colors.green),
-                                  foregroundColor:
-                                      MaterialStatePropertyAll(Colors.white)),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                        side: BorderSide(
+                                            color: registerList.contains(
+                                                    FirebaseAuth.instance
+                                                        .currentUser!.email
+                                                        .toString())
+                                                ? Colors.grey
+                                                : Colors.green))),
+                                backgroundColor: registerList.contains(
+                                        FirebaseAuth.instance.currentUser!.email
+                                            .toString())
+                                    ? MaterialStatePropertyAll(Colors.grey)
+                                    : MaterialStatePropertyAll(Colors.green),
+                                foregroundColor:
+                                    MaterialStatePropertyAll(Colors.white),
+                              ),
                               onPressed: () {},
-                              child: Text("JOIN NOW")),
+                              child: Text(registerList.contains(FirebaseAuth
+                                      .instance.currentUser!.email
+                                      .toString())
+                                  ? "JOINED"
+                                  : "JOIN NOW")),
                         ],
-                      )
+                      ),
+                      registerList.contains(FirebaseAuth
+                              .instance.currentUser!.email
+                              .toString())
+                          ? Text(
+                              "* Get Room ID & PASS 10 mins before the match",
+                              style: TextStyle(color: Colors.red),
+                            )
+                          : Text(
+                              "",
+                            )
                     ],
                   ),
                 )

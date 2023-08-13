@@ -49,6 +49,8 @@ dependencies:
   flutter_custom_carousel_slider: ^1.2.0
   random_avatar: ^0.0.8
   percent_indicator: ^4.2.3
+  intl: ^0.18.1
+
   # google_sign_in: ^6.1.4
 
 dev_dependencies:
