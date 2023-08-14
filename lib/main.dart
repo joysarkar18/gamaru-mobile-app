@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'Controllers/Login-Contollers/autehntication.dart';
 import 'Screens/Splash-Screen/splash_scree.dart';
@@ -12,7 +14,20 @@ void main() async {
   MobileAds.instance.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((value) => Get.put(Authentication()));
+  ).then((_) => Get.put(Authentication()));
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
+  final fcmTocken = await FirebaseMessaging.instance.getToken().then(
+    (value) {
+      print(
+          'token kfghfghfhghjgjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj   = ' +
+              value.toString());
+    },
+  );
+
   runApp(const MyApp());
 }
 

@@ -5,6 +5,7 @@ import 'package:gamaru_mobile_app/Controllers/Event-controller/bgmiController.da
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/Game-Screen/event.dart';
 import 'package:get/get.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class GameScreen extends StatefulWidget {
   final gameName;
@@ -17,6 +18,11 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   final userController = Get.put(UserController());
   final bgmiController = Get.put(BgmiController());
+
+  Future<void> _handleRequest() async {
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -78,26 +84,32 @@ class _GameScreenState extends State<GameScreen> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           List arr = snapshot.data!.data()!["events"];
-                          return ListView.builder(
-                            itemCount: arr.length,
-                            itemBuilder: (context, index) {
-                              var l = arr[index];
-                              Timestamp t = l["eventTime"];
-                              DateTime dt = t.toDate();
-                              List rList = l["eventRegisteredPlayers"];
+                          return LiquidPullToRefresh(
+                            color: const Color.fromARGB(255, 37, 72, 101),
+                            animSpeedFactor: 5,
+                            onRefresh: _handleRequest,
+                            backgroundColor: Color.fromARGB(255, 220, 19, 255),
+                            child: ListView.builder(
+                              itemCount: arr.length,
+                              itemBuilder: (context, index) {
+                                var l = arr[index];
+                                Timestamp t = l["eventTime"];
+                                DateTime dt = t.toDate();
+                                List rList = l["eventRegisteredPlayers"];
 
-                              return EventCard(
-                                registerList: rList,
-                                eventEntryFee: l["eventEntryFee"],
-                                eventMap: l["eventMap"],
-                                eventName: l["eventName"],
-                                eventPerKill: l["eventPerKill"],
-                                eventRegisteredPlayers: rList.length,
-                                eventTime: dt,
-                                eventTotalPlayers: l["eventTotalPlayers"],
-                                eventWinner: l["eventWinner"],
-                              );
-                            },
+                                return EventCard(
+                                  registerList: rList,
+                                  eventEntryFee: l["eventEntryFee"],
+                                  eventMap: l["eventMap"],
+                                  eventName: l["eventName"],
+                                  eventPerKill: l["eventPerKill"],
+                                  eventRegisteredPlayers: rList.length,
+                                  eventTime: dt,
+                                  eventTotalPlayers: l["eventTotalPlayers"],
+                                  eventWinner: l["eventWinner"],
+                                );
+                              },
+                            ),
                           );
                         } else {
                           return const SizedBox(

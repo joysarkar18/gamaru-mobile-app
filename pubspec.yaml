@@ -50,6 +50,9 @@ dependencies:
   random_avatar: ^0.0.8
   percent_indicator: ^4.2.3
   intl: ^0.18.1
+  liquid_pull_to_refresh: ^3.0.1
+  firebase_messaging: ^14.6.5
+  permission_handler: ^10.4.3
 
   # google_sign_in: ^6.1.4
 
