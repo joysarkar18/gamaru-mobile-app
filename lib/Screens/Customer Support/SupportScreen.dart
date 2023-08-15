@@ -11,6 +11,9 @@ class SupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.black,
+          iconTheme: IconThemeData(color: Colors.white)),
       backgroundColor: Colors.black,
       body: SafeArea(
           child: SingleChildScrollView(
@@ -20,9 +23,6 @@ class SupportScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 40,
-              ),
               const Text(
                 "Request Help",
                 style: TextStyle(

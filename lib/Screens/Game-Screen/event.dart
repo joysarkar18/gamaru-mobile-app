@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
+import 'package:gamaru_mobile_app/Screens/Join-now/joinNow-bgmi.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -306,7 +307,14 @@ class EventCard extends StatelessWidget {
                                 foregroundColor:
                                     MaterialStatePropertyAll(Colors.white),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                if (!registerList.contains(
+                                    FirebaseAuth.instance.currentUser!.email)) {
+                                  Get.to(() => BgmiJoinNow(
+                                        entryFee: eventEntryFee,
+                                      ));
+                                }
+                              },
                               child: Text(registerList.contains(FirebaseAuth
                                       .instance.currentUser!.email
                                       .toString())
