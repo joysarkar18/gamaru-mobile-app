@@ -10,6 +10,7 @@ import '../../Componants/glossyEffect.dart';
 
 class EventCard extends StatelessWidget {
   final eventName;
+  final int index;
   final DateTime eventTime;
   final List registerList;
   final eventMap;
@@ -20,6 +21,7 @@ class EventCard extends StatelessWidget {
   final eventRegisteredPlayers;
   const EventCard(
       {super.key,
+      required this.index,
       required this.eventEntryFee,
       required this.eventMap,
       required this.eventName,
@@ -311,6 +313,7 @@ class EventCard extends StatelessWidget {
                                 if (!registerList.contains(
                                     FirebaseAuth.instance.currentUser!.email)) {
                                   Get.to(() => BgmiJoinNow(
+                                        index: index,
                                         entryFee: eventEntryFee,
                                       ));
                                 }

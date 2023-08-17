@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Controllers/Event-controller/bgmiController.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -7,13 +8,15 @@ bool isChecked = false;
 
 class BgmiJoinNow extends StatefulWidget {
   final int entryFee;
-  const BgmiJoinNow({super.key, required this.entryFee});
+  final int index;
+  const BgmiJoinNow({super.key, required this.entryFee, required this.index});
 
   @override
   State<BgmiJoinNow> createState() => _BgmiJoinNowState();
 }
 
 class _BgmiJoinNowState extends State<BgmiJoinNow> {
+  final bgmiController = Get.put(BgmiController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +120,10 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                             foregroundColor:
                                 MaterialStatePropertyAll(Colors.white),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            bgmiController.joinBgmi(widget.index);
+                            print("fuck");
+                          },
                           child: SizedBox(
                             width: 130,
                             child: Row(

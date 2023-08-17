@@ -98,6 +98,7 @@ class _GameScreenState extends State<GameScreen> {
                                 List rList = l["eventRegisteredPlayers"];
 
                                 return EventCard(
+                                  index: index,
                                   registerList: rList,
                                   eventEntryFee: l["eventEntryFee"],
                                   eventMap: l["eventMap"],
