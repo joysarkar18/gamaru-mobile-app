@@ -9,7 +9,12 @@ bool isChecked = false;
 class BgmiJoinNow extends StatefulWidget {
   final int entryFee;
   final int index;
-  const BgmiJoinNow({super.key, required this.entryFee, required this.index});
+  final DateTime dt;
+  const BgmiJoinNow(
+      {super.key,
+      required this.entryFee,
+      required this.index,
+      required this.dt});
 
   @override
   State<BgmiJoinNow> createState() => _BgmiJoinNowState();
@@ -17,6 +22,7 @@ class BgmiJoinNow extends StatefulWidget {
 
 class _BgmiJoinNowState extends State<BgmiJoinNow> {
   final bgmiController = Get.put(BgmiController());
+  final fromKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +56,15 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                 borderRadius: 10.0,
                 borderWith: 2.0,
                 child: Form(
+                  key: fromKey,
                   child: Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 15, right: 15, top: 20, bottom: 0),
                         child: TextFormField(
+                          validator: (value) => validateID(value),
+                          controller: bgmiController.bgmiIdController,
                           keyboardType: TextInputType.text,
                           style: const TextStyle(
                               color: Colors.white60,
@@ -121,8 +130,14 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                                 MaterialStatePropertyAll(Colors.white),
                           ),
                           onPressed: () {
-                            bgmiController.joinBgmi(widget.index);
-                            print("fuck");
+                            final from = fromKey.currentState!;
+                            if (from.validate()) {
+                              bgmiController.joinBgmi(
+                                widget.index,
+                                widget.dt,
+                                bgmiController.bgmiIdController.text,
+                              );
+                            }
                           },
                           child: SizedBox(
                             width: 130,
@@ -161,4 +176,12 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
           )),
     );
   }
+}
+
+String? validateID(String? id) {
+  if (id == null || id.isEmpty) {
+    return "please enter the ID";
+  }
+
+  return null;
 }

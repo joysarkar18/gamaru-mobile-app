@@ -315,6 +315,7 @@ class EventCard extends StatelessWidget {
                                   Get.to(() => BgmiJoinNow(
                                         index: index,
                                         entryFee: eventEntryFee,
+                                        dt: eventTime,
                                       ));
                                 }
                               },

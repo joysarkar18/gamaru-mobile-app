@@ -83,7 +83,7 @@ class _GameScreenState extends State<GameScreen> {
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          List arr = snapshot.data!.data()!["events"];
+                          List arr = snapshot.data!.data()!["event"];
                           return LiquidPullToRefresh(
                             color: const Color.fromARGB(255, 37, 72, 101),
                             animSpeedFactor: 5,
