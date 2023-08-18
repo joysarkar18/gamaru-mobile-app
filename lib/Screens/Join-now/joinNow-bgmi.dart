@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Event-controller/bgmiController.dart';
+import 'package:gamaru_mobile_app/game_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -23,6 +24,12 @@ class BgmiJoinNow extends StatefulWidget {
 class _BgmiJoinNowState extends State<BgmiJoinNow> {
   final bgmiController = Get.put(BgmiController());
   final fromKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    bgmiController.getBgmiId();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,11 +139,17 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                           onPressed: () {
                             final from = fromKey.currentState!;
                             if (from.validate()) {
+                              if (isChecked) {
+                                bgmiController.updateBgmiId(
+                                    bgmiController.bgmiIdController.text);
+                              }
                               bgmiController.joinBgmi(
                                 widget.index,
                                 widget.dt,
                                 bgmiController.bgmiIdController.text,
                               );
+                              Get.off(() => GameScreen(
+                                  gameName: "BATTLE GROUND MOBILE INDIA"));
                             }
                           },
                           child: SizedBox(

@@ -21,6 +21,7 @@ class UserController extends GetxController {
       "id": id,
       "email": email,
       "coins": 0,
+      "bgmiId": "",
     }).then((_) {
       _db
           .collection("user")

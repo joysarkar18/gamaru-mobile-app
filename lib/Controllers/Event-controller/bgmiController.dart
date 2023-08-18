@@ -32,7 +32,7 @@ class BgmiController extends GetxController {
         .get()
         .then((value) {
       if (value.exists) {
-        List l = value[dt.toString()];
+        List l = value["players"];
         l.add(bgmiId);
         _db
             .collection("BGMI REGISTER LIST")
@@ -47,5 +47,22 @@ class BgmiController extends GetxController {
             .set({"players": l});
       }
     });
+  }
+
+  getBgmiId() async {
+    _db
+        .collection("user")
+        .doc(FirebaseAuth.instance.currentUser!.email.toString())
+        .get()
+        .then((value) {
+      bgmiIdController.value = value["bgmiId"];
+    });
+  }
+
+  updateBgmiId(String id) async {
+    _db
+        .collection("user")
+        .doc(FirebaseAuth.instance.currentUser!.email.toString())
+        .update({"bgmiId": id});
   }
 }
