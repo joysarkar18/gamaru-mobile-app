@@ -24,13 +24,12 @@ class TopDetails extends StatelessWidget {
                 children: [
                   Container(
                       height: 40,
-                      width: 40,
+                      width: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      )),
+                          image: DecorationImage(
+                              image: AssetImage("Assets/g_Logo.png")))),
                   SizedBox(
-                    width: Get.width * 0.5,
+                    width: Get.width * 0.46,
                   ),
                   Container(
                     height: 28,

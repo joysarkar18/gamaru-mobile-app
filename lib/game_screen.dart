@@ -6,6 +6,7 @@ import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dar
 import 'package:gamaru_mobile_app/Screens/Game-Screen/event.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:lottie/lottie.dart';
 
 class GameScreen extends StatefulWidget {
   final gameName;
@@ -86,7 +87,8 @@ class _GameScreenState extends State<GameScreen> {
                           List arr = snapshot.data!.data()!["event"];
                           return LiquidPullToRefresh(
                             color: const Color.fromARGB(255, 37, 72, 101),
-                            animSpeedFactor: 5,
+                            animSpeedFactor: 3,
+                            springAnimationDurationInMilliseconds: 600,
                             onRefresh: _handleRequest,
                             backgroundColor: Color.fromARGB(255, 220, 19, 255),
                             child: ListView.builder(
@@ -113,10 +115,14 @@ class _GameScreenState extends State<GameScreen> {
                             ),
                           );
                         } else {
-                          return const SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: CircularProgressIndicator());
+                          return const Center(
+                            child: SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.grey,
+                                )),
+                          );
                         }
                       },
                     )),
