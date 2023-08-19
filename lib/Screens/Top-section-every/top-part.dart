@@ -20,16 +20,42 @@ class TopDetails extends StatelessWidget {
               height: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
                       height: 40,
-                      width: 50,
+                      width: 125,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("Assets/g_Logo.png")))),
+                              image: AssetImage("Assets/gamaru_text.png")))),
                   SizedBox(
-                    width: Get.width * 0.46,
+                    width: Get.width * 0.02,
+                  ),
+                  Container(
+                    height: 28,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                    ),
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 78, 78, 78).withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Center(
+                      child: Row(
+                        children: [
+                          LottieBuilder.asset(
+                            "Assets/winning_coin.json",
+                            frameRate: FrameRate.max,
+                          ),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          Obx(() => Text(
+                                userController.totalCoins.value.toString(),
+                                style: TextStyle(color: Colors.yellow),
+                              ))
+                        ],
+                      ),
+                    ),
                   ),
                   Container(
                     height: 28,
@@ -46,13 +72,21 @@ class TopDetails extends StatelessWidget {
                             "Assets/coin.json",
                             frameRate: FrameRate.max,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 2,
                           ),
                           Obx(() => Text(
                                 userController.totalCoins.value.toString(),
                                 style: TextStyle(color: Colors.yellow),
-                              ))
+                              )),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          const Icon(
+                            Icons.add,
+                            size: 20,
+                            color: Colors.green,
+                          ),
                         ],
                       ),
                     ),
