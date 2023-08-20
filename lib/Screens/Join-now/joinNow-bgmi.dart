@@ -58,7 +58,7 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                 ),
               ),
               GlossyCard(
-                height: 200.0,
+                height: Get.height * .28,
                 width: Get.width - 30.0,
                 borderRadius: 10.0,
                 borderWith: 2.0,
@@ -182,7 +182,7 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "*PLEASE ENTER YOUR BGMI ID SAME AS YOUR OWN ACCOUNT OTHERWISE YOU ARE NOT ALLOWED TO PLAY",
-                  style: TextStyle(color: Colors.red, fontSize: 20),
+                  style: TextStyle(color: Colors.orange, fontSize: 20),
                 ),
               ),
             ],
