@@ -33,17 +33,31 @@ class BgmiController extends GetxController {
         .then((value) {
       if (value.exists) {
         List l = value["players"];
-        l.add(bgmiId);
+        l.add({
+          "bgmiId": bgmiId,
+          "email": FirebaseAuth.instance.currentUser!.email.toString()
+        });
         _db
             .collection("BGMI REGISTER LIST")
-            .doc(dt.toString())
+            .doc(dt.day.toString() +
+                dt.month.toString() +
+                dt.year.toString() +
+                dt.hour.toString() +
+                dt.minute.toString())
             .update({"players": l});
       } else {
         List l = [];
-        l.add(bgmiId);
+        l.add({
+          "bgmiId": bgmiId,
+          "email": FirebaseAuth.instance.currentUser!.email.toString()
+        });
         _db
             .collection("BGMI REGISTER LIST")
-            .doc(dt.toString())
+            .doc(dt.day.toString() +
+                dt.month.toString() +
+                dt.year.toString() +
+                dt.hour.toString() +
+                dt.minute.toString())
             .set({"players": l});
       }
     });

@@ -25,7 +25,7 @@ class TopDetails extends StatelessWidget {
                   Container(
                       height: 40,
                       width: 125,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage("Assets/gamaru_text.png")))),
                   SizedBox(
@@ -33,7 +33,7 @@ class TopDetails extends StatelessWidget {
                   ),
                   Container(
                     height: 28,
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                     ),
                     decoration: BoxDecoration(
@@ -46,7 +46,7 @@ class TopDetails extends StatelessWidget {
                             "Assets/winning_coin.json",
                             frameRate: FrameRate.max,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 2,
                           ),
                           Obx(() => Text(
@@ -59,11 +59,12 @@ class TopDetails extends StatelessWidget {
                   ),
                   Container(
                     height: 28,
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                     ),
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 78, 78, 78).withOpacity(0.9),
+                        color: const Color.fromARGB(255, 78, 78, 78)
+                            .withOpacity(0.9),
                         borderRadius: BorderRadius.circular(15)),
                     child: Center(
                       child: Row(

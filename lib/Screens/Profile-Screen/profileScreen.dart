@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:gamaru_mobile_app/Componants/glossy_prof.dart';
+import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
@@ -17,12 +19,15 @@ class ProfileScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authentication = Get.put(Authentication());
+    final walletController = Get.put(WalletController());
+    walletController.myWalletStatus.value = false;
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("Assets/bg_profile.JPG"),
                     fit: BoxFit.cover)),
@@ -67,7 +72,7 @@ class ProfileScreen1 extends StatelessWidget {
                         Obx(
                           () => Text(
                             authentication.userEmail.value,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
@@ -78,33 +83,146 @@ class ProfileScreen1 extends StatelessWidget {
                     SizedBox(
                       height: 45,
                     ),
-                    InkWell(
-                      onTap: () {
-                        print('I love you');
-                      },
-                      child: GlossyCard(
+                    Obx(
+                      () => GlossyCard(
                         borderRadius: 10.0,
                         borderWith: 1.0,
-                        height: 50.0,
+                        height: walletController.myWalletStatus.value
+                            ? 200.0
+                            : 50.0,
                         width: Get.width,
-                        child: Row(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: 10,
+                            InkWell(
+                              onTap: () {
+                                walletController.myWalletStatus.value =
+                                    !walletController.myWalletStatus.value;
+                              },
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Icon(
+                                    HeroIcons.wallet,
+                                    color: Colors.white70,
+                                    size: 35,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  const Text(
+                                    "My Wallet",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  SizedBox(
+                                    width: 150,
+                                  ),
+                                  walletController.myWalletStatus.value
+                                      ? const Icon(
+                                          Icons.arrow_drop_up_rounded,
+                                          color: Colors.white,
+                                          size: 40,
+                                        )
+                                      : const Icon(
+                                          Icons.arrow_drop_down_rounded,
+                                          color: Colors.white,
+                                          size: 40,
+                                        )
+                                ],
+                              ),
                             ),
-                            Icon(
-                              HeroIcons.wallet,
-                              color: Colors.white70,
-                              size: 35,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "My Wallet",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
+                            walletController.myWalletStatus.value
+                                ? Divider()
+                                : Text(
+                                    "",
+                                    style: TextStyle(fontSize: 0),
+                                  ),
+                            walletController.myWalletStatus.value
+                                ? Container(
+                                    child: Column(children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(() => AddMoney());
+                                        },
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Icon(
+                                              HeroIcons.bolt,
+                                              color: Colors.white70,
+                                              size: 35,
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              "Recharge",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Icon(
+                                            HeroIcons.banknotes,
+                                            color: Colors.white70,
+                                            size: 35,
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text(
+                                            "Withdraw",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Icon(
+                                            HeroIcons.bars_arrow_down,
+                                            color: Colors.white70,
+                                            size: 35,
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text(
+                                            "Transactions",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        ],
+                                      ),
+                                    ]),
+                                  )
+                                : Text(
+                                    "",
+                                    style: TextStyle(fontSize: 0),
+                                  ),
                           ],
                         ),
                       ),
