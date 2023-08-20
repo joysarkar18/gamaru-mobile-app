@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
+import 'package:gamaru_mobile_app/Screens/Game-Screen/details_screen.dart';
 import 'package:gamaru_mobile_app/Screens/Join-now/joinNow-bgmi.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -286,7 +287,9 @@ class EventCard extends StatelessWidget {
                                       MaterialStatePropertyAll(Colors.blue),
                                   foregroundColor:
                                       MaterialStatePropertyAll(Colors.white)),
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(DetailsScreen());
+                              },
                               child: Text("DETAILS")),
                           ElevatedButton(
                               style: ButtonStyle(
