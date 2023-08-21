@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addBankCard.dart';
 import 'package:get/get.dart';
 
 class BankCard extends StatelessWidget {
@@ -21,10 +22,15 @@ class BankCard extends StatelessWidget {
           Container(
             height: Get.height * 0.5,
           ),
-          Icon(
-            Icons.add_box_rounded,
-            color: Colors.white,
-            size: 50,
+          InkWell(
+            onTap: () {
+              Get.to(() => AddBankCard());
+            },
+            child: Icon(
+              Icons.add_box_rounded,
+              color: Colors.white,
+              size: 50,
+            ),
           ),
           Text(
             "ADD NEW BANK CARD",
