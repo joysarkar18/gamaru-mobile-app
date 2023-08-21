@@ -11,14 +11,20 @@ import 'package:gamaru_mobile_app/Screens/Wallet-Screens/paymentScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class AddMoney extends StatelessWidget {
+class AddMoney extends StatefulWidget {
   const AddMoney({super.key});
 
+  @override
+  State<AddMoney> createState() => _AddMoneyState();
+}
+
+class _AddMoneyState extends State<AddMoney> {
   @override
   Widget build(BuildContext context) {
     final fromKey = GlobalKey<FormState>();
     final walletController = Get.put(WalletController());
     walletController.adMoneyController.text = "";
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -318,7 +324,7 @@ class AddMoney extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                               side: BorderSide(color: Colors.green))),
                       backgroundColor: MaterialStatePropertyAll(Colors.green)),
-                  onPressed: () {
+                  onPressed: () async {
                     final from = fromKey.currentState!;
                     if (from.validate()) {
                       Get.to(() => PaymentPage(
