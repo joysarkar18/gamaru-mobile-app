@@ -1,13 +1,9 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
-import 'package:gamaru_mobile_app/Screens/Wallet-Screens/paymentScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -327,9 +323,9 @@ class _AddMoneyState extends State<AddMoney> {
                   onPressed: () async {
                     final from = fromKey.currentState!;
                     if (from.validate()) {
-                      Get.to(() => PaymentPage(
-                          amount: double.parse(
-                              walletController.adMoneyController.text)));
+                      // Get.to(() => PaymentPage(
+                      //     amount: double.parse(
+                      //         walletController.adMoneyController.text)));
                     }
                   },
                   child: const Text(

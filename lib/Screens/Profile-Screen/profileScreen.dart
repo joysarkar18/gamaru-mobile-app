@@ -4,6 +4,7 @@ import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:gamaru_mobile_app/Componants/glossy_prof.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
@@ -172,26 +173,31 @@ class ProfileScreen1 extends StatelessWidget {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Icon(
-                                            HeroIcons.banknotes,
-                                            color: Colors.white70,
-                                            size: 35,
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Text(
-                                            "Withdraw",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
-                                        ],
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(() => WithdrawScreen());
+                                        },
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Icon(
+                                              HeroIcons.banknotes,
+                                              color: Colors.white70,
+                                              size: 35,
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              "Withdraw",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 10,
