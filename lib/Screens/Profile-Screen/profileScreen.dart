@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
-import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:gamaru_mobile_app/Componants/glossy_prof.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/transaction-screen.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:lottie/lottie.dart';
 import 'package:random_avatar/random_avatar.dart';
 
 import '../../Controllers/Login-Contollers/autehntication.dart';
@@ -202,26 +201,31 @@ class ProfileScreen1 extends StatelessWidget {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Icon(
-                                            HeroIcons.bars_arrow_down,
-                                            color: Colors.white70,
-                                            size: 35,
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Text(
-                                            "Transactions",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
-                                        ],
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(() => TransactionScreen());
+                                        },
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Icon(
+                                              HeroIcons.bars_arrow_down,
+                                              color: Colors.white70,
+                                              size: 35,
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              "Transactions",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ]),
                                   )
