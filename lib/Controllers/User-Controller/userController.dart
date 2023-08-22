@@ -17,6 +17,10 @@ class UserController extends GetxController {
   }
 
   createUserDataUsingSignin(String id, String email) async {
+    await _db
+        .collection("user transactions")
+        .doc(email)
+        .set({"transactions": []});
     await _db.collection("user").doc(email).set({
       "id": id,
       "email": email,
@@ -41,6 +45,10 @@ class UserController extends GetxController {
     if (a.exists) {
       print("data already exists");
     } else {
+      await _db
+          .collection("user transactions")
+          .doc(email)
+          .set({"transactions": []});
       await _db.collection("user").doc(email).set({
         "id": id,
         "email": email,

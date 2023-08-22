@@ -103,7 +103,7 @@ class TopDetails extends StatelessWidget {
                                 int coins = snapshot!.data!.data()!["coins"];
                                 return Text(
                                   coins.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.yellow,
                                   ),
                                 );
