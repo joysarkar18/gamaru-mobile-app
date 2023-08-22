@@ -16,7 +16,9 @@ class _TransactionScreenState extends State<TransactionScreen> {
         backgroundColor: Colors.black,
         title: Text(
           "TRANSACTIONS",
+          style: TextStyle(color: Colors.white),
         ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Container(),
     );
