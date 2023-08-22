@@ -49,10 +49,26 @@ class TopDetails extends StatelessWidget {
                           const SizedBox(
                             width: 2,
                           ),
-                          Obx(() => Text(
-                                userController.totalCoins.value.toString(),
-                                style: TextStyle(color: Colors.yellow),
-                              ))
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("user")
+                                .doc(FirebaseAuth.instance.currentUser!.email
+                                    .toString())
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                int coins = snapshot!.data!.data()!["winCoins"];
+                                return Text(
+                                  coins.toString(),
+                                  style: TextStyle(
+                                    color: Colors.yellow,
+                                  ),
+                                );
+                              } else {
+                                return Text("0");
+                              }
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -76,12 +92,28 @@ class TopDetails extends StatelessWidget {
                           const SizedBox(
                             width: 2,
                           ),
-                          Obx(() => Text(
-                                userController.totalCoins.value.toString(),
-                                style: TextStyle(color: Colors.yellow),
-                              )),
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("user")
+                                .doc(FirebaseAuth.instance.currentUser!.email
+                                    .toString())
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                int coins = snapshot!.data!.data()!["coins"];
+                                return Text(
+                                  coins.toString(),
+                                  style: TextStyle(
+                                    color: Colors.yellow,
+                                  ),
+                                );
+                              } else {
+                                return Text("0");
+                              }
+                            },
+                          ),
                           const SizedBox(
-                            width: 6,
+                            width: 5,
                           ),
                           const Icon(
                             Icons.add,

@@ -33,9 +33,12 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                 onTap: () {
                   Get.to(() => BankCard());
                 },
-                child: Icon(Icons.account_balance_wallet_rounded)),
+                child: Icon(
+                  Icons.account_balance_wallet_rounded,
+                  size: 30,
+                )),
             SizedBox(
-              width: 10,
+              width: 15,
             )
           ],
           backgroundColor: Colors.black,
@@ -85,7 +88,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        int coins = snapshot!.data!.data()!["coins"];
+                        int coins = snapshot!.data!.data()!["winCoins"];
                         return Text(
                           coins.toString(),
                           style: TextStyle(color: Colors.yellow, fontSize: 20),

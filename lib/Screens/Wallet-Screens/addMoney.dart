@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/paymentScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
