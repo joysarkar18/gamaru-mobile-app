@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: Get.width - 60,
                             decoration: const BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
+                                  BorderRadius.all(Radius.circular(8)),
                               image: DecorationImage(
                                   image: AssetImage(
                                       "Assets/carrom_home_screen.jpg"),

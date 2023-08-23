@@ -32,6 +32,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
     walletController.fee.value = "0";
     walletController.toAccount.value = "0";
     walletController.bankCardDetails = null;
+    int balance = 0;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -100,12 +101,14 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             int coins = snapshot!.data!.data()!["winCoins"];
+                            balance = coins;
                             return Text(
                               coins.toString(),
                               style:
                                   TextStyle(color: Colors.yellow, fontSize: 20),
                             );
                           } else {
+                            balance = 0;
                             return Text("0");
                           }
                         },
@@ -271,6 +274,12 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                         if (from.validate()) {
                           if (walletController.bankCardDetails == null) {
                             Get.snackbar("Error", "Select a Bank Card",
+                                colorText: Colors.red);
+                          } else if (int.parse(walletController
+                                  .withdrawMoneyController.text) >
+                              balance) {
+                            Get.snackbar(
+                                "Error", "Doesn't have sufficient balance",
                                 colorText: Colors.red);
                           } else {
                             int amount = double.parse(walletController
