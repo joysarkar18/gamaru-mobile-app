@@ -53,6 +53,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   firebase_messaging: ^14.6.5
   permission_handler: ^10.4.3
+  url_launcher: ^6.1.12
 
   # google_sign_in: ^6.1.4
 

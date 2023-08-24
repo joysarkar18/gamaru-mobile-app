@@ -4,6 +4,7 @@ import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -71,54 +72,84 @@ class SupportScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  GlossyCard(
-                      height: 55.0,
-                      width: 150.0,
-                      borderRadius: 10.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Logo(
-                            Logos.whatsapp,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Chat with us",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                        ],
-                      ),
-                      borderWith: 1.0),
-                  GlossyCard(
-                      height: 55.0,
-                      width: 150.0,
-                      borderRadius: 10.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Logo(
-                            Logos.gmail,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Mail us",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                        ],
-                      ),
-                      borderWith: 1.0),
+                  InkWell(
+                    onTap: () async {
+                      //To remove the keyboard when button is pressed
+                      FocusManager.instance.primaryFocus?.unfocus();
+
+                      var whatsappUrl = "whatsapp://send?phone=+919064983473";
+                      try {
+                        launch(whatsappUrl);
+                      } catch (e) {
+                        //To handle error and display error message
+                        print("error");
+                      }
+                    },
+                    child: GlossyCard(
+                        height: 55.0,
+                        width: 150.0,
+                        borderRadius: 10.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Logo(
+                              Logos.whatsapp,
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "Chat with us",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                          ],
+                        ),
+                        borderWith: 1.0),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      String email =
+                          Uri.encodeComponent("joysarkar8171@gmail.com");
+                      String subject = Uri.encodeComponent("Gamaru Support");
+                      String body = Uri.encodeComponent("");
+                      print(subject); //output: Hello%20Flutter
+                      Uri mail = Uri.parse(
+                          "mailto:$email?subject=$subject&body=$body");
+                      if (await launchUrl(mail)) {
+                        //email app opened
+                      } else {
+                        //email app is not opened
+                      }
+                    },
+                    child: GlossyCard(
+                        height: 55.0,
+                        width: 150.0,
+                        borderRadius: 10.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Logo(
+                              Logos.gmail,
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "Mail us",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                          ],
+                        ),
+                        borderWith: 1.0),
+                  ),
                 ],
               ),
               SizedBox(
@@ -160,11 +191,41 @@ class SupportScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Logo(Logos.facebook_logo),
-                    Logo(Logos.instagram),
-                    Logo(Logos.linkedin),
-                    Logo(Logos.twitter),
-                    Logo(Logos.youtube),
+                    InkWell(
+                        onTap: () async {
+                          var url = Uri.parse(
+                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          await launchUrl(url);
+                        },
+                        child: Logo(Logos.facebook_logo)),
+                    InkWell(
+                        onTap: () async {
+                          var url = Uri.parse(
+                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          await launchUrl(url);
+                        },
+                        child: Logo(Logos.instagram)),
+                    InkWell(
+                        onTap: () async {
+                          var url = Uri.parse(
+                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          await launchUrl(url);
+                        },
+                        child: Logo(Logos.linkedin)),
+                    InkWell(
+                        onTap: () async {
+                          var url = Uri.parse(
+                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          await launchUrl(url);
+                        },
+                        child: Logo(Logos.twitter)),
+                    InkWell(
+                        onTap: () async {
+                          var url = Uri.parse(
+                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          await launchUrl(url);
+                        },
+                        child: Logo(Logos.youtube)),
                   ],
                 ),
               )

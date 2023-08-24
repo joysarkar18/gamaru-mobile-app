@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
+import 'package:gamaru_mobile_app/Screens/notifications-screen/notification.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -136,10 +137,15 @@ class TopDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Icon(
-                    Icons.notifications_none_rounded,
-                    color: Colors.white,
-                    size: 26,
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => Notifications());
+                    },
+                    child: const Icon(
+                      Icons.notifications_none_rounded,
+                      color: Colors.white,
+                      size: 26,
+                    ),
                   ),
                 ],
               ))
