@@ -29,6 +29,7 @@ class BgmiController extends GetxController {
             Get.off(AddMoney());
           }, "Low Balance", "Doesn't have sufficient balance",
               colorText: Colors.red);
+          is_joining.value = false;
           return;
         });
       } else {
