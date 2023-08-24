@@ -41,7 +41,7 @@ class BgmiController extends GetxController {
             .update({"coins": bal});
 
         await _db
-            .collection("BATTLE GROUND MOBILE INDIA")
+            .collection("BATTLE GROUNDS MOBILE INDIA")
             .doc("upcoming")
             .get()
             .then((value) async {
@@ -50,7 +50,7 @@ class BgmiController extends GetxController {
           temp.add(FirebaseAuth.instance.currentUser!.email.toString());
           eventListBgmiUpcoming[index]["eventRegisteredPlayers"] = temp;
           await _db
-              .collection("BATTLE GROUND MOBILE INDIA")
+              .collection("BATTLE GROUNDS MOBILE INDIA")
               .doc("upcoming")
               .update({"event": eventListBgmiUpcoming}).then((_) async {
             await _db
