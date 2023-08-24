@@ -86,8 +86,10 @@ class WalletController extends GetxController {
             "amount": (amount - fee),
             "card": card,
             "email": user!.email,
-            "reason": "withdraw",
-            "time": DateTime.now()
+            "reason": "Withdraw",
+            "time": DateTime.now(),
+            "fee": fee,
+            "add": false
           });
           await _db
               .collection("user transactions")

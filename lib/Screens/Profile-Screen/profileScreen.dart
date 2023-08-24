@@ -60,7 +60,7 @@ class ProfileScreen1 extends StatelessWidget {
                 ),
               )),
           Positioned(
-            top: Get.height - Get.height * 0.65,
+            top: Get.height - Get.height * 0.66,
             child: Container(
               width: Get.width - 60,
               child: Column(
@@ -81,7 +81,7 @@ class ProfileScreen1 extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 45,
+                      height: 25,
                     ),
                     Obx(
                       () => GlossyCard(
