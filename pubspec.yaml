@@ -54,6 +54,7 @@ dependencies:
   firebase_messaging: ^14.6.5
   permission_handler: ^10.4.3
   url_launcher: ^6.1.12
+  shimmer: ^3.0.0
 
   # google_sign_in: ^6.1.4
 

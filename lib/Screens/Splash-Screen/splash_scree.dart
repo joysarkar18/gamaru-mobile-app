@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
 import 'package:get/get.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,9 +21,11 @@ class SplashState extends State<Splash> {
   static String KEYLOGIN = "login";
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    Timer(const Duration(milliseconds: 300), () {});
+    Timer(const Duration(milliseconds: 500), () {
+      Get.offAll(MainScreen());
+    });
   }
 
   @override
