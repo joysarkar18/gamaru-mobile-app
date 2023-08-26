@@ -5,6 +5,7 @@ import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/transaction-screen.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
+import 'package:gamaru_mobile_app/Screens/notifications-screen/notification.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:random_avatar/random_avatar.dart';
@@ -60,7 +61,7 @@ class ProfileScreen1 extends StatelessWidget {
                 ),
               )),
           Positioned(
-            top: Get.height - Get.height * 0.65,
+            top: Get.height - Get.height * 0.66,
             child: Container(
               width: Get.width - 60,
               child: Column(
@@ -81,7 +82,7 @@ class ProfileScreen1 extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 45,
+                      height: 25,
                     ),
                     Obx(
                       () => GlossyCard(
@@ -280,7 +281,7 @@ class ProfileScreen1 extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         print('I love you');
-                        Get.to(ReferAndEarn());
+                        Get.to(Notifications());
                       },
                       child: GlossyCard(
                         borderRadius: 10.0,

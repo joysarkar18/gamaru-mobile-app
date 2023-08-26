@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
+import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:gamaru_mobile_app/Screens/Profile-Screen/profileScreen.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:lottie/lottie.dart';
 import '../earn_screen.dart';
 import '../game_screen.dart';
 import 'Home-Screen/homeScreen.dart';
@@ -13,7 +15,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 1;
+  final mainController = Get.put(MainController());
 
   List<Widget> _pages = [
     EarnScreen(),
@@ -22,19 +24,33 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+
+    mainController.loadData();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: _pages[_currentIndex],
-      bottomNavigationBar: EnhancedNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
-    );
+    return Obx(() => mainController.is_loading.value
+        ? Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(
+                child: LottieBuilder.asset(
+              "Assets/loading_home.json",
+              frameRate: FrameRate.max,
+            )),
+          )
+        : Scaffold(
+            backgroundColor: Colors.black,
+            body: _pages[mainController.navBarIndex.value],
+            bottomNavigationBar: EnhancedNavigationBar(
+              currentIndex: mainController.navBarIndex.value,
+              onTap: (index) {
+                mainController.navBarIndex.value = index;
+              },
+            ),
+          ));
   }
 }
 

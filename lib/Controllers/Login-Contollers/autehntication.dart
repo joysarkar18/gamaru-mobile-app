@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
@@ -10,6 +11,7 @@ import 'package:uuid/uuid.dart';
 
 class Authentication extends GetxController {
   static Authentication get instance => Get.find();
+
   final _auth = FirebaseAuth.instance;
   late Rx<User?> firebaseUser;
   RxString? errorMsg = "".obs;
@@ -29,14 +31,13 @@ class Authentication extends GetxController {
   }
 
   _setInitScreen(User? user) {
-    Timer(const Duration(seconds: 1), () {
-      if (user == null) {
-        Get.offAll(() => const Login());
-      } else {
-        userEmail.value = _auth.currentUser!.email.toString();
-        Get.offAll(() => MainScreen());
-      }
-    });
+    if (user == null) {
+      Get.offAll(() => const Login());
+    } else {
+      userEmail.value = _auth.currentUser!.email.toString();
+
+      Get.offAll(() => MainScreen());
+    }
   }
 
   Future<void> createUserWithEmailPassword(
