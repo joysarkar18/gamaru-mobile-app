@@ -5,8 +5,8 @@ import 'package:lottie/lottie.dart';
 
 import '../../Componants/glossyEffect.dart';
 
-class WithdrawComplete extends StatelessWidget {
-  const WithdrawComplete({super.key});
+class WithdrawFailed extends StatelessWidget {
+  const WithdrawFailed({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class WithdrawComplete extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(
-            25,
+            20,
           ),
         ),
       ),
@@ -37,14 +37,14 @@ class WithdrawComplete extends StatelessWidget {
                   height: 100,
                   width: 100,
                   child: LottieBuilder.asset(
-                    "Assets/Successfully.json",
+                    "Assets/Failed.json",
                     fit: BoxFit.cover,
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Text(
-                    "S U C C E S S !",
+                    "Sorry, Payment Failed !",
                     style: TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.bold,
@@ -52,17 +52,22 @@ class WithdrawComplete extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  "Your payment of rs100 was paid to",
+                  "The payment was unsuccesfull due to ",
                   style: TextStyle(
                       color: Colors.white70, fontWeight: FontWeight.w700),
                 ),
                 const Text(
-                  "tanmoysarkar06@ybl.",
+                  "some abnormality. Please try again",
+                  style: TextStyle(
+                      color: Colors.white70, fontWeight: FontWeight.w700),
+                ),
+                const Text(
+                  "later or use another method.",
                   style: TextStyle(
                       color: Colors.white70, fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
-                  height: Get.height * 0.04,
+                  height: Get.height * .02,
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 18.0, bottom: 8.0),

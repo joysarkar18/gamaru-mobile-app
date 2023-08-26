@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import 'withdrawComplete.dart';
+import 'withdrawFaild.dart';
 
 class WithdrawScreen extends StatefulWidget {
   const WithdrawScreen({super.key});
@@ -298,7 +299,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                       },
                       child: InkWell(
                         onTap: () {
-                          Get.to(WithdrawComplete());
+                          Get.to(WithdrawFailed());
                         },
                         child: const Text(
                           "Withdraw",
