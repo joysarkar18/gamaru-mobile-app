@@ -9,6 +9,8 @@ import 'package:gamaru_mobile_app/Screens/Wallet-Screens/bankCard.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import 'withdrawComplete.dart';
+
 class WithdrawScreen extends StatefulWidget {
   const WithdrawScreen({super.key});
 
@@ -294,12 +296,17 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                           }
                         }
                       },
-                      child: const Text(
-                        "Withdraw",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(WithdrawComplete());
+                        },
+                        child: const Text(
+                          "Withdraw",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
                       )),
                   const SizedBox(
                     height: 20,
