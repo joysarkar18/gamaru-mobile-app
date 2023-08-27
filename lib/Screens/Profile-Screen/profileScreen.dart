@@ -55,14 +55,14 @@ class ProfileScreen1 extends StatelessWidget {
                     ],
                     color: Colors.transparent,
                     border: Border.all(color: Colors.black, width: 5),
-                    borderRadius: BorderRadius.all(Radius.circular(75))),
+                    borderRadius: const BorderRadius.all(Radius.circular(75))),
                 child: RandomAvatar(
                   authentication.userEmail.value,
                 ),
               )),
           Positioned(
-            top: Get.height - Get.height * 0.66,
-            child: Container(
+            top: Get.height - Get.height * 0.65,
+            child: SizedBox(
               width: Get.width - 60,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +81,7 @@ class ProfileScreen1 extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Obx(
@@ -102,15 +102,15 @@ class ProfileScreen1 extends StatelessWidget {
                               },
                               child: Row(
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     HeroIcons.wallet,
                                     color: Colors.white70,
                                     size: 35,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   const Text(
@@ -119,7 +119,7 @@ class ProfileScreen1 extends StatelessWidget {
                                         color: Colors.white, fontSize: 20),
                                   ),
                                   SizedBox(
-                                    width: 150,
+                                    width: Get.width * .35,
                                   ),
                                   walletController.myWalletStatus.value
                                       ? const Icon(
@@ -137,7 +137,7 @@ class ProfileScreen1 extends StatelessWidget {
                             ),
                             walletController.myWalletStatus.value
                                 ? Divider()
-                                : Text(
+                                : const Text(
                                     "",
                                     style: TextStyle(fontSize: 0),
                                   ),
@@ -148,7 +148,7 @@ class ProfileScreen1 extends StatelessWidget {
                                         onTap: () {
                                           Get.to(() => AddMoney());
                                         },
-                                        child: Row(
+                                        child: const Row(
                                           children: [
                                             SizedBox(
                                               width: 10,
@@ -170,14 +170,14 @@ class ProfileScreen1 extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       InkWell(
                                         onTap: () {
                                           Get.to(() => WithdrawScreen());
                                         },
-                                        child: Row(
+                                        child: const Row(
                                           children: [
                                             SizedBox(
                                               width: 10,
@@ -199,14 +199,14 @@ class ProfileScreen1 extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       InkWell(
                                         onTap: () {
                                           Get.to(() => TransactionScreen());
                                         },
-                                        child: Row(
+                                        child: const Row(
                                           children: [
                                             SizedBox(
                                               width: 10,
@@ -230,7 +230,7 @@ class ProfileScreen1 extends StatelessWidget {
                                       ),
                                     ]),
                                   )
-                                : Text(
+                                : const Text(
                                     "",
                                     style: TextStyle(fontSize: 0),
                                   ),
@@ -238,7 +238,7 @@ class ProfileScreen1 extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     InkWell(
@@ -251,44 +251,42 @@ class ProfileScreen1 extends StatelessWidget {
                         width: Get.width,
                         borderRadius: 10.0,
                         borderWith: 1.0,
-                        child: Container(
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Icon(
-                                HeroIcons.chat_bubble_bottom_center_text,
-                                color: Colors.white70,
-                                size: 35,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                "Refer & Earn",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            ],
-                          ),
+                        child: const Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              HeroIcons.chat_bubble_bottom_center_text,
+                              color: Colors.white70,
+                              size: 35,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Refer & Earn",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     InkWell(
                       onTap: () {
                         print('I love you');
-                        Get.to(Notifications());
+                        Get.to(const Notifications());
                       },
                       child: GlossyCard(
                         borderRadius: 10.0,
                         borderWith: 1.0,
                         height: 50.0,
                         width: Get.width,
-                        child: Row(
+                        child: const Row(
                           children: [
                             SizedBox(
                               width: 10,
@@ -310,7 +308,7 @@ class ProfileScreen1 extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     InkWell(
@@ -323,7 +321,7 @@ class ProfileScreen1 extends StatelessWidget {
                         borderWith: 1.0,
                         height: 50.0,
                         width: Get.width,
-                        child: Row(
+                        child: const Row(
                           children: [
                             SizedBox(
                               width: 10,
@@ -345,7 +343,7 @@ class ProfileScreen1 extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     InkWell(
@@ -358,7 +356,7 @@ class ProfileScreen1 extends StatelessWidget {
                         borderWith: 1.0,
                         height: 50.0,
                         width: Get.width,
-                        child: Row(
+                        child: const Row(
                           children: [
                             SizedBox(
                               width: 10,

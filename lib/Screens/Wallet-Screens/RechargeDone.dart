@@ -5,8 +5,8 @@ import 'package:lottie/lottie.dart';
 
 import '../../Componants/glossyEffect.dart';
 
-class WithdrawComplete extends StatelessWidget {
-  const WithdrawComplete({super.key});
+class RechargeDone extends StatelessWidget {
+  const RechargeDone({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +31,23 @@ class WithdrawComplete extends StatelessWidget {
             Container(
               decoration: const BoxDecoration(color: Colors.transparent),
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding:
+                    const EdgeInsets.only(bottom: 15.0, left: 15, right: 15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 100,
-                      width: 100,
+                      height: 150,
+                      width: 150,
                       child: LottieBuilder.asset(
-                        "Assets/Successfully.json",
+                        "Assets/PaymentDone.json",
                         fit: BoxFit.cover,
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      padding: EdgeInsets.only(top: 0.0, bottom: 8.0),
                       child: Text(
-                        "S U C C E S S !",
+                        "Payment done!",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -54,17 +55,22 @@ class WithdrawComplete extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      "Your payment of rs100 was paid to",
+                      "Your transaction is successful.Money",
                       style: TextStyle(
                           color: Colors.white70, fontWeight: FontWeight.w700),
                     ),
                     const Text(
-                      "tanmoysarkar06@ybl.",
+                      " will be creadited to your account",
+                      style: TextStyle(
+                          color: Colors.white70, fontWeight: FontWeight.w700),
+                    ),
+                    const Text(
+                      "shortly.",
                       style: TextStyle(
                           color: Colors.white70, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
-                      height: Get.height * 0.04,
+                      height: Get.height * 0.0,
                     ),
                     const Padding(
                       padding: EdgeInsets.only(top: 18.0, bottom: 8.0),
@@ -116,7 +122,7 @@ class WithdrawComplete extends StatelessWidget {
               ),
             ),
             Positioned(
-              right: 0,
+              left: 220,
               child: IconButton(
                 onPressed: () {
                   Get.back();

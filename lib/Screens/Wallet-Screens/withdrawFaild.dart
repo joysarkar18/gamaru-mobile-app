@@ -48,7 +48,7 @@ class WithdrawFailed extends StatelessWidget {
                       child: Text(
                         "Sorry, Payment failed !",
                         style: TextStyle(
-                            color: Colors.white70,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),

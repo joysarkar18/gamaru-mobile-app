@@ -8,6 +8,8 @@ import 'package:gamaru_mobile_app/Screens/Wallet-Screens/paymentScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import 'RechargeDone.dart';
+
 class AddMoney extends StatefulWidget {
   const AddMoney({super.key});
 
@@ -312,7 +314,7 @@ class _AddMoneyState extends State<AddMoney> {
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 40,
               ),
               ElevatedButton(
                   style: ButtonStyle(
@@ -329,22 +331,25 @@ class _AddMoneyState extends State<AddMoney> {
                       //         walletController.adMoneyController.text)));
                     }
                   },
-                  child: const Text(
-                    "Recharge Now",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                  child: InkWell(
+                    onTap: () => Get.to(RechargeDone()),
+                    child: Text(
+                      "Recharge Now",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
                   )),
               const SizedBox(
                 height: 20,
               ),
               const Text(
                 "*CAUTION : Do not clear the app from the background while completing the recharge",
-                style: TextStyle(color: Colors.red, fontSize: 18),
+                style: TextStyle(color: Colors.red, fontSize: 15),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
