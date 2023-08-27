@@ -204,7 +204,7 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      "*PLEASE ENTER YOUR GAME ID SAME AS YOUR OWN ACCOUNT OTHERWISE YOU ARE NOT ALLOWED TO PLAY",
+                      "*PLEASE ENTER GAME ID SAME AS YOUR OWN ACCOUNT OTHERWISE YOU ARE NOT ALLOWED TO PLAY",
                       style: TextStyle(color: Colors.orange, fontSize: 20),
                     ),
                   ),

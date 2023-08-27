@@ -315,36 +315,45 @@ class EventCard extends StatelessWidget {
                                     MaterialStatePropertyAll(Colors.white),
                               ),
                               onPressed: () {
-                                if (!registerList.contains(
-                                    FirebaseAuth.instance.currentUser!.email)) {
-                                  if (eventName == "FREE FIRE SOLO MATCH") {
-                                    Get.to(() => BgmiJoinNow(
-                                          index: index,
-                                          entryFee: eventEntryFee,
-                                          dt: eventTime,
-                                          eventName: eventName,
-                                        ));
-                                  } else if (eventName == "BGMI SOLO MATCH") {
-                                    Get.to(() => BgmiJoinNow(
-                                          index: index,
-                                          entryFee: eventEntryFee,
-                                          dt: eventTime,
-                                          eventName: eventName,
-                                        ));
-                                  } else if (eventName == "BGMI DUO MATCH") {
-                                    Get.to(() => JoinNowDuo(
-                                          index: index,
-                                          entryFee: eventEntryFee,
-                                          dt: eventTime,
-                                          eventName: eventName,
-                                        ));
-                                  } else if (eventName == "BGMI SQUAD MATCH") {
-                                    Get.to(() => JoinNowSquad(
-                                          index: index,
-                                          entryFee: eventEntryFee,
-                                          dt: eventTime,
-                                          eventName: eventName,
-                                        ));
+                                if (registerList.length >= eventTotalPlayers) {
+                                  Get.snackbar("EVENT IS FULL",
+                                      "Maximum number of players has been joined",
+                                      colorText: Colors.red);
+                                } else {
+                                  if (!registerList.contains(FirebaseAuth
+                                          .instance.currentUser!.email) &&
+                                      (registerList.length <
+                                          eventTotalPlayers)) {
+                                    if (eventName == "FREE FIRE SOLO MATCH") {
+                                      Get.to(() => BgmiJoinNow(
+                                            index: index,
+                                            entryFee: eventEntryFee,
+                                            dt: eventTime,
+                                            eventName: eventName,
+                                          ));
+                                    } else if (eventName == "BGMI SOLO MATCH") {
+                                      Get.to(() => BgmiJoinNow(
+                                            index: index,
+                                            entryFee: eventEntryFee,
+                                            dt: eventTime,
+                                            eventName: eventName,
+                                          ));
+                                    } else if (eventName == "BGMI DUO MATCH") {
+                                      Get.to(() => JoinNowDuo(
+                                            index: index,
+                                            entryFee: eventEntryFee,
+                                            dt: eventTime,
+                                            eventName: eventName,
+                                          ));
+                                    } else if (eventName ==
+                                        "BGMI SQUAD MATCH") {
+                                      Get.to(() => JoinNowSquad(
+                                            index: index,
+                                            entryFee: eventEntryFee,
+                                            dt: eventTime,
+                                            eventName: eventName,
+                                          ));
+                                    }
                                   }
                                 }
                               },

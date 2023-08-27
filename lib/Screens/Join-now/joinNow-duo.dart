@@ -85,7 +85,7 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                                   decoration: TextDecoration.none),
                               decoration: const InputDecoration(
                                 fillColor: Colors.transparent,
-                                hintText: "ENTER YOUR GAME ID NAME",
+                                hintText: "ENTER PLAYER-1 GAME ID NAME",
                                 hintStyle: TextStyle(
                                     color: Colors.white60, fontSize: 15),
                                 prefixIcon: Icon(
@@ -243,7 +243,7 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      "*PLEASE ENTER YOUR GAME ID SAME AS YOUR OWN ACCOUNT OTHERWISE YOU ARE NOT ALLOWED TO PLAY",
+                      "*PLEASE ENTER GAME ID SAME AS YOUR OWN ACCOUNT OTHERWISE YOU ARE NOT ALLOWED TO PLAY",
                       style: TextStyle(color: Colors.orange, fontSize: 20),
                     ),
                   ),
