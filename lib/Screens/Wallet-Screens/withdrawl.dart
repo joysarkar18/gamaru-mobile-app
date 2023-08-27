@@ -264,51 +264,47 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                     height: 50,
                   ),
                   ElevatedButton(
-                      style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      side: BorderSide(color: Colors.green))),
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.green)),
-                      onPressed: () {
-                        final from = fromKey.currentState!;
-                        if (from.validate()) {
-                          if (walletController.bankCardDetails == null) {
-                            Get.snackbar("Error", "Select a Bank Card",
-                                colorText: Colors.red);
-                          } else if (int.parse(walletController
-                                  .withdrawMoneyController.text) >
-                              balance) {
-                            Get.snackbar(
-                                "Error", "Doesn't have sufficient balance",
-                                colorText: Colors.red);
-                          } else {
-                            int amount = double.parse(walletController
-                                    .withdrawMoneyController.text)
-                                .floor();
-                            int fee = double.parse(walletController.fee.value)
-                                .floor();
+                    style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    side: BorderSide(color: Colors.green))),
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.green)),
+                    onPressed: () {
+                      final from = fromKey.currentState!;
+                      if (from.validate()) {
+                        if (walletController.bankCardDetails == null) {
+                          Get.snackbar("Error", "Select a Bank Card",
+                              colorText: Colors.red);
+                        } else if (int.parse(
+                                walletController.withdrawMoneyController.text) >
+                            balance) {
+                          Get.snackbar(
+                              "Error", "Doesn't have sufficient balance",
+                              colorText: Colors.red);
+                        } else {
+                          int amount = double.parse(
+                                  walletController.withdrawMoneyController.text)
+                              .floor();
+                          int fee =
+                              double.parse(walletController.fee.value).floor();
 
-                            walletController.withdrawAmount(
-                                amount, walletController.bankCardDetails, fee);
-                            print("hiiii");
-                          }
+                          walletController.withdrawAmount(
+                              amount, walletController.bankCardDetails, fee);
+                          print("hiiii");
                         }
-                      },
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(WithdrawFailed());
-                        },
-                        child: const Text(
-                          "Withdraw",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )),
+                      }
+                    },
+                    child: const Text(
+                      "Withdraw",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),

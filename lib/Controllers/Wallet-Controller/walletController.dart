@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawComplete.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawFaild.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
 import 'package:get/get.dart';
 
@@ -61,51 +62,55 @@ class WalletController extends GetxController {
 
   withdrawAmount(int amount, var card, int fee) async {
     is_withdrawing.value = true;
-    print("in coin");
-    await _db
-        .collection("user")
-        .doc(user!.email.toString())
-        .get()
-        .then((value) async {
-      int winCoins = value["winCoins"];
-      winCoins = winCoins - amount;
-      print("in tranctions");
+    try {
+      print("in coin");
       await _db
           .collection("user")
-          .doc(user!.email)
-          .update({"winCoins": winCoins}).then((_) async {
-        print("in getting");
+          .doc(user!.email.toString())
+          .get()
+          .then((value) async {
+        int winCoins = value["winCoins"];
+        winCoins = winCoins - amount;
+        print("in tranctions");
         await _db
-            .collection("user transactions")
+            .collection("user")
             .doc(user!.email)
-            .get()
-            .then((v) async {
-          print("in update");
-          List transactionList = v["transactions"];
-          transactionList.add({
-            "amount": (amount - fee),
-            "card": card,
-            "email": user!.email,
-            "reason": "Withdraw",
-            "time": DateTime.now(),
-            "fee": fee,
-            "add": false
-          });
+            .update({"winCoins": winCoins}).then((_) async {
+          print("in getting");
           await _db
               .collection("user transactions")
-              .doc(user!.email.toString())
-              .update({"transactions": transactionList});
-          await _db
-              .collection("withdraw")
-              .doc("all transactions")
-              .update({"transactions": transactionList}).then((_) {
-            Timer(Duration(milliseconds: 800), () {
-              is_withdrawing.value = false;
-              Get.off(WithdrawComplete());
+              .doc(user!.email)
+              .get()
+              .then((v) async {
+            print("in update");
+            List transactionList = v["transactions"];
+            transactionList.add({
+              "amount": (amount - fee),
+              "card": card,
+              "email": user!.email,
+              "reason": "Withdraw",
+              "time": DateTime.now(),
+              "fee": fee,
+              "add": false
+            });
+            await _db
+                .collection("user transactions")
+                .doc(user!.email.toString())
+                .update({"transactions": transactionList});
+            await _db
+                .collection("withdraw")
+                .doc("all transactions")
+                .update({"transactions": transactionList}).then((_) {
+              Timer(Duration(milliseconds: 800), () {
+                is_withdrawing.value = false;
+                Get.to(WithdrawComplete());
+              });
             });
           });
         });
       });
-    });
+    } catch (e) {
+      Get.to(WithdrawFailed());
+    }
   }
 }
