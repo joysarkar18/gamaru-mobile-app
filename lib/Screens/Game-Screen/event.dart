@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:gamaru_mobile_app/Screens/Game-Screen/details_screen.dart';
 import 'package:gamaru_mobile_app/Screens/Join-now/joinNow-bgmi.dart';
+import 'package:gamaru_mobile_app/Screens/Join-now/joinNow-duo.dart';
+import 'package:gamaru_mobile_app/Screens/Join-now/joinNow-squad.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -315,11 +317,35 @@ class EventCard extends StatelessWidget {
                               onPressed: () {
                                 if (!registerList.contains(
                                     FirebaseAuth.instance.currentUser!.email)) {
-                                  Get.to(() => BgmiJoinNow(
-                                        index: index,
-                                        entryFee: eventEntryFee,
-                                        dt: eventTime,
-                                      ));
+                                  if (eventName == "FREE FIRE SOLO MATCH") {
+                                    Get.to(() => BgmiJoinNow(
+                                          index: index,
+                                          entryFee: eventEntryFee,
+                                          dt: eventTime,
+                                          eventName: eventName,
+                                        ));
+                                  } else if (eventName == "BGMI SOLO MATCH") {
+                                    Get.to(() => BgmiJoinNow(
+                                          index: index,
+                                          entryFee: eventEntryFee,
+                                          dt: eventTime,
+                                          eventName: eventName,
+                                        ));
+                                  } else if (eventName == "BGMI DUO MATCH") {
+                                    Get.to(() => JoinNowDuo(
+                                          index: index,
+                                          entryFee: eventEntryFee,
+                                          dt: eventTime,
+                                          eventName: eventName,
+                                        ));
+                                  } else if (eventName == "BGMI SQUAD MATCH") {
+                                    Get.to(() => JoinNowSquad(
+                                          index: index,
+                                          entryFee: eventEntryFee,
+                                          dt: eventTime,
+                                          eventName: eventName,
+                                        ));
+                                  }
                                 }
                               },
                               child: Text(registerList.contains(FirebaseAuth
