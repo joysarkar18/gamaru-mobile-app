@@ -299,7 +299,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                       },
                       child: InkWell(
                         onTap: () {
-                          Get.to(WithdrawFailed());
+                          Get.to(WithdrawComplete());
                         },
                         child: const Text(
                           "Withdraw",
