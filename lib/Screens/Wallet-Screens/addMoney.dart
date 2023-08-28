@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
-import 'package:gamaru_mobile_app/Screens/Wallet-Screens/paymentScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -29,7 +28,7 @@ class _AddMoneyState extends State<AddMoney> {
       backgroundColor: Colors.black,
       appBar: AppBar(
           backgroundColor: Colors.black,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           title: const Text(
             "RECHARGE",
             style: TextStyle(
@@ -38,7 +37,7 @@ class _AddMoneyState extends State<AddMoney> {
       body: SizedBox(
         width: Get.width,
         child: Column(children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Container(
@@ -48,7 +47,7 @@ class _AddMoneyState extends State<AddMoney> {
               horizontal: 10,
             ),
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 78, 78, 78).withOpacity(0.9),
+                color: const Color.fromARGB(255, 78, 78, 78).withOpacity(0.9),
                 borderRadius: BorderRadius.circular(15)),
             child: Center(
               child: Row(
@@ -78,10 +77,11 @@ class _AddMoneyState extends State<AddMoney> {
                         int coins = snapshot!.data!.data()!["coins"];
                         return Text(
                           coins.toString(),
-                          style: TextStyle(color: Colors.yellow, fontSize: 20),
+                          style: const TextStyle(
+                              color: Colors.yellow, fontSize: 20),
                         );
                       } else {
-                        return Text("0");
+                        return const Text("0");
                       }
                     },
                   )
@@ -89,13 +89,13 @@ class _AddMoneyState extends State<AddMoney> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Form(
             key: fromKey,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
                 controller: walletController.adMoneyController,
                 validator: (value) {
@@ -133,11 +133,11 @@ class _AddMoneyState extends State<AddMoney> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,7 +195,7 @@ class _AddMoneyState extends State<AddMoney> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
@@ -254,7 +254,7 @@ class _AddMoneyState extends State<AddMoney> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
@@ -321,8 +321,9 @@ class _AddMoneyState extends State<AddMoney> {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
-                              side: BorderSide(color: Colors.green))),
-                      backgroundColor: MaterialStatePropertyAll(Colors.green)),
+                              side: const BorderSide(color: Colors.green))),
+                      backgroundColor:
+                          const MaterialStatePropertyAll(Colors.green)),
                   onPressed: () async {
                     final from = fromKey.currentState!;
                     if (from.validate()) {
@@ -332,8 +333,8 @@ class _AddMoneyState extends State<AddMoney> {
                     }
                   },
                   child: InkWell(
-                    onTap: () => Get.to(RechargeDone()),
-                    child: Text(
+                    onTap: () => Get.to(const RechargeDone()),
+                    child: const Text(
                       "Recharge Now",
                       style: TextStyle(
                           color: Colors.white,
@@ -363,7 +364,7 @@ class _AddMoneyState extends State<AddMoney> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(() => SupportScreen());
+                      Get.to(() => const SupportScreen());
                     },
                     child: const Text(
                       "Contact Us",
