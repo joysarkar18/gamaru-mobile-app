@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/RechargeDone.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawComplete.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawFaild.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
@@ -23,6 +24,8 @@ class WalletController extends GetxController {
   TextEditingController phoneNoController = TextEditingController();
   TextEditingController ifscCodeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController withdrawNoController = TextEditingController();
+
   RxList bankCardList = [].obs;
   var bankCardDetails = null;
   RxBool is_withdrawing = false.obs;
@@ -112,5 +115,30 @@ class WalletController extends GetxController {
     } catch (e) {
       Get.to(WithdrawFailed());
     }
+  }
+
+  paymentSuccess(int amount) async {
+    await _db
+        .collection("user")
+        .doc(user!.email.toString())
+        .get()
+        .then((value) async {
+      int coins = value["coins"];
+      coins = coins + amount;
+
+      await _db
+          .collection("user")
+          .doc(user!.email.toString())
+          .update({"coins": coins}).then((value) {
+        Get.off(() => const RechargeDone());
+      });
+    });
+  }
+
+  saveNumForWithdraw(String nu) async {
+    await _db
+        .collection("user")
+        .doc(user!.email.toString())
+        .update({"withdrawNo": nu});
   }
 }
