@@ -7,12 +7,12 @@ import 'package:lottie/lottie.dart';
 
 bool isChecked = false;
 
-class BgmiJoinNow extends StatefulWidget {
+class JoinNowDuo extends StatefulWidget {
   final String eventName;
   final int entryFee;
   final int index;
   final DateTime dt;
-  const BgmiJoinNow(
+  const JoinNowDuo(
       {super.key,
       required this.entryFee,
       required this.index,
@@ -20,10 +20,10 @@ class BgmiJoinNow extends StatefulWidget {
       required this.eventName});
 
   @override
-  State<BgmiJoinNow> createState() => _BgmiJoinNowState();
+  State<JoinNowDuo> createState() => _JoinNowDuoState();
 }
 
-class _BgmiJoinNowState extends State<BgmiJoinNow> {
+class _JoinNowDuoState extends State<JoinNowDuo> {
   final eventController = Get.put(EventController());
   final fromKey = GlobalKey<FormState>();
   @override
@@ -53,16 +53,19 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 250,
+                    height: 200,
                     child: Center(
                       child: LottieBuilder.asset(
-                        "Assets/JoinNow.json",
+                        "Assets/duoJoin.json",
                         frameRate: FrameRate.max,
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   GlossyCard(
-                    height: Get.height * .28,
+                    height: Get.height * .33,
                     width: Get.width - 30.0,
                     borderRadius: 10.0,
                     borderWith: 2.0,
@@ -82,7 +85,43 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                                   decoration: TextDecoration.none),
                               decoration: const InputDecoration(
                                 fillColor: Colors.transparent,
-                                hintText: "ENTER YOUR GAME ID NAME",
+                                hintText: "ENTER PLAYER-1 GAME ID NAME",
+                                hintStyle: TextStyle(
+                                    color: Colors.white60, fontSize: 15),
+                                prefixIcon: Icon(
+                                  Icons.tag_rounded,
+                                  color: Colors.white60,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    borderSide:
+                                        BorderSide(color: Colors.white60)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide(color: Colors.red)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    borderSide:
+                                        BorderSide(color: Colors.purple)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 15, right: 15, top: 20, bottom: 0),
+                            child: TextFormField(
+                              validator: (value) => validateID(value),
+                              controller: eventController.player2,
+                              keyboardType: TextInputType.text,
+                              style: const TextStyle(
+                                  color: Colors.white60,
+                                  decoration: TextDecoration.none),
+                              decoration: const InputDecoration(
+                                fillColor: Colors.transparent,
+                                hintText: "ENTER PLAYER-2GAME ID NAME",
                                 hintStyle: TextStyle(
                                     color: Colors.white60, fontSize: 15),
                                 prefixIcon: Icon(
@@ -155,7 +194,7 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                                         widget.index,
                                         widget.dt,
                                         widget.entryFee,
-                                        "solo",
+                                        "duo",
                                         eventController.player1.text,
                                         eventController.player2.text,
                                         eventController.player3.text,
@@ -166,7 +205,7 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                                         widget.index,
                                         widget.dt,
                                         widget.entryFee,
-                                        "solo",
+                                        "duo",
                                         eventController.player1.text,
                                         eventController.player2.text,
                                         eventController.player3.text,
@@ -201,8 +240,8 @@ class _BgmiJoinNowState extends State<BgmiJoinNow> {
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       "*PLEASE ENTER GAME ID SAME AS YOUR OWN ACCOUNT OTHERWISE YOU ARE NOT ALLOWED TO PLAY",
                       style: TextStyle(color: Colors.orange, fontSize: 20),

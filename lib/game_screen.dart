@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Controllers/Event-controller/bgmiController.dart';
+import 'package:gamaru_mobile_app/Controllers/Event-controller/eventController.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/Game-Screen/event.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,6 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final userController = Get.put(UserController());
-  final bgmiController = Get.put(BgmiController());
 
   Future<void> _handleRequest() async {
     setState(() {});
@@ -37,6 +36,7 @@ class _GameScreenState extends State<GameScreen> {
         length: 2,
         initialIndex: 0,
         child: Scaffold(
+            backgroundColor: Colors.black,
             extendBodyBehindAppBar: false,
             appBar: AppBar(
               backgroundColor: Colors.black,
@@ -54,7 +54,7 @@ class _GameScreenState extends State<GameScreen> {
               // elevation: 20,
               bottom: const TabBar(
                   indicatorColor: Colors.purple,
-                  indicatorWeight: 2,
+                  indicatorWeight: 3,
                   tabs: [
                     Tab(
                       // text: "Upcomming Event",
@@ -71,110 +71,129 @@ class _GameScreenState extends State<GameScreen> {
                     )
                   ]),
             ),
-            body: TabBarView(
-              physics: const BouncingScrollPhysics(),
-              dragStartBehavior: DragStartBehavior.down,
-              children: [
-                Container(
+            body: widget.gameName == "LUDO" || widget.gameName == "CARROM"
+                ? Container(
                     color: Colors.black,
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection(widget.gameName.toString())
-                          .doc("upcoming")
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          List arr = snapshot.data!.data()!["event"];
-                          return LiquidPullToRefresh(
-                            color: const Color.fromARGB(255, 37, 72, 101),
-                            animSpeedFactor: 3,
-                            springAnimationDurationInMilliseconds: 600,
-                            onRefresh: _handleRequest,
-                            backgroundColor: Color.fromARGB(255, 220, 19, 255),
-                            child: ListView.builder(
-                              itemCount: arr.length,
-                              itemBuilder: (context, index) {
-                                var l = arr[index];
-                                Timestamp t = l["eventTime"];
-                                DateTime dt = t.toDate();
-                                List rList = l["eventRegisteredPlayers"];
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        LottieBuilder.asset("Assets/NoData.json"),
+                        Text(
+                          "Comming Soon",
+                          style: TextStyle(color: Colors.white70, fontSize: 20),
+                        )
+                      ],
+                    ),
+                  )
+                : TabBarView(
+                    physics: const BouncingScrollPhysics(),
+                    dragStartBehavior: DragStartBehavior.down,
+                    children: [
+                      Container(
+                          color: Colors.black,
+                          child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection(widget.gameName.toString())
+                                .doc("upcoming")
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                List arr = snapshot.data!.data()!["event"];
+                                return LiquidPullToRefresh(
+                                  color: const Color.fromARGB(255, 37, 72, 101),
+                                  animSpeedFactor: 3,
+                                  springAnimationDurationInMilliseconds: 600,
+                                  onRefresh: _handleRequest,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 220, 19, 255),
+                                  child: ListView.builder(
+                                    itemCount: arr.length,
+                                    itemBuilder: (context, index) {
+                                      var l = arr[index];
+                                      Timestamp t = l["eventTime"];
+                                      DateTime dt = t.toDate();
+                                      List rList = l["eventRegisteredPlayers"];
 
-                                return EventCard(
-                                  index: index,
-                                  registerList: rList,
-                                  eventEntryFee: l["eventEntryFee"],
-                                  eventMap: l["eventMap"],
-                                  eventName: l["eventName"],
-                                  eventPerKill: l["eventPerKill"],
-                                  eventRegisteredPlayers: rList.length,
-                                  eventTime: dt,
-                                  eventTotalPlayers: l["eventTotalPlayers"],
-                                  eventWinner: l["eventWinner"],
+                                      return EventCard(
+                                        index: index,
+                                        registerList: rList,
+                                        eventEntryFee: l["eventEntryFee"],
+                                        eventMap: l["eventMap"],
+                                        eventName: l["eventName"],
+                                        eventPerKill: l["eventPerKill"],
+                                        eventRegisteredPlayers: rList.length,
+                                        eventTime: dt,
+                                        eventTotalPlayers:
+                                            l["eventTotalPlayers"],
+                                        eventWinner: l["eventWinner"],
+                                      );
+                                    },
+                                  ),
                                 );
-                              },
+                              } else {
+                                return const Center(
+                                  child: SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.grey,
+                                      )),
+                                );
+                              }
+                            },
+                          )),
+
+                      // FOR RESULT PAGE
+
+                      Container(
+                        color: Colors.black,
+                        child: ListTile(
+                          onTap: () {
+                            print("fuck u");
+                          },
+                          focusColor: Colors.amber,
+                          // horizontalTitleGap: 10,
+                          hoverColor: Colors.amber,
+                          title: const Text(
+                            "Name of player",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          subtitle: const Text(
+                            "Name of event",
+                            style:
+                                TextStyle(color: Colors.purple, fontSize: 15),
+                          ),
+                          leading: CircleAvatar(radius: 25),
+                          trailing: Container(
+                            height: 40,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Color.fromARGB(255, 78, 78, 78)
+                                  .withOpacity(0.9),
                             ),
-                          );
-                        } else {
-                          return const Center(
-                            child: SizedBox(
-                                height: 50,
-                                width: 50,
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.grey,
-                                )),
-                          );
-                        }
-                      },
-                    )),
-
-                // FOR RESULT PAGE
-
-                Container(
-                  color: Colors.black,
-                  child: ListTile(
-                    onTap: () {
-                      print("fuck u");
-                    },
-                    focusColor: Colors.amber,
-                    // horizontalTitleGap: 10,
-                    hoverColor: Colors.amber,
-                    title: const Text(
-                      "Name of player",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    subtitle: const Text(
-                      "Name of event",
-                      style: TextStyle(color: Colors.purple, fontSize: 15),
-                    ),
-                    leading: CircleAvatar(radius: 25),
-                    trailing: Container(
-                      height: 40,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color.fromARGB(255, 78, 78, 78).withOpacity(0.9),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(0.0),
-                            child: Icon(
-                              Icons.currency_rupee,
-                              color: Colors.green,
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(0.0),
+                                  child: Icon(
+                                    Icons.currency_rupee,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                Text(
+                                  "100",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                )
+                              ],
                             ),
                           ),
-                          Text(
-                            "100",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ],
-            )),
+                    ],
+                  )),
       ),
     );
   }
