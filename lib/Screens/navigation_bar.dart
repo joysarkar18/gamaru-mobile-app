@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import '../earn_screen.dart';
-import '../game_screen.dart';
 import 'Home-Screen/homeScreen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -102,7 +101,7 @@ class EnhancedNavigationBar extends StatelessWidget {
 
               // size: currentIndex == index ? Size(12, 12) : Size(10, 10),
             ),
-            SizedBox(height: 2.0),
+            const SizedBox(height: 2.0),
             Text(
               label,
               style: TextStyle(
