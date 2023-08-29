@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import 'RechargeDone.dart';
+import 'RechargeFailed.dart';
 
 class AddMoney extends StatefulWidget {
   const AddMoney({super.key});
@@ -40,16 +41,21 @@ class _AddMoneyState extends State<AddMoney> {
       appBar: AppBar(
           backgroundColor: Colors.black,
           iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text(
-            "RECHARGE",
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          title: InkWell(
+            onTap: () => Get.to(RechargeFailed()),
+            child: const Text(
+              "RECHARGE",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
           )),
       body: SizedBox(
         width: Get.width,
         child: Column(children: [
           const SizedBox(
-            height: 50,
+            height: 20,
           ),
           Container(
             height: 48,
