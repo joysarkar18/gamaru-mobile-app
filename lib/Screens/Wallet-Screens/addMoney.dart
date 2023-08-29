@@ -24,6 +24,7 @@ class _AddMoneyState extends State<AddMoney> {
 
   @override
   void initState() {
+    walletController.getNumForRecharge();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
@@ -148,7 +149,7 @@ class _AddMoneyState extends State<AddMoney> {
                     height: 10,
                   ),
                   TextFormField(
-                    controller: walletController.withdrawNoController,
+                    controller: walletController.rechargeNoController,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Please Enter your Number";
@@ -383,8 +384,8 @@ class _AddMoneyState extends State<AddMoney> {
                 onPressed: () async {
                   final from = fromKey.currentState!;
                   if (from.validate()) {
-                    walletController.saveNumForWithdraw(
-                        walletController.withdrawNoController.text);
+                    walletController.saveNumForRecharge(
+                        walletController.rechargeNoController.text);
 
                     var options = {
                       'key': 'rzp_test_Fj6THSFegB0Ocj',
@@ -394,7 +395,7 @@ class _AddMoneyState extends State<AddMoney> {
                       'name': 'Gamaru',
                       'description': 'recharge',
                       'prefill': {
-                        'contact': walletController.withdrawNoController.text,
+                        'contact': walletController.rechargeNoController.text,
                         'email':
                             FirebaseAuth.instance.currentUser!.email.toString()
                       }
