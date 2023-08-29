@@ -28,6 +28,7 @@ class UserController extends GetxController {
       "bgmiId": "",
       "winCoins": 0,
       "bankCards": [],
+      "withdrawNo": "",
     }).then((_) {
       _db
           .collection("user")
@@ -56,6 +57,7 @@ class UserController extends GetxController {
         "bgmiId": "",
         "winCoins": 0,
         "bankCards": [],
+        "withdrawNo": "",
       }).then((_) {
         _db
             .collection("user")

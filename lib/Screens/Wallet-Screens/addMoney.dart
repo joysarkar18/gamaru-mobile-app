@@ -6,6 +6,7 @@ import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController
 import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import 'RechargeDone.dart';
 
@@ -17,10 +18,20 @@ class AddMoney extends StatefulWidget {
 }
 
 class _AddMoneyState extends State<AddMoney> {
+  final _razorpay = Razorpay();
+  final fromKey = GlobalKey<FormState>();
+  final walletController = Get.put(WalletController());
+
+  @override
+  void initState() {
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final fromKey = GlobalKey<FormState>();
-    final walletController = Get.put(WalletController());
     walletController.adMoneyController.text = "";
 
     return Scaffold(
@@ -95,41 +106,87 @@ class _AddMoneyState extends State<AddMoney> {
           Form(
             key: fromKey,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: TextFormField(
-                controller: walletController.adMoneyController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Please Enter some Amount";
-                  } else {
-                    return null;
-                  }
-                },
-                keyboardType: TextInputType.number,
-                style: const TextStyle(
-                    color: Colors.white60,
-                    decoration: TextDecoration.none,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
-                decoration: const InputDecoration(
-                  fillColor: Colors.transparent,
-                  hintText: "Enter the amount",
-                  hintStyle: TextStyle(color: Colors.white60, fontSize: 24),
-                  prefixIcon: Icon(
-                    Icons.currency_rupee_rounded,
-                    color: Colors.white60,
-                    size: 28,
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: walletController.adMoneyController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter some Amount";
+                      } else {
+                        return null;
+                      }
+                    },
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(
+                        color: Colors.white60,
+                        decoration: TextDecoration.none,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                    decoration: const InputDecoration(
+                      fillColor: Colors.transparent,
+                      hintText: "Enter the amount",
+                      hintStyle: TextStyle(color: Colors.white60, fontSize: 24),
+                      prefixIcon: Icon(
+                        Icons.currency_rupee_rounded,
+                        color: Colors.white60,
+                        size: 28,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.red)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.white60)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.purple)),
+                    ),
                   ),
-                  errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: Colors.red)),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: Colors.white60)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: Colors.purple)),
-                ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    controller: walletController.withdrawNoController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter your Number";
+                      } else if (value.length < 10) {
+                        return "Invalid Number";
+                      } else if (value.length > 10) {
+                        return "Invalid Number";
+                      } else {
+                        return null;
+                      }
+                    },
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(
+                        color: Colors.white60,
+                        decoration: TextDecoration.none,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                    decoration: const InputDecoration(
+                      fillColor: Colors.transparent,
+                      hintText: "Enter Phone Number",
+                      hintStyle: TextStyle(color: Colors.white60, fontSize: 24),
+                      prefixIcon: Icon(
+                        Icons.phone_android_rounded,
+                        color: Colors.white60,
+                        size: 28,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.red)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.white60)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.purple)),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -317,37 +374,49 @@ class _AddMoneyState extends State<AddMoney> {
                 height: 40,
               ),
               ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              side: const BorderSide(color: Colors.green))),
-                      backgroundColor:
-                          const MaterialStatePropertyAll(Colors.green)),
-                  onPressed: () async {
-                    final from = fromKey.currentState!;
-                    if (from.validate()) {
-                      // Get.to(() => PaymentPage(
-                      //     amount: double.parse(
-                      //         walletController.adMoneyController.text)));
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            side: BorderSide(color: Colors.green))),
+                    backgroundColor: MaterialStatePropertyAll(Colors.green)),
+                onPressed: () async {
+                  final from = fromKey.currentState!;
+                  if (from.validate()) {
+                    walletController.saveNumForWithdraw(
+                        walletController.withdrawNoController.text);
+
+                    var options = {
+                      'key': 'rzp_test_Fj6THSFegB0Ocj',
+                      'amount':
+                          int.parse(walletController.adMoneyController.text) *
+                              100,
+                      'name': 'Gamaru',
+                      'description': 'recharge',
+                      'prefill': {
+                        'contact': walletController.withdrawNoController.text,
+                        'email':
+                            FirebaseAuth.instance.currentUser!.email.toString()
+                      }
+                    };
+
+                    try {
+                      _razorpay.open(options);
+                    } catch (e) {
+                      print("fuck");
                     }
-                  },
-                  child: InkWell(
-                    onTap: () => Get.to(const RechargeDone()),
-                    child: const Text(
-                      "Recharge Now",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  )),
+                  }
+                },
+                child: Text(
+                  "Recharge Now",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
               const SizedBox(
                 height: 20,
-              ),
-              const Text(
-                "*CAUTION : Do not clear the app from the background while completing the recharge",
-                style: TextStyle(color: Colors.red, fontSize: 15),
               ),
               const SizedBox(
                 height: 10,
@@ -385,4 +454,18 @@ class _AddMoneyState extends State<AddMoney> {
       ),
     );
   }
+}
+
+void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  // Do something when payment succeeds
+  WalletController.instance.paymentSuccess(
+      int.parse(WalletController.instance.adMoneyController.text));
+}
+
+void _handlePaymentError(PaymentFailureResponse response) {
+  // Do something when payment fails
+}
+
+void _handleExternalWallet(ExternalWalletResponse response) {
+  // Do something when an external wallet was selected
 }
