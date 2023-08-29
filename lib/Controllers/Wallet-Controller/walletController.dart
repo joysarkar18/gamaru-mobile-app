@@ -24,7 +24,7 @@ class WalletController extends GetxController {
   TextEditingController phoneNoController = TextEditingController();
   TextEditingController ifscCodeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  TextEditingController withdrawNoController = TextEditingController();
+  TextEditingController rechargeNoController = TextEditingController();
 
   RxList bankCardList = [].obs;
   var bankCardDetails = null;
@@ -129,16 +129,47 @@ class WalletController extends GetxController {
       await _db
           .collection("user")
           .doc(user!.email.toString())
-          .update({"coins": coins}).then((value) {
-        Get.off(() => const RechargeDone());
+          .update({"coins": coins}).then((value) async {
+        await _db
+            .collection("user transactions")
+            .doc(user!.email.toString())
+            .get()
+            .then((value) async {
+          List tList = value["transactions"];
+          tList.add({
+            "amount": amount,
+            "email": FirebaseAuth.instance.currentUser!.email,
+            "fee": 0,
+            "reason": "Recharge",
+            "time": DateTime.now(),
+            "add": true,
+          });
+
+          await _db
+              .collection("user transactions")
+              .doc(FirebaseAuth.instance.currentUser!.email)
+              .update({"transactions": tList}).then((value) {
+            Get.to(() => const RechargeDone());
+          });
+        });
       });
     });
   }
 
-  saveNumForWithdraw(String nu) async {
+  saveNumForRecharge(String nu) async {
     await _db
         .collection("user")
         .doc(user!.email.toString())
-        .update({"withdrawNo": nu});
+        .update({"rechargeNo": nu});
+  }
+
+  getNumForRecharge() async {
+    await _db
+        .collection("user")
+        .doc(user!.email.toString())
+        .get()
+        .then((value) {
+      rechargeNoController.text = value["rechargeNo"];
+    });
   }
 }
