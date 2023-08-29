@@ -470,6 +470,7 @@ void _handlePaymentSuccess(PaymentSuccessResponse response) {
 }
 
 void _handlePaymentError(PaymentFailureResponse response) {
+  Get.to(const RechargeFailed());
   // Do something when payment fails
 }
 
