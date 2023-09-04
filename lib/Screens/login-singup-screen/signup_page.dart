@@ -1,5 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Controllers/ReferalController/referalController.dart';
+import 'package:gamaru_mobile_app/Screens/login-singup-screen/referScreen.dart';
 import 'package:get/get.dart';
 import '../../Componants/glossyEffect.dart';
 import '../../Controllers/Login-Contollers/autehntication.dart';
@@ -15,6 +17,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool equalOrnot = true;
+  final referalController = Get.put(ReferalController());
   final Authentication authentication = Get.put(Authentication());
   final signupController = Get.put(SignupController());
   bool _isVisible1 = false;
@@ -283,14 +286,20 @@ class _SignUpState extends State<SignUp> {
                                                     .passwordController1.text ==
                                                 signupController
                                                     .passwordController2.text) {
-                                              authentication.is_loading.value =
-                                                  true;
-                                              signupController.registerUser(
-                                                  signupController
-                                                      .emailController.text,
-                                                  signupController
-                                                      .passwordController1
-                                                      .text);
+                                              // authentication.is_loading.value =
+                                              //     true;
+                                              // signupController.registerUser(
+                                              //     signupController
+                                              //         .emailController.text,
+                                              //     signupController
+                                              //         .passwordController1
+                                              //         .text);
+                                              // referalController
+                                              //     .generateUniqueString(
+                                              //         signupController
+                                              //             .emailController
+                                              //             .text);
+                                              Get.to(() => Refer());
                                             } else {
                                               setState(() {
                                                 equalOrnot = false;

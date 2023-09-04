@@ -14,6 +14,7 @@ class SignupController extends GetxController {
   var emailController = TextEditingController();
   var passwordController1 = TextEditingController();
   var passwordController2 = TextEditingController();
+  var referalController = TextEditingController();
   String verificationId = "";
   var forgotPassemailController = TextEditingController();
 
