@@ -18,8 +18,9 @@ class SignupController extends GetxController {
   String verificationId = "";
   var forgotPassemailController = TextEditingController();
 
-  void registerUser(String email, String password) {
-    Authentication.instance.createUserWithEmailPassword(email, password);
+  void registerUser(String email, String password, String referal) {
+    Authentication.instance
+        .createUserWithEmailPassword(email, password, referal);
   }
 
   void loginUser(String email, String password) async {

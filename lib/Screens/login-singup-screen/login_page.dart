@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Login-Contollers/autehntication.dart';
 import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
+import 'package:gamaru_mobile_app/Controllers/ReferalController/referalController.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/forget_password_page.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/signup_page.dart';
+import 'package:gamaru_mobile_app/Screens/refer_screen/refer_earn_screen.dart';
 import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
@@ -259,7 +261,8 @@ class _LoginState extends State<Login> {
                                 InkWell(
                                   onTap: () {
                                     authentication.is_loading.value = true;
-                                    authentication.googleSignIn();
+                                    authentication.googleSignIn(signupController
+                                        .referalController.text);
                                   },
                                   child: GlossyCard(
                                     height: 50.0,

@@ -41,12 +41,13 @@ class Authentication extends GetxController {
   }
 
   Future<void> createUserWithEmailPassword(
-      String email, String password) async {
+      String email, String password, String referal) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) async {
-        await userController.createUserDataUsingSignin(Uuid().v1(), email);
+        await userController.createUserDataUsingSignin(
+            Uuid().v1(), email, referal);
         is_loading.value = false;
       });
     } on FirebaseAuthException catch (e) {
@@ -80,7 +81,7 @@ class Authentication extends GetxController {
     }
   }
 
-  googleSignIn() async {
+  googleSignIn(String referal) async {
     try {
       GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -92,7 +93,7 @@ class Authentication extends GetxController {
       _auth.signInWithCredential(credential).then((value) async {
         print("hiiiii ${value.user!.email}");
         await userController.createUserDataUsingGoogleSignin(
-            Uuid().v1(), value.user!.email.toString().trim());
+            Uuid().v1(), value.user!.email.toString().trim(), referal);
         is_loading.value = false;
       });
     } catch (e) {

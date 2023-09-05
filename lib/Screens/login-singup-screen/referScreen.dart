@@ -1,10 +1,7 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Login-Contollers/autehntication.dart';
 import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupController.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/forget_password_page.dart';
-import 'package:gamaru_mobile_app/Screens/login-singup-screen/signup_page.dart';
 import 'package:get/get.dart';
 
 class Refer extends StatefulWidget {
@@ -18,7 +15,6 @@ class _ReferState extends State<Refer> {
   final fromKey = GlobalKey<FormState>();
   final signupController = Get.put(SignupController());
   final Authentication authentication = Get.put(Authentication());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +120,9 @@ class _ReferState extends State<Refer> {
                                               signupController
                                                   .emailController.text,
                                               signupController
-                                                  .passwordController1.text);
+                                                  .passwordController1.text,
+                                              signupController
+                                                  .referalController.text);
                                         }
                                       },
                                       child: Container(
@@ -150,7 +148,7 @@ class _ReferState extends State<Refer> {
                                         )),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 28,
                                     ),
                                     InkWell(
@@ -161,7 +159,9 @@ class _ReferState extends State<Refer> {
                                             signupController
                                                 .emailController.text,
                                             signupController
-                                                .passwordController1.text);
+                                                .passwordController1.text,
+                                            signupController
+                                                .referalController.text);
                                       },
                                       child: Container(
                                         width: Get.width * 0.79,

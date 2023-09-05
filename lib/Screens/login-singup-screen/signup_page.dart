@@ -288,17 +288,7 @@ class _SignUpState extends State<SignUp> {
                                                     .passwordController2.text) {
                                               // authentication.is_loading.value =
                                               //     true;
-                                              // signupController.registerUser(
-                                              //     signupController
-                                              //         .emailController.text,
-                                              //     signupController
-                                              //         .passwordController1
-                                              //         .text);
-                                              // referalController
-                                              //     .generateUniqueString(
-                                              //         signupController
-                                              //             .emailController
-                                              //             .text);
+
                                               Get.to(() => Refer());
                                             } else {
                                               setState(() {
@@ -367,7 +357,9 @@ class _SignUpState extends State<SignUp> {
                                   InkWell(
                                     onTap: () {
                                       authentication.is_loading.value = true;
-                                      authentication.googleSignIn();
+                                      authentication.googleSignIn(
+                                          signupController
+                                              .referalController.text);
                                     },
                                     child: GlossyCard(
                                       height: 50.0,

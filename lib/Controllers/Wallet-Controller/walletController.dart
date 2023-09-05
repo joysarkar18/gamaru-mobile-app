@@ -122,37 +122,179 @@ class WalletController extends GetxController {
         .collection("user")
         .doc(user!.email.toString())
         .get()
-        .then((value) async {
-      int coins = value["coins"];
-      coins = coins + amount;
+        .then((v) async {
+      bool rechargeFirst = v["rechargeFirst"];
 
-      await _db
-          .collection("user")
-          .doc(user!.email.toString())
-          .update({"coins": coins}).then((value) async {
+      if (rechargeFirst) {
         await _db
-            .collection("user transactions")
+            .collection("user")
             .doc(user!.email.toString())
             .get()
             .then((value) async {
-          List tList = value["transactions"];
-          tList.add({
-            "amount": amount,
-            "email": FirebaseAuth.instance.currentUser!.email,
-            "fee": 0,
-            "reason": "Recharge",
-            "time": DateTime.now(),
-            "add": true,
-          });
-
+          int coins = value["coins"];
+          String referal = value["referal"];
           await _db
-              .collection("user transactions")
-              .doc(FirebaseAuth.instance.currentUser!.email)
-              .update({"transactions": tList}).then((value) {
-            Get.to(() => const RechargeDone());
+              .collection("ReferalAmount")
+              .doc("refAmount")
+              .get()
+              .then((value1) async {
+            int refReward = value1["amount"];
+
+            await _db
+                .collection("refId")
+                .doc(referal)
+                .get()
+                .then((value2) async {
+              String referalEmail = value2["email"];
+
+              coins = coins + amount;
+
+              await _db
+                  .collection("user")
+                  .doc(user!.email.toString())
+                  .update({"coins": coins}).then((value) async {
+                await _db
+                    .collection("user transactions")
+                    .doc(user!.email.toString())
+                    .get()
+                    .then((value) async {
+                  List tList = value["transactions"];
+                  tList.add({
+                    "amount": amount,
+                    "email": FirebaseAuth.instance.currentUser!.email,
+                    "fee": 0,
+                    "reason": "Recharge",
+                    "time": DateTime.now(),
+                    "add": true,
+                  });
+
+                  await _db
+                      .collection("user transactions")
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .update({"transactions": tList}).then((value) async {
+                    await _db
+                        .collection("user")
+                        .doc(user!.email.toString())
+                        .get()
+                        .then((value) async {
+                      coins = value["coins"];
+                      coins = coins + refReward;
+
+                      await _db
+                          .collection("user")
+                          .doc(user!.email.toString())
+                          .update({"coins": coins}).then((value) async {
+                        await _db
+                            .collection("user transactions")
+                            .doc(user!.email.toString())
+                            .get()
+                            .then((value) async {
+                          List tList = value["transactions"];
+                          tList.add({
+                            "amount": refReward,
+                            "email": FirebaseAuth.instance.currentUser!.email,
+                            "fee": 0,
+                            "reason": "Referal Reward",
+                            "time": DateTime.now(),
+                            "add": true,
+                          });
+
+                          await _db
+                              .collection("user transactions")
+                              .doc(FirebaseAuth.instance.currentUser!.email)
+                              .update({"transactions": tList}).then(
+                                  (value) async {
+                            await _db
+                                .collection("user")
+                                .doc(referalEmail)
+                                .get()
+                                .then((value) async {
+                              int coins = value["coins"];
+                              coins = coins + refReward;
+
+                              await _db
+                                  .collection("user")
+                                  .doc(referalEmail)
+                                  .update({"coins": coins}).then((value) async {
+                                await _db
+                                    .collection("user transactions")
+                                    .doc(referalEmail)
+                                    .get()
+                                    .then((value) async {
+                                  List tList = value["transactions"];
+                                  tList.add({
+                                    "amount": refReward,
+                                    "email": referalEmail,
+                                    "fee": 0,
+                                    "reason": "Referal Reward",
+                                    "time": DateTime.now(),
+                                    "add": true,
+                                  });
+
+                                  await _db
+                                      .collection("user transactions")
+                                      .doc(referalEmail)
+                                      .update({"transactions": tList}).then(
+                                          (value) async {
+                                    await _db
+                                        .collection("user")
+                                        .doc(user!.email.toString())
+                                        .update({"rechargeFirst": false}).then(
+                                            (value) {
+                                      Get.to(() => const RechargeDone());
+                                    });
+                                  });
+                                });
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
           });
         });
-      });
+      } else {
+        await _db
+            .collection("user")
+            .doc(user!.email.toString())
+            .get()
+            .then((value) async {
+          int coins = value["coins"];
+          coins = coins + amount;
+
+          await _db
+              .collection("user")
+              .doc(user!.email.toString())
+              .update({"coins": coins}).then((value) async {
+            await _db
+                .collection("user transactions")
+                .doc(user!.email.toString())
+                .get()
+                .then((value) async {
+              List tList = value["transactions"];
+              tList.add({
+                "amount": amount,
+                "email": FirebaseAuth.instance.currentUser!.email,
+                "fee": 0,
+                "reason": "Recharge",
+                "time": DateTime.now(),
+                "add": true,
+              });
+
+              await _db
+                  .collection("user transactions")
+                  .doc(FirebaseAuth.instance.currentUser!.email)
+                  .update({"transactions": tList}).then((value) {
+                Get.to(() => const RechargeDone());
+              });
+            });
+          });
+        });
+      }
     });
   }
 
