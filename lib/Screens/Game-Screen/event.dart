@@ -237,7 +237,9 @@ class EventCard extends StatelessWidget {
                               animate: false,
                             ),
                             Text(
-                              this.eventEntryFee.toString(),
+                              this.eventEntryFee.toString() == "0"
+                                  ? "FREE"
+                                  : this.eventEntryFee.toString(),
                               style: TextStyle(
                                   color: Color.fromARGB(255, 255, 234, 45)),
                             )
