@@ -366,7 +366,23 @@ class EventCard extends StatelessWidget {
                                             dt: eventTime,
                                             eventName: eventName,
                                           ));
-                                    }
+                                    } else if (eventName ==
+                                        "FREE FIRE DUO MATCH") {
+                                      Get.to(() => JoinNowDuo(
+                                            index: index,
+                                            entryFee: eventEntryFee,
+                                            dt: eventTime,
+                                            eventName: eventName,
+                                          ));
+                                    } else if (eventName ==
+                                        "FREE FIRE SQUAD MATCH") {
+                                      Get.to(() => JoinNowSquad(
+                                            index: index,
+                                            entryFee: eventEntryFee,
+                                            dt: eventTime,
+                                            eventName: eventName,
+                                          ));
+                                    } else {}
                                   } else {
                                     if (id != "") {
                                       Get.to(() => IdPass());
