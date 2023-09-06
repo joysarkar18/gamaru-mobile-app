@@ -255,32 +255,32 @@ class _LoginState extends State<Login> {
                                 ),
                               ]),
                             ]),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    authentication.is_loading.value = true;
-                                    authentication.googleSignIn(signupController
-                                        .referalController.text);
-                                  },
-                                  child: GlossyCard(
-                                    height: 50.0,
-                                    width: 50.0,
-                                    borderRadius: 15.0,
-                                    borderWith: 1.1,
-                                    child: Container(
-                                      height: 30,
-                                      width: 30,
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  "Assets/googleLogo.png"))),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     InkWell(
+                            //       onTap: () {
+                            //         // authentication.is_loading.value = true;
+                            //         // authentication.googleSignIn(signupController
+                            //         //     .referalController.text);
+                            //       },
+                            //       child: GlossyCard(
+                            //         height: 50.0,
+                            //         width: 50.0,
+                            //         borderRadius: 15.0,
+                            //         borderWith: 1.1,
+                            //         child: Container(
+                            //           height: 30,
+                            //           width: 30,
+                            //           decoration: const BoxDecoration(
+                            //               image: DecorationImage(
+                            //                   image: AssetImage(
+                            //                       "Assets/googleLogo.png"))),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             const SizedBox(
                               height: 40,
                             ),
