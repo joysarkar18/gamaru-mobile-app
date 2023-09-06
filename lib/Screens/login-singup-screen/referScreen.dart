@@ -5,7 +5,8 @@ import 'package:gamaru_mobile_app/Controllers/Login-Contollers/signinSignupContr
 import 'package:get/get.dart';
 
 class Refer extends StatefulWidget {
-  const Refer({super.key});
+  final bool isGoogel;
+  const Refer({super.key, required this.isGoogel});
 
   @override
   State<Refer> createState() => _ReferState();
@@ -155,13 +156,19 @@ class _ReferState extends State<Refer> {
                                       onTap: () {
                                         authentication.is_loading.value = true;
 
-                                        signupController.registerUser(
-                                            signupController
-                                                .emailController.text,
-                                            signupController
-                                                .passwordController1.text,
-                                            signupController
-                                                .referalController.text);
+                                        if (widget.isGoogel) {
+                                          authentication.googleSignIn(
+                                              signupController
+                                                  .referalController.text);
+                                        } else {
+                                          signupController.registerUser(
+                                              signupController
+                                                  .emailController.text,
+                                              signupController
+                                                  .passwordController1.text,
+                                              signupController
+                                                  .referalController.text);
+                                        }
                                       },
                                       child: Container(
                                         width: Get.width * 0.79,

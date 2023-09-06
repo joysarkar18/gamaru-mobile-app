@@ -289,7 +289,9 @@ class _SignUpState extends State<SignUp> {
                                               // authentication.is_loading.value =
                                               //     true;
 
-                                              Get.to(() => Refer());
+                                              Get.to(() => const Refer(
+                                                    isGoogel: false,
+                                                  ));
                                             } else {
                                               setState(() {
                                                 equalOrnot = false;
@@ -357,9 +359,7 @@ class _SignUpState extends State<SignUp> {
                                   InkWell(
                                     onTap: () {
                                       authentication.is_loading.value = true;
-                                      authentication.googleSignIn(
-                                          signupController
-                                              .referalController.text);
+                                      Get.to(() => const Refer(isGoogel: true));
                                     },
                                     child: GlossyCard(
                                       height: 50.0,

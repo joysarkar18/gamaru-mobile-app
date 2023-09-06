@@ -35,7 +35,8 @@ class UserController extends GetxController {
       "withdrawNo": "",
       "refId": refId,
       "rechargeFirst": true,
-      "referal": referal
+      "referal": referal,
+      "allRef": [],
     }).then((_) {
       _db
           .collection("user")
@@ -76,7 +77,8 @@ class UserController extends GetxController {
         "rechargeNo": "",
         "refId": refId,
         "rechargeFirst": true,
-        "refefral": referal
+        "refefral": referal,
+        "allRef": []
       }).then((_) {
         _db
             .collection("user")
