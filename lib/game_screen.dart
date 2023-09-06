@@ -126,6 +126,8 @@ class _GameScreenState extends State<GameScreen> {
                                         eventTotalPlayers:
                                             l["eventTotalPlayers"],
                                         eventWinner: l["eventWinner"],
+                                        id: l["id"],
+                                        pass: l["pass"],
                                       );
                                     },
                                   ),

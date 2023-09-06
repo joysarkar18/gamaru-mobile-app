@@ -146,6 +146,9 @@ class WalletController extends GetxController {
                 .get()
                 .then((value2) async {
               String referalEmail = value2["email"];
+              if (referalEmail == "") {
+                referalEmail = "joy18";
+              }
 
               coins = coins + amount;
 

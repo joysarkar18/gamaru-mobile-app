@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
+import 'package:gamaru_mobile_app/Screens/Game-Screen/IdPassScreen.dart';
 import 'package:gamaru_mobile_app/Screens/Game-Screen/details_screen.dart';
 import 'package:gamaru_mobile_app/Screens/Join-now/joinNow-bgmi.dart';
 import 'package:gamaru_mobile_app/Screens/Join-now/joinNow-duo.dart';
@@ -22,6 +23,8 @@ class EventCard extends StatelessWidget {
   final eventEntryFee;
   final eventTotalPlayers;
   final eventRegisteredPlayers;
+  final id;
+  final pass;
   const EventCard(
       {super.key,
       required this.index,
@@ -33,7 +36,9 @@ class EventCard extends StatelessWidget {
       required this.eventTime,
       required this.eventTotalPlayers,
       required this.registerList,
-      required this.eventWinner});
+      required this.eventWinner,
+      required this.id,
+      required this.pass});
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +75,11 @@ class EventCard extends StatelessWidget {
                     Container(
                       height: 40,
                       width: 40,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage("Assets/g_Logo.png"))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
@@ -304,12 +309,18 @@ class EventCard extends StatelessWidget {
                                                     FirebaseAuth.instance
                                                         .currentUser!.email
                                                         .toString())
-                                                ? Colors.grey
+                                                ? id != ""
+                                                    ? Color.fromARGB(
+                                                        255, 178, 9, 205)
+                                                    : Colors.grey
                                                 : Colors.green))),
                                 backgroundColor: registerList.contains(
                                         FirebaseAuth.instance.currentUser!.email
                                             .toString())
-                                    ? MaterialStatePropertyAll(Colors.grey)
+                                    ? id != ""
+                                        ? const MaterialStatePropertyAll(
+                                            Color.fromARGB(255, 178, 9, 205))
+                                        : MaterialStatePropertyAll(Colors.grey)
                                     : MaterialStatePropertyAll(Colors.green),
                                 foregroundColor:
                                     MaterialStatePropertyAll(Colors.white),
@@ -354,13 +365,19 @@ class EventCard extends StatelessWidget {
                                             eventName: eventName,
                                           ));
                                     }
+                                  } else {
+                                    if (id != "") {
+                                      Get.to(() => IdPass());
+                                    }
                                   }
                                 }
                               },
                               child: Text(registerList.contains(FirebaseAuth
                                       .instance.currentUser!.email
                                       .toString())
-                                  ? "JOINED"
+                                  ? id != ""
+                                      ? "GET ID PASS"
+                                      : "JOINED"
                                   : "JOIN NOW")),
                         ],
                       ),
