@@ -343,14 +343,23 @@ class EventController extends GetxController {
         .get()
         .then((value) {
       player1.text = value["bgmiId"];
+      player2.text = value["player2"];
+      player3.text = value["player3"];
+      player4.text = value["player4"];
     });
   }
 
-  updateBgmiId(String id) async {
+  updateBgmiId(
+      String id, String player2, String player3, String player4) async {
     _db
         .collection("user")
         .doc(FirebaseAuth.instance.currentUser!.email.toString())
-        .update({"bgmiId": id});
+        .update({
+      "bgmiId": id,
+      "player2": player2,
+      "player3": player3,
+      "player4": player4
+    });
   }
 
   Future<void> joinFreeFire(int index, DateTime dt, int fee, String matchType,

@@ -262,7 +262,10 @@ class _JoinNowSquadState extends State<JoinNowSquad> {
                                   if (from.validate()) {
                                     if (isChecked) {
                                       eventController.updateBgmiId(
-                                          eventController.player1.text);
+                                          eventController.player1.text,
+                                          eventController.player2.text,
+                                          eventController.player3.text,
+                                          eventController.player4.text);
                                     }
 
                                     if (widget.eventName.contains("BGMI")) {
