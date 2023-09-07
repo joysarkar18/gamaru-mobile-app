@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReferAndEarn extends StatelessWidget {
   const ReferAndEarn({super.key});
@@ -128,8 +130,21 @@ class ReferAndEarn extends StatelessWidget {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           InkWell(
-                                            onTap: () {
-                                              print('Ahhh');
+                                            onTap: () async {
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+
+                                              final message = Uri.encodeFull(
+                                                  'Hello, this is your predefined message.');
+                                              final url =
+                                                  "https://wa.me/?text=$message";
+
+                                              try {
+                                                launch(url);
+                                              } catch (e) {
+                                                //To handle error and display error message
+                                                print("error");
+                                              }
                                             },
                                             child: Image.asset(
                                               "Assets/whatsapp.png",
@@ -137,8 +152,20 @@ class ReferAndEarn extends StatelessWidget {
                                             ),
                                           ),
                                           InkWell(
-                                            onTap: () {
-                                              print('Uhhh');
+                                            onTap: () async {
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                              final message = Uri.encodeFull(
+                                                  'Hello, this is your predefined message.');
+
+                                              final smsUri =
+                                                  "sms:?body=$message";
+                                              try {
+                                                launch(smsUri);
+                                              } catch (e) {
+                                                //To handle error and display error message
+                                                print("error");
+                                              }
                                             },
                                             child: Image.asset(
                                               "Assets/instagram.png",
@@ -146,8 +173,20 @@ class ReferAndEarn extends StatelessWidget {
                                             ),
                                           ),
                                           InkWell(
-                                            onTap: () {
-                                              print('Isssh');
+                                            onTap: () async {
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                              final message = Uri.encodeFull(
+                                                  'Hello, this is your predefined message.');
+
+                                              final telegramUrl =
+                                                  "https://t.me/share/url?url=&text=$message";
+                                              try {
+                                                launch(telegramUrl);
+                                              } catch (e) {
+                                                //To handle error and display error message
+                                                print("error");
+                                              }
                                             },
                                             child: Image.asset(
                                               "Assets/telegram.png",
@@ -163,7 +202,10 @@ class ReferAndEarn extends StatelessWidget {
                                               children: [
                                                 IconButton(
                                                   onPressed: () {
-                                                    print('I love you');
+                                                    Share.share(
+                                                        'check out my website https://example.com',
+                                                        subject:
+                                                            'Look what I made!');
                                                   },
                                                   icon: Icon(
                                                     Icons.more_horiz,
