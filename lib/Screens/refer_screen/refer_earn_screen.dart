@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:get/get.dart';
@@ -69,15 +70,29 @@ class ReferAndEarn extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              "30 Gold",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection("ReferalAmount")
+                                    .doc("refAmount")
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data!
+                                              .data()!["amount"]
+                                              .toString() +
+                                          " Play Coins",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w700),
+                                    );
+                                  } else {
+                                    return Text("");
+                                  }
+                                },
+                              )),
                         ],
                       ),
                       Stack(
