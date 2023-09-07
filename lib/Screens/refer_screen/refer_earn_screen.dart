@@ -1,16 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Controllers/ReferalController/referalController.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ReferAndEarn extends StatelessWidget {
+class ReferAndEarn extends StatefulWidget {
   const ReferAndEarn({super.key});
 
   @override
+  State<ReferAndEarn> createState() => _ReferAndEarnState();
+}
+
+class _ReferAndEarnState extends State<ReferAndEarn> {
+  final referalController = Get.put(ReferalController());
+
+  @override
+  void initState() {
+    super.initState();
+    referalController.getIdAmount();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String refMessage = ''''Hey,
+
+I'm loving "Gamaru" – it's a blast! 🎮
+play BGMI, Free Fire and many more and win real cash!💸🔥
+
+Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just use my referral link: www.gamaru.online and code: ${referalController.refId.value} .
+
+Game on!''';
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -32,7 +55,7 @@ class ReferAndEarn extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GlossyCard(
-                height: 600.0,
+                height: 640.0,
                 width: Get.width * 0.95,
                 borderRadius: 10.0,
                 borderWith: 1.0,
@@ -97,6 +120,45 @@ class ReferAndEarn extends StatelessWidget {
                               )),
                         ],
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      GlossyCard(
+                        borderRadius: 5.0,
+                        borderWith: 2.0,
+                        height: 50.0,
+                        width: 250.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "Your Code : ${referalController.refId.value}",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            IconButton(
+                                onPressed: () async {
+                                  await Clipboard.setData(ClipboardData(
+                                          text: referalController.refId.value))
+                                      .then((value) {
+                                    Get.snackbar(
+                                      "Copied to Clipboard",
+                                      "",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      colorText: Colors.green,
+                                    );
+                                  });
+                                },
+                                icon: Icon(Icons.copy))
+                          ],
+                        ),
+                      ),
                       Stack(
                         children: [
                           Padding(
@@ -134,8 +196,8 @@ class ReferAndEarn extends StatelessWidget {
                                               FocusManager.instance.primaryFocus
                                                   ?.unfocus();
 
-                                              final message = Uri.encodeFull(
-                                                  'Hello, this is your predefined message.');
+                                              final message =
+                                                  Uri.encodeFull(refMessage);
                                               final url =
                                                   "https://wa.me/?text=$message";
 
@@ -155,8 +217,8 @@ class ReferAndEarn extends StatelessWidget {
                                             onTap: () async {
                                               FocusManager.instance.primaryFocus
                                                   ?.unfocus();
-                                              final message = Uri.encodeFull(
-                                                  'Hello, this is your predefined message.');
+                                              final message =
+                                                  Uri.encodeFull(refMessage);
 
                                               final smsUri =
                                                   "sms:?body=$message";
@@ -176,8 +238,8 @@ class ReferAndEarn extends StatelessWidget {
                                             onTap: () async {
                                               FocusManager.instance.primaryFocus
                                                   ?.unfocus();
-                                              final message = Uri.encodeFull(
-                                                  'Hello, this is your predefined message.');
+                                              final message =
+                                                  Uri.encodeFull(refMessage);
 
                                               final telegramUrl =
                                                   "https://t.me/share/url?url=&text=$message";
@@ -202,10 +264,9 @@ class ReferAndEarn extends StatelessWidget {
                                               children: [
                                                 IconButton(
                                                   onPressed: () {
-                                                    Share.share(
-                                                        'check out my website https://example.com',
+                                                    Share.share(refMessage,
                                                         subject:
-                                                            'Look what I made!');
+                                                            'Gamaru Referal');
                                                   },
                                                   icon: Icon(
                                                     Icons.more_horiz,
@@ -244,8 +305,17 @@ class ReferAndEarn extends StatelessWidget {
                                       ),
                                     ]),
                                     InkWell(
-                                      onTap: () {
-                                        print('FuCk YoU');
+                                      onTap: () async {
+                                        await Clipboard.setData(
+                                                ClipboardData(text: refMessage))
+                                            .then((value) {
+                                          Get.snackbar(
+                                            "Copied to Clipboard",
+                                            "",
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            colorText: Colors.green,
+                                          );
+                                        });
                                       },
                                       child: Container(
                                         width: Get.width * 0.59,
