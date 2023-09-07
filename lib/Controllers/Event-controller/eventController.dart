@@ -19,6 +19,32 @@ class EventController extends GetxController {
   TextEditingController player4 = TextEditingController();
   RxBool is_joining = false.obs;
 
+  upadteTransaction(int fee) async {
+    await _db
+        .collection("user transactions")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get()
+        .then((value) async {
+      List tList = value["transactions"];
+      tList.add({
+        "amount": fee,
+        "email": FirebaseAuth.instance.currentUser!.email,
+        "fee": 0,
+        "reason": "Joined Contest",
+        "time": DateTime.now(),
+        "add": false,
+      });
+
+      await _db
+          .collection("user transactions")
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .update({"transactions": tList}).then((value) {
+        is_joining.value = false;
+        Get.back();
+      });
+    });
+  }
+
   Future<void> joinBgmi(int index, DateTime dt, int fee, String matchType,
       String player1, String player2, String player3, String player4) async {
     is_joining.value = true;
@@ -61,14 +87,21 @@ class EventController extends GetxController {
                 .update({"event": eventListBgmiUpcoming}).then((_) async {
               await _db
                   .collection("BGMI REGISTER LIST")
-                  .doc(dt.toString())
+                  .doc(dt.day.toString() +
+                      dt.month.toString() +
+                      dt.year.toString() +
+                      dt.hour.toString() +
+                      dt.minute.toString() +
+                      matchType)
                   .get()
                   .then((value) async {
                 if (value.exists) {
                   List l = value["players"];
                   l.add({
                     "player1": player1,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("BGMI REGISTER LIST")
@@ -78,13 +111,16 @@ class EventController extends GetxController {
                           dt.hour.toString() +
                           dt.minute.toString() +
                           matchType)
-                      .update({"players": l});
+                      .update({"players": l}).then((value) async {
+                    upadteTransaction(fee);
+                  });
                 } else {
                   List l = [];
                   l.add({
                     "player1": player1,
                     "email":
                         FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("BGMI REGISTER LIST")
@@ -95,29 +131,7 @@ class EventController extends GetxController {
                           dt.minute.toString() +
                           matchType)
                       .set({"players": l}).then((value) async {
-                    await _db
-                        .collection("user transactions")
-                        .doc(FirebaseAuth.instance.currentUser!.email)
-                        .get()
-                        .then((value) async {
-                      List tList = value["transactions"];
-                      tList.add({
-                        "amount": fee,
-                        "email": FirebaseAuth.instance.currentUser!.email,
-                        "fee": 0,
-                        "reason": "Joined Contest",
-                        "time": DateTime.now(),
-                        "add": false,
-                      });
-
-                      await _db
-                          .collection("user transactions")
-                          .doc(FirebaseAuth.instance.currentUser!.email)
-                          .update({"transactions": tList}).then((value) {
-                        is_joining.value = false;
-                        Get.back();
-                      });
-                    });
+                    upadteTransaction(fee);
                   });
                 }
               });
@@ -166,7 +180,12 @@ class EventController extends GetxController {
                 .update({"event": eventListBgmiUpcoming}).then((_) async {
               await _db
                   .collection("BGMI REGISTER LIST")
-                  .doc(dt.toString())
+                  .doc(dt.day.toString() +
+                      dt.month.toString() +
+                      dt.year.toString() +
+                      dt.hour.toString() +
+                      dt.minute.toString() +
+                      matchType)
                   .get()
                   .then((value) async {
                 if (value.exists) {
@@ -174,7 +193,9 @@ class EventController extends GetxController {
                   l.add({
                     "player1": player1,
                     "player2": player2,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("BGMI REGISTER LIST")
@@ -184,13 +205,17 @@ class EventController extends GetxController {
                           dt.hour.toString() +
                           dt.minute.toString() +
                           matchType)
-                      .update({"players": l});
+                      .update({"players": l}).then((value) {
+                    upadteTransaction(fee);
+                  });
                 } else {
                   List l = [];
                   l.add({
                     "player1": player1,
                     "player2": player2,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("BGMI REGISTER LIST")
@@ -201,29 +226,7 @@ class EventController extends GetxController {
                           dt.minute.toString() +
                           matchType)
                       .set({"players": l}).then((value) async {
-                    await _db
-                        .collection("user transactions")
-                        .doc(FirebaseAuth.instance.currentUser!.email)
-                        .get()
-                        .then((value) async {
-                      List tList = value["transactions"];
-                      tList.add({
-                        "amount": fee,
-                        "email": FirebaseAuth.instance.currentUser!.email,
-                        "fee": 0,
-                        "reason": "Joined Contest",
-                        "time": DateTime.now(),
-                        "add": false,
-                      });
-
-                      await _db
-                          .collection("user transactions")
-                          .doc(FirebaseAuth.instance.currentUser!.email)
-                          .update({"transactions": tList}).then((value) {
-                        is_joining.value = false;
-                        Get.back();
-                      });
-                    });
+                    upadteTransaction(fee);
                   });
                 }
               });
@@ -272,7 +275,12 @@ class EventController extends GetxController {
                 .update({"event": eventListBgmiUpcoming}).then((_) async {
               await _db
                   .collection("BGMI REGISTER LIST")
-                  .doc(dt.toString())
+                  .doc(dt.day.toString() +
+                      dt.month.toString() +
+                      dt.year.toString() +
+                      dt.hour.toString() +
+                      dt.minute.toString() +
+                      matchType)
                   .get()
                   .then((value) async {
                 if (value.exists) {
@@ -282,7 +290,9 @@ class EventController extends GetxController {
                     "player2": player2,
                     "player3": player3,
                     "player4": player4,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("BGMI REGISTER LIST")
@@ -292,7 +302,9 @@ class EventController extends GetxController {
                           dt.hour.toString() +
                           dt.minute.toString() +
                           matchType)
-                      .update({"players": l});
+                      .update({"players": l}).then((value) {
+                    upadteTransaction(fee);
+                  });
                 } else {
                   List l = [];
                   l.add({
@@ -300,7 +312,9 @@ class EventController extends GetxController {
                     "player2": player2,
                     "player3": player3,
                     "player4": player4,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("BGMI REGISTER LIST")
@@ -311,29 +325,7 @@ class EventController extends GetxController {
                           dt.minute.toString() +
                           matchType)
                       .set({"players": l}).then((value) async {
-                    await _db
-                        .collection("user transactions")
-                        .doc(FirebaseAuth.instance.currentUser!.email)
-                        .get()
-                        .then((value) async {
-                      List tList = value["transactions"];
-                      tList.add({
-                        "amount": fee,
-                        "email": FirebaseAuth.instance.currentUser!.email,
-                        "fee": 0,
-                        "reason": "Joined Contest",
-                        "time": DateTime.now(),
-                        "add": false,
-                      });
-
-                      await _db
-                          .collection("user transactions")
-                          .doc(FirebaseAuth.instance.currentUser!.email)
-                          .update({"transactions": tList}).then((value) {
-                        is_joining.value = false;
-                        Get.back();
-                      });
-                    });
+                    upadteTransaction(fee);
                   });
                 }
               });
@@ -403,14 +395,21 @@ class EventController extends GetxController {
                 .update({"event": eventListBgmiUpcoming}).then((_) async {
               await _db
                   .collection("FREE FIRE REGISTER LIST")
-                  .doc(dt.toString())
+                  .doc(dt.day.toString() +
+                      dt.month.toString() +
+                      dt.year.toString() +
+                      dt.hour.toString() +
+                      dt.minute.toString() +
+                      matchType)
                   .get()
                   .then((value) async {
                 if (value.exists) {
                   List l = value["players"];
                   l.add({
                     "player1": player1,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("FREE FIRE REGISTER LIST")
@@ -420,13 +419,16 @@ class EventController extends GetxController {
                           dt.hour.toString() +
                           dt.minute.toString() +
                           matchType)
-                      .update({"players": l});
+                      .update({"players": l}).then((value) {
+                    upadteTransaction(fee);
+                  });
                 } else {
                   List l = [];
                   l.add({
                     "player1": player1,
                     "email":
                         FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("FREE FIRE REGISTER LIST")
@@ -437,29 +439,7 @@ class EventController extends GetxController {
                           dt.minute.toString() +
                           matchType)
                       .set({"players": l}).then((value) async {
-                    await _db
-                        .collection("user transactions")
-                        .doc(FirebaseAuth.instance.currentUser!.email)
-                        .get()
-                        .then((value) async {
-                      List tList = value["transactions"];
-                      tList.add({
-                        "amount": fee,
-                        "email": FirebaseAuth.instance.currentUser!.email,
-                        "fee": 0,
-                        "reason": "Joined Contest",
-                        "time": DateTime.now(),
-                        "add": false,
-                      });
-
-                      await _db
-                          .collection("user transactions")
-                          .doc(FirebaseAuth.instance.currentUser!.email)
-                          .update({"transactions": tList}).then((value) {
-                        is_joining.value = false;
-                        Get.back();
-                      });
-                    });
+                    upadteTransaction(fee);
                   });
                 }
               });
@@ -516,7 +496,9 @@ class EventController extends GetxController {
                   l.add({
                     "player1": player1,
                     "player2": player2,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("FREE FIRE REGISTER LIST")
@@ -526,13 +508,17 @@ class EventController extends GetxController {
                           dt.hour.toString() +
                           dt.minute.toString() +
                           matchType)
-                      .update({"players": l});
+                      .update({"players": l}).then((value) {
+                    upadteTransaction(fee);
+                  });
                 } else {
                   List l = [];
                   l.add({
                     "player1": player1,
                     "player2": player2,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("FREE FIRE REGISTER LIST")
@@ -543,29 +529,7 @@ class EventController extends GetxController {
                           dt.minute.toString() +
                           matchType)
                       .set({"players": l}).then((value) async {
-                    await _db
-                        .collection("user transactions")
-                        .doc(FirebaseAuth.instance.currentUser!.email)
-                        .get()
-                        .then((value) async {
-                      List tList = value["transactions"];
-                      tList.add({
-                        "amount": fee,
-                        "email": FirebaseAuth.instance.currentUser!.email,
-                        "fee": 0,
-                        "reason": "Joined Contest",
-                        "time": DateTime.now(),
-                        "add": false,
-                      });
-
-                      await _db
-                          .collection("user transactions")
-                          .doc(FirebaseAuth.instance.currentUser!.email)
-                          .update({"transactions": tList}).then((value) {
-                        is_joining.value = false;
-                        Get.back();
-                      });
-                    });
+                    upadteTransaction(fee);
                   });
                 }
               });
@@ -624,7 +588,9 @@ class EventController extends GetxController {
                     "player2": player2,
                     "player3": player3,
                     "player4": player4,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("FREE FIRE REGISTER LIST")
@@ -634,7 +600,9 @@ class EventController extends GetxController {
                           dt.hour.toString() +
                           dt.minute.toString() +
                           matchType)
-                      .update({"players": l});
+                      .update({"players": l}).then((value) {
+                    upadteTransaction(fee);
+                  });
                 } else {
                   List l = [];
                   l.add({
@@ -642,7 +610,9 @@ class EventController extends GetxController {
                     "player2": player2,
                     "player3": player3,
                     "player4": player4,
-                    "email": FirebaseAuth.instance.currentUser!.email.toString()
+                    "email":
+                        FirebaseAuth.instance.currentUser!.email.toString(),
+                    "paid": false
                   });
                   await _db
                       .collection("FREE FIRE REGISTER LIST")
@@ -653,29 +623,7 @@ class EventController extends GetxController {
                           dt.minute.toString() +
                           matchType)
                       .set({"players": l}).then((value) async {
-                    await _db
-                        .collection("user transactions")
-                        .doc(FirebaseAuth.instance.currentUser!.email)
-                        .get()
-                        .then((value) async {
-                      List tList = value["transactions"];
-                      tList.add({
-                        "amount": fee,
-                        "email": FirebaseAuth.instance.currentUser!.email,
-                        "fee": 0,
-                        "reason": "Joined Contest",
-                        "time": DateTime.now(),
-                        "add": false,
-                      });
-
-                      await _db
-                          .collection("user transactions")
-                          .doc(FirebaseAuth.instance.currentUser!.email)
-                          .update({"transactions": tList}).then((value) {
-                        is_joining.value = false;
-                        Get.back();
-                      });
-                    });
+                    upadteTransaction(fee);
                   });
                 }
               });

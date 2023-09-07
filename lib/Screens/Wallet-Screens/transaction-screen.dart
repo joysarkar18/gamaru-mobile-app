@@ -113,7 +113,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                           SizedBox(
                                             width: 4,
                                           ),
-                                          e["reason"] == "Withdraw"
+                                          e["reason"] == "Withdraw" ||
+                                                  e["reason"] == "Winning"
                                               ? LottieBuilder.asset(
                                                   "Assets/winning_coin.json",
                                                   animate: false,
