@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
-import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
@@ -14,11 +13,11 @@ class SupportScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.black,
-          iconTheme: IconThemeData(color: Colors.white)),
+          iconTheme: const IconThemeData(color: Colors.white)),
       backgroundColor: Colors.black,
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: Get.height,
           width: Get.width,
           child: Column(
@@ -66,7 +65,7 @@ class SupportScreen extends StatelessWidget {
                 "us a chance to improve.",
                 style: TextStyle(color: Colors.white70, fontSize: 16),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
@@ -89,6 +88,7 @@ class SupportScreen extends StatelessWidget {
                         height: 55.0,
                         width: 150.0,
                         borderRadius: 10.0,
+                        borderWith: 1.0,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -96,10 +96,10 @@ class SupportScreen extends StatelessWidget {
                               Logos.whatsapp,
                               size: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
-                            Text(
+                            const Text(
                               "Chat with us",
                               style: TextStyle(
                                   color: Colors.white,
@@ -107,8 +107,7 @@ class SupportScreen extends StatelessWidget {
                                   fontSize: 15),
                             ),
                           ],
-                        ),
-                        borderWith: 1.0),
+                        )),
                   ),
                   InkWell(
                     onTap: () async {
@@ -129,6 +128,7 @@ class SupportScreen extends StatelessWidget {
                         height: 55.0,
                         width: 150.0,
                         borderRadius: 10.0,
+                        borderWith: 1.0,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -136,10 +136,10 @@ class SupportScreen extends StatelessWidget {
                               Logos.gmail,
                               size: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
-                            Text(
+                            const Text(
                               "Mail us",
                               style: TextStyle(
                                   color: Colors.white,
@@ -147,12 +147,11 @@ class SupportScreen extends StatelessWidget {
                                   fontSize: 15),
                             ),
                           ],
-                        ),
-                        borderWith: 1.0),
+                        )),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Column(children: <Widget>[
@@ -187,7 +186,7 @@ class SupportScreen extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

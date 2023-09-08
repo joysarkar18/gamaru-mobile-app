@@ -4,19 +4,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
-import 'package:gamaru_mobile_app/game_screen.dart';
 import 'package:get/get.dart';
 
 class EventController extends GetxController {
   static EventController get instance => Get.find();
   final _db = FirebaseFirestore.instance;
   List eventListBgmiUpcoming = [];
+  // ignore: non_constant_identifier_names
   RxBool upcoming_loading = true.obs;
 
   TextEditingController player1 = TextEditingController();
   TextEditingController player2 = TextEditingController();
   TextEditingController player3 = TextEditingController();
   TextEditingController player4 = TextEditingController();
+  // ignore: non_constant_identifier_names
   RxBool is_joining = false.obs;
 
   Future<void> joinBgmi(int index, DateTime dt, int fee, String matchType,
@@ -32,7 +33,7 @@ class EventController extends GetxController {
         if (bal < fee) {
           Timer(const Duration(seconds: 0), () {
             Get.snackbar(onTap: (snack) {
-              Get.off(AddMoney());
+              Get.off(const AddMoney());
             }, "Low Balance", "Doesn't have sufficient balance",
                 colorText: Colors.red);
             is_joining.value = false;
