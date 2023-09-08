@@ -385,7 +385,11 @@ class EventCard extends StatelessWidget {
                                     } else {}
                                   } else {
                                     if (id != "") {
-                                      Get.to(() => IdPass());
+                                      Get.to(() => IdPass(
+                                            id: id,
+                                            pass: pass,
+                                            eventName: eventName,
+                                          ));
                                     }
                                   }
                                 }

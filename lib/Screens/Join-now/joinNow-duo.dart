@@ -65,7 +65,7 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                     height: 10,
                   ),
                   GlossyCard(
-                    height: Get.height * .33,
+                    height: Get.height * .37,
                     width: Get.width - 30.0,
                     borderRadius: 10.0,
                     borderWith: 2.0,
@@ -121,7 +121,7 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                                   decoration: TextDecoration.none),
                               decoration: const InputDecoration(
                                 fillColor: Colors.transparent,
-                                hintText: "ENTER PLAYER-2GAME ID NAME",
+                                hintText: "ENTER PLAYER-2 GAME ID NAME",
                                 hintStyle: TextStyle(
                                     color: Colors.white60, fontSize: 15),
                                 prefixIcon: Icon(
@@ -186,7 +186,10 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                                 if (from.validate()) {
                                   if (isChecked) {
                                     eventController.updateBgmiId(
-                                        eventController.player1.text);
+                                        eventController.player1.text,
+                                        eventController.player2.text,
+                                        eventController.player3.text,
+                                        eventController.player4.text);
                                   }
 
                                   if (widget.eventName.contains("BGMI")) {
