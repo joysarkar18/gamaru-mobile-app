@@ -149,50 +149,14 @@ class _GameScreenState extends State<GameScreen> {
 
                       Container(
                         color: Colors.black,
-                        child: ListTile(
-                          onTap: () {
-                            print("fuck u");
-                          },
-                          focusColor: Colors.amber,
-                          // horizontalTitleGap: 10,
-                          hoverColor: Colors.amber,
-                          title: const Text(
-                            "Name of player",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                        child: Center(
+                            child: Text(
+                          "No Data Available",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
                           ),
-                          subtitle: const Text(
-                            "Name of event",
-                            style:
-                                TextStyle(color: Colors.purple, fontSize: 15),
-                          ),
-                          leading: CircleAvatar(radius: 25),
-                          trailing: Container(
-                            height: 40,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Color.fromARGB(255, 78, 78, 78)
-                                  .withOpacity(0.9),
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.all(0.0),
-                                  child: Icon(
-                                    Icons.currency_rupee,
-                                    color: Colors.green,
-                                  ),
-                                ),
-                                Text(
-                                  "100",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                        )),
                       ),
                     ],
                   )),
