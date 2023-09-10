@@ -149,7 +149,7 @@ class _GameScreenState extends State<GameScreen> {
 
                       Container(
                         color: Colors.black,
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           "No Data Available",
                           style: TextStyle(
