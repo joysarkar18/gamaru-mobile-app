@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/ReferalController/referalController.dart';
 import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -208,9 +209,9 @@ Game on!''';
                                                 print("error");
                                               }
                                             },
-                                            child: Image.asset(
-                                              "Assets/whatsapp.png",
-                                              scale: Checkbox.width,
+                                            child: Logo(
+                                              Logos.whatsapp,
+                                              size: 40,
                                             ),
                                           ),
                                           InkWell(
@@ -229,9 +230,9 @@ Game on!''';
                                                 print("error");
                                               }
                                             },
-                                            child: Image.asset(
-                                              "Assets/instagram.png",
-                                              scale: Checkbox.width,
+                                            child: Logo(
+                                              Logos.facebook_messenger,
+                                              size: 40,
                                             ),
                                           ),
                                           InkWell(
@@ -250,9 +251,9 @@ Game on!''';
                                                 print("error");
                                               }
                                             },
-                                            child: Image.asset(
-                                              "Assets/telegram.png",
-                                              scale: Checkbox.width,
+                                            child: Logo(
+                                              Logos.telegram,
+                                              size: 40,
                                             ),
                                           ),
                                           Container(
