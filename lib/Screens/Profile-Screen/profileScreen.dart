@@ -5,6 +5,7 @@ import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/transaction-screen.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
+import 'package:gamaru_mobile_app/Screens/app_update/update_screen.dart';
 import 'package:gamaru_mobile_app/Screens/notifications-screen/notification.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -371,6 +372,40 @@ class ProfileScreen1 extends StatelessWidget {
                             ),
                             Text(
                               "Logout",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(UpdateScreen());
+                      },
+                      child: GlossyCard(
+                        borderRadius: 10.0,
+                        borderWith: 1.0,
+                        height: 50.0,
+                        width: Get.width,
+                        child: const Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.update,
+                              color: Colors.white70,
+                              size: 35,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Check Update",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
