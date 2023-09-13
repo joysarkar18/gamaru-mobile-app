@@ -19,7 +19,6 @@ class ReferalController extends GetxController {
 
     // Take the first 5 characters of the hexadecimal digest
     final hash = digest.toString().substring(0, 5);
-    print("ansssssssssssssssssssssssssssssssssssssssssssssssssssssss" + hash);
 
     return hash;
   }
@@ -31,6 +30,8 @@ class ReferalController extends GetxController {
         .get()
         .then((value) async {
       refId.value = value["refId"];
+      print("ansssssssssssssssssssssssssssssssssssssssssssssssssssssss" +
+          refId.value);
       await FirebaseFirestore.instance
           .collection("ReferalAmount")
           .doc("refAmount")

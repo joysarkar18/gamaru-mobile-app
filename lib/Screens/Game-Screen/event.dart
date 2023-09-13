@@ -397,7 +397,10 @@ class EventCard extends StatelessWidget {
                               child: Text(registerList.contains(FirebaseAuth
                                       .instance.currentUser!.email
                                       .toString())
-                                  ? id != ""
+                                  ? id != "" &&
+                                          registerList.contains(FirebaseAuth
+                                              .instance.currentUser!.email
+                                              .toString())
                                       ? "GET ID PASS"
                                       : "JOINED"
                                   : "JOIN NOW")),
