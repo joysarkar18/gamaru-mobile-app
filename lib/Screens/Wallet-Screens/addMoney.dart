@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_upi_payment/easy_upi_payment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
@@ -6,7 +7,7 @@ import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController
 import 'package:gamaru_mobile_app/Screens/Customer%20Support/SupportScreen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
+// import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import 'RechargeDone.dart';
 import 'RechargeFailed.dart';
@@ -19,16 +20,16 @@ class AddMoney extends StatefulWidget {
 }
 
 class _AddMoneyState extends State<AddMoney> {
-  final _razorpay = Razorpay();
+  // final _razorpay = Razorpay();
   final fromKey = GlobalKey<FormState>();
   final walletController = Get.put(WalletController());
 
   @override
   void initState() {
     walletController.getNumForRecharge();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    // _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    // _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    // _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     super.initState();
   }
 
@@ -390,28 +391,40 @@ class _AddMoneyState extends State<AddMoney> {
                 onPressed: () async {
                   final from = fromKey.currentState!;
                   if (from.validate()) {
-                    walletController.saveNumForRecharge(
-                        walletController.rechargeNoController.text);
+                    // walletController.saveNumForRecharge(
+                    //     walletController.rechargeNoController.text);
 
-                    var options = {
-                      'key': 'rzp_test_Fj6THSFegB0Ocj',
-                      'amount':
-                          int.parse(walletController.adMoneyController.text) *
-                              100,
-                      'name': 'Gamaru',
-                      'description': 'recharge',
-                      'prefill': {
-                        'contact': walletController.rechargeNoController.text,
-                        'email':
-                            FirebaseAuth.instance.currentUser!.email.toString()
-                      }
-                    };
+                    // var options = {
+                    //   'key': 'rzp_test_Fj6THSFegB0Ocj',
+                    //   'amount':
+                    //       int.parse(walletController.adMoneyController.text) *
+                    //           100,
+                    //   'name': 'Gamaru',
+                    //   'description': 'recharge',
+                    //   'prefill': {
+                    //     'contact': walletController.rechargeNoController.text,
+                    //     'email':
+                    //         FirebaseAuth.instance.currentUser!.email.toString()
+                    //   }
+                    // };
 
-                    try {
-                      _razorpay.open(options);
-                    } catch (e) {
-                      print("fuck");
-                    }
+                    // try {
+                    //   _razorpay.open(options);
+                    // } catch (e) {
+                    //   print("fuck");
+                    // }
+
+                    final res =
+                        await EasyUpiPaymentPlatform.instance.startPayment(
+                      EasyUpiPaymentModel(
+                        payeeVpa: '9064983473@apl',
+                        payeeName: 'Joy Sarkar',
+                        amount: 10.0,
+                        description: 'Testing payment',
+                      ),
+                    );
+                    print(res);
+                    // TODO: add y
                   }
                 },
                 child: Text(
@@ -463,17 +476,17 @@ class _AddMoneyState extends State<AddMoney> {
   }
 }
 
-void _handlePaymentSuccess(PaymentSuccessResponse response) {
-  // Do something when payment succeeds
-  WalletController.instance.paymentSuccess(
-      int.parse(WalletController.instance.adMoneyController.text));
-}
+// void _handlePaymentSuccess(PaymentSuccessResponse response) {
+//   // Do something when payment succeeds
+//   WalletController.instance.paymentSuccess(
+//       int.parse(WalletController.instance.adMoneyController.text));
+// }
 
-void _handlePaymentError(PaymentFailureResponse response) {
-  Get.to(const RechargeFailed());
-  // Do something when payment fails
-}
+// void _handlePaymentError(PaymentFailureResponse response) {
+//   Get.to(const RechargeFailed());
+//   // Do something when payment fails
+// }
 
-void _handleExternalWallet(ExternalWalletResponse response) {
-  // Do something when an external wallet was selected
-}
+// void _handleExternalWallet(ExternalWalletResponse response) {
+//   // Do something when an external wallet was selected
+// }

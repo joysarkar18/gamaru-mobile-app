@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
