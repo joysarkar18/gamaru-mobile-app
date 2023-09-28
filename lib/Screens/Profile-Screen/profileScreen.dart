@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Componants/background_style.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Componants/glossy_prof.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
