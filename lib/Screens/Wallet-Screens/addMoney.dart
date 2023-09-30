@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_upi_payment/easy_upi_payment.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -382,60 +381,62 @@ class _AddMoneyState extends State<AddMoney> {
               const SizedBox(
                 height: 40,
               ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            side: BorderSide(color: Colors.green))),
-                    backgroundColor: MaterialStatePropertyAll(Colors.green)),
-                onPressed: () async {
-                  final from = fromKey.currentState!;
-                  if (from.validate()) {
-                    // walletController.saveNumForRecharge(
-                    //     walletController.rechargeNoController.text);
+              // ElevatedButton(
+              //   style: ButtonStyle(
+              //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              //           RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(5),
+              //               side: BorderSide(color: Colors.green))),
+              //       backgroundColor: MaterialStatePropertyAll(Colors.green)),
+              //   onPressed: () async {
+              //     final from = fromKey.currentState!;
+              //     if (from.validate()) {
+              //       // walletController.saveNumForRecharge(
+              //       //     walletController.rechargeNoController.text);
 
-                    // var options = {
-                    //   'key': 'rzp_test_Fj6THSFegB0Ocj',
-                    //   'amount':
-                    //       int.parse(walletController.adMoneyController.text) *
-                    //           100,
-                    //   'name': 'Gamaru',
-                    //   'description': 'recharge',
-                    //   'prefill': {
-                    //     'contact': walletController.rechargeNoController.text,
-                    //     'email':
-                    //         FirebaseAuth.instance.currentUser!.email.toString()
-                    //   }
-                    // };
+              //       // var options = {
+              //       //   'key': 'rzp_test_Fj6THSFegB0Ocj',
+              //       //   'amount':
+              //       //       int.parse(walletController.adMoneyController.text) *
+              //       //           100,
+              //       //   'name': 'Gamaru',
+              //       //   'description': 'recharge',
+              //       //   'prefill': {
+              //       //     'contact': walletController.rechargeNoController.text,
+              //       //     'email':
+              //       //         FirebaseAuth.instance.currentUser!.email.toString()
+              //       //   }
+              //       // };
 
-                    // try {
-                    //   _razorpay.open(options);
-                    // } catch (e) {
-                    //   print("fuck");
-                    // }
+              //       // try {
+              //       //   _razorpay.open(options);
+              //       // } catch (e) {
+              //       //   print("fuck");
+              //       // }
 
-                    final res =
-                        await EasyUpiPaymentPlatform.instance.startPayment(
-                      EasyUpiPaymentModel(
-                        payeeVpa: '9064983473@apl',
-                        payeeName: 'Joy Sarkar',
-                        amount: 10.0,
-                        description: 'Testing payment',
-                      ),
-                    );
-                    print(res);
-                    // TODO: add y
-                  }
-                },
-                child: Text(
-                  "Recharge Now",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              //       final res =
+              //           await EasyUpiPaymentPlatform.instance.startPayment(
+              //         EasyUpiPaymentModel(
+              //           payeeVpa: 'BHARATPE09912492612@yesbankltd',
+              //           payeeName: 'BARUN ROY',
+              //           amount: 10.0,
+              //           description: 'Testing payment',
+
+              //         ),
+              //       );
+              //       print(res);
+              //       // TODO: add y
+              //     }
+              //   },
+              //   child: Text(
+              //     "Recharge Now",
+              //     style: TextStyle(
+              //         color: Colors.white,
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.bold),
+              //   ),
+              // ),
+
               const SizedBox(
                 height: 20,
               ),

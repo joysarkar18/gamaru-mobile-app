@@ -21,9 +21,9 @@ class ForgetPass extends StatelessWidget {
         children: [
           const BackgroundStyle(
               UpperCircleColor1: Colors.red,
-              UpperCircleColor2: Colors.green,
+              UpperCircleColor2: Color.fromARGB(255, 235, 211, 3),
               LowerCircleColor1: Colors.yellow,
-              LowerCircleColor2: Colors.blue),
+              LowerCircleColor2: Color.fromARGB(255, 248, 99, 0)),
           SafeArea(
             child: Center(
               child: SingleChildScrollView(

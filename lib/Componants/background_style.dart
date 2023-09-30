@@ -30,7 +30,7 @@ class BackgroundStyle extends StatelessWidget {
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
-                  end: Alignment.center,
+                  end: Alignment.bottomLeft,
                   colors: [
                     UpperCircleColor1,
                     UpperCircleColor2,
@@ -49,7 +49,7 @@ class BackgroundStyle extends StatelessWidget {
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
-                  end: Alignment.center,
+                  end: Alignment.bottomLeft,
                   colors: [
                     LowerCircleColor1,
                     LowerCircleColor2,

@@ -40,11 +40,11 @@ class _LoginState extends State<Login> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          const BackgroundStyle( 
-              UpperCircleColor1: Colors.red,
-              UpperCircleColor2: Colors.green,
-              LowerCircleColor1: Colors.yellow,
-              LowerCircleColor2: Colors.blue),
+          const BackgroundStyle(
+              UpperCircleColor1: Color.fromARGB(255, 255, 0, 170),
+              UpperCircleColor2: Color.fromARGB(255, 0, 57, 245),
+              LowerCircleColor1: Color.fromARGB(255, 0, 60, 255),
+              LowerCircleColor2: Color.fromARGB(255, 248, 6, 188)),
           Container(
             padding: const EdgeInsets.only(top: 30),
             child: Center(

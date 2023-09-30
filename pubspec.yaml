@@ -57,7 +57,7 @@ dependencies:
   crypto: ^3.0.3
   whatsapp_unilink: ^2.1.0
   share_plus: ^7.1.0
-  easy_upi_payment: ^0.1.5
+  upi_payment_qrcode_generator: ^1.4.0
   
 
 

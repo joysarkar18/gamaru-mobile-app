@@ -49,10 +49,10 @@ class _SignUpState extends State<SignUp> {
       body: Stack(
         children: [
           const BackgroundStyle(
-              UpperCircleColor1: Colors.red,
-              UpperCircleColor2: Colors.green,
-              LowerCircleColor1: Colors.yellow,
-              LowerCircleColor2: Colors.blue),
+              UpperCircleColor1: Color.fromARGB(255, 228, 26, 247),
+              UpperCircleColor2: Color.fromARGB(255, 23, 7, 245),
+              LowerCircleColor1: Color.fromARGB(255, 248, 9, 61),
+              LowerCircleColor2: Color.fromARGB(255, 235, 20, 217)),
           Container(
             padding: const EdgeInsets.only(top: 30),
             child: Center(
