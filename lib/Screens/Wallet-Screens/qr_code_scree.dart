@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:get/get.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 import 'package:upi_payment_qrcode_generator/upi_payment_qrcode_generator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,21 +33,31 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Center(
-            child: UPIPaymentQRCode(
-              embeddedImagePath: "Assets/g_Logo.png",
-              embeddedImageSize: const Size(60, 60),
-              upiDetails: upiDetails!,
-              size: 200,
+          SizedBox(
+            height: 100,
+          ),
+          Countdown(
+            seconds: 300,
+            build: (BuildContext context, double time) => Text(
+                (time / 60).toInt().toString() +
+                    ":" +
+                    (time % 60).toInt().toString()),
+            interval: Duration(seconds: 1),
+            onFinished: () {
+              print('Timer is done!');
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: UPIPaymentQRCode(
+                embeddedImagePath: "Assets/gQr.png",
+                embeddedImageSize: Size(Get.width * 0.17, Get.width * 0.17),
+                upiDetails: upiDetails!,
+                size: Get.width * 0.7,
+              ),
             ),
           ),
-          ElevatedButton(
-              onPressed: () async {
-                String upiurl =
-                    'upi://pay?pa=9064983473@apl&pn=JoySarkar&tn=TestingGpay&am=10&cu=INR';
-                await launchUrl(Uri.parse(upiurl));
-              },
-              child: Text("joy"))
         ],
       ),
     );
