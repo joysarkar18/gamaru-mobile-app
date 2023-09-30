@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/RechargeDone.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/qr_code_scree.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawComplete.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawFaild.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
@@ -29,6 +30,14 @@ class WalletController extends GetxController {
   RxList bankCardList = [].obs;
   var bankCardDetails = null;
   RxBool is_withdrawing = false.obs;
+  RxString upiId = "".obs;
+
+  getUpiId() {
+    _db.collection("upi").doc("upiId").get().then((value) {
+      upiId.value = value["upi"];
+      Get.to(QrCodeScreen());
+    });
+  }
 
   addBankCard(
       accountNoorUPI, bankName, name, phoneNo, ifscCode, address) async {

@@ -58,6 +58,7 @@ dependencies:
   whatsapp_unilink: ^2.1.0
   share_plus: ^7.1.0
   upi_payment_qrcode_generator: ^1.4.0
+  timer_count_down: ^2.2.2
   
 
 
