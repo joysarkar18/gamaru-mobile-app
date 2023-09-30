@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:gamaru_mobile_app/Screens/Top-section-every/top-part.dart';
+// import 'package:gamaru_mobile_app/Screens/Wallet-Screens/upi_payment_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -88,7 +89,7 @@ class EarnScreen extends StatelessWidget {
                           borderWith: 1.0,
                           child: InkWell(
                             onTap: () {
-                              // Get.to(WatchAndEarn());
+                              // Get.to(UpiScreen());
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

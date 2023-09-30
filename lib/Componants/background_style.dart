@@ -34,7 +34,7 @@ class BackgroundStyle extends StatelessWidget {
                   colors: [
                     UpperCircleColor1,
                     UpperCircleColor2,
-                  ],
+                  ], 
                 ),
               ),
             ),
