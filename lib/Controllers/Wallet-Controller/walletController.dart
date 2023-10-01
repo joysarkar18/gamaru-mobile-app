@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/RechargeDone.dart';
-import 'package:gamaru_mobile_app/Screens/Wallet-Screens/qr_code_scree.dart';
+import 'package:gamaru_mobile_app/Screens/Wallet-Screens/upi_payment_screen.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawComplete.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawFaild.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
@@ -26,6 +26,7 @@ class WalletController extends GetxController {
   TextEditingController ifscCodeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController rechargeNoController = TextEditingController();
+  TextEditingController refNoController = TextEditingController();
 
   RxList bankCardList = [].obs;
   var bankCardDetails = null;
@@ -35,7 +36,7 @@ class WalletController extends GetxController {
   getUpiId() {
     _db.collection("upi").doc("upiId").get().then((value) {
       upiId.value = value["upi"];
-      Get.to(QrCodeScreen());
+      Get.to(UpiScreen());
     });
   }
 
@@ -96,7 +97,7 @@ class WalletController extends GetxController {
               .then((v) async {
             print("in update");
             List transactionList = v["transactions"];
-            transactionList.add({
+            transactionList.insert(0, {
               "amount": (amount - fee),
               "card": card,
               "email": user!.email,
@@ -124,6 +125,34 @@ class WalletController extends GetxController {
     } catch (e) {
       Get.to(WithdrawFailed());
     }
+  }
+
+  saveToAllRecharge(String refNo, int amount, String phNO) async {
+    await _db
+        .collection("recharges")
+        .doc("allRecharges")
+        .get()
+        .then((value) async {
+      List l = value["all"];
+      l.insert(0, {
+        "amount": amount,
+        "email": FirebaseAuth.instance.currentUser!.email,
+        "fee": 0,
+        "reason": "Recharge",
+        "time": DateTime.now(),
+        "add": true,
+        "refNo": refNo,
+        "phNO": phNO,
+        "verified": false
+      });
+
+      await _db
+          .collection("recharges")
+          .doc("allRecharges")
+          .update({"all": l}).then((value) {
+        Get.off(RechargeDone());
+      });
+    });
   }
 
   paymentSuccess(int amount) async {
@@ -171,7 +200,7 @@ class WalletController extends GetxController {
                     .get()
                     .then((value) async {
                   List tList = value["transactions"];
-                  tList.add({
+                  tList.insert(0, {
                     "amount": amount,
                     "email": FirebaseAuth.instance.currentUser!.email,
                     "fee": 0,
@@ -202,7 +231,7 @@ class WalletController extends GetxController {
                             .get()
                             .then((value) async {
                           List tList = value["transactions"];
-                          tList.add({
+                          tList.insert(0, {
                             "amount": refReward,
                             "email": FirebaseAuth.instance.currentUser!.email,
                             "fee": 0,
@@ -234,7 +263,7 @@ class WalletController extends GetxController {
                                     .get()
                                     .then((value) async {
                                   List tList = value["transactions"];
-                                  tList.add({
+                                  tList.insert(0, {
                                     "amount": refReward,
                                     "email": referalEmail,
                                     "fee": 0,
@@ -253,7 +282,7 @@ class WalletController extends GetxController {
                                         .doc(user!.email.toString())
                                         .update({"rechargeFirst": false}).then(
                                             (value) {
-                                      Get.to(() => const RechargeDone());
+                                      // Get.to(() => const RechargeDone());
                                     });
                                   });
                                 });
@@ -288,7 +317,7 @@ class WalletController extends GetxController {
                 .get()
                 .then((value) async {
               List tList = value["transactions"];
-              tList.add({
+              tList.insert(0, {
                 "amount": amount,
                 "email": FirebaseAuth.instance.currentUser!.email,
                 "fee": 0,
@@ -301,7 +330,7 @@ class WalletController extends GetxController {
                   .collection("user transactions")
                   .doc(FirebaseAuth.instance.currentUser!.email)
                   .update({"transactions": tList}).then((value) {
-                Get.to(() => const RechargeDone());
+                // Get.to(() => const RechargeDone());
               });
             });
           });

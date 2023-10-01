@@ -27,7 +27,7 @@ class EventController extends GetxController {
         .get()
         .then((value) async {
       List tList = value["transactions"];
-      tList.add({
+      tList.insert(0, {
         "amount": fee,
         "email": FirebaseAuth.instance.currentUser!.email,
         "fee": 0,
