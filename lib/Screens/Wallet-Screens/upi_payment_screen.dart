@@ -7,7 +7,8 @@ import 'package:timer_count_down/timer_count_down.dart';
 import 'package:upi_payment_qrcode_generator/upi_payment_qrcode_generator.dart';
 
 class UpiScreen extends StatefulWidget {
-  const UpiScreen({super.key});
+  final String phNo;
+  const UpiScreen({super.key, required this.phNo});
 
   @override
   State<UpiScreen> createState() => _UpiScreenState();
@@ -211,7 +212,7 @@ class _UpiScreenState extends State<UpiScreen> {
                           walletController.saveToAllRecharge(
                               walletController.refNoController.text,
                               amount,
-                              walletController.phoneNoController.text);
+                              widget.phNo);
                         }
                       },
                       backgroundColor: Colors.green,

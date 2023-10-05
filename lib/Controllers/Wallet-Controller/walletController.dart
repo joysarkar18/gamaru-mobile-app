@@ -33,10 +33,12 @@ class WalletController extends GetxController {
   RxBool is_withdrawing = false.obs;
   RxString upiId = "".obs;
 
-  getUpiId() {
+  getUpiId(String phNo) {
     _db.collection("upi").doc("upiId").get().then((value) {
       upiId.value = value["upi"];
-      Get.to(UpiScreen());
+      Get.to(UpiScreen(
+        phNo: phNo,
+      ));
     });
   }
 

@@ -391,7 +391,8 @@ class _AddMoneyState extends State<AddMoney> {
                 onPressed: () async {
                   final from = fromKey.currentState!;
                   if (from.validate()) {
-                    walletController.getUpiId();
+                    walletController
+                        .getUpiId(walletController.phoneNoController.text);
                   }
                 },
                 child: Text(
