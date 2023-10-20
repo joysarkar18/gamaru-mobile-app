@@ -8,14 +8,20 @@ class IdPass extends StatelessWidget {
   final String eventName;
   final String id;
   final String pass;
-  const IdPass(
-      {super.key,
-      required this.id,
-      required this.pass,
-      required this.eventName});
+  final String email;
+  final List registeredPlayers;
+  const IdPass({
+    super.key,
+    required this.email,
+    required this.id,
+    required this.pass,
+    required this.eventName,
+    required this.registeredPlayers,
+  });
 
   @override
   Widget build(BuildContext context) {
+    int slotNo = registeredPlayers.indexOf(email) + 1;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -23,8 +29,8 @@ class IdPass extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.white70),
           title: Text(
             eventName,
-            style:
-                TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+                color: Colors.white70, fontWeight: FontWeight.w600),
           )),
       body: SizedBox(
         width: Get.width,
@@ -35,6 +41,26 @@ class IdPass extends StatelessWidget {
             frameRate: FrameRate.max,
           ),
           GlossyCard(
+            height: 70.0,
+            width: 200.0,
+            borderRadius: 20.0,
+            borderWith: 2.0,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Slot No : $slotNo ",
+                    style: TextStyle(color: Colors.white, fontSize: 28),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          GlossyCard(
               height: 70.0,
               width: Get.width * 0.9,
               borderRadius: 20.0,
@@ -43,14 +69,14 @@ class IdPass extends StatelessWidget {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 1,
                   ),
                   Text(
-                    "Id : ${id}",
-                    style: TextStyle(color: Colors.white, fontSize: 28),
+                    "Id : $id",
+                    style: const TextStyle(color: Colors.white, fontSize: 28),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 1,
                   ),
                   IconButton(
@@ -65,10 +91,10 @@ class IdPass extends StatelessWidget {
                           );
                         });
                       },
-                      icon: Icon(Icons.copy))
+                      icon: const Icon(Icons.copy))
                 ],
               ))),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           GlossyCard(
@@ -80,14 +106,14 @@ class IdPass extends StatelessWidget {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 1,
                   ),
                   Text(
-                    "Password : ${pass}",
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    "Password : $pass",
+                    style: const TextStyle(color: Colors.white, fontSize: 24),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 1,
                   ),
                   IconButton(
@@ -102,10 +128,10 @@ class IdPass extends StatelessWidget {
                           );
                         });
                       },
-                      icon: Icon(Icons.copy))
+                      icon: const Icon(Icons.copy))
                 ],
               ))),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           const Padding(

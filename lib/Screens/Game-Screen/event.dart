@@ -386,9 +386,13 @@ class EventCard extends StatelessWidget {
                                   } else {
                                     if (id != "") {
                                       Get.to(() => IdPass(
+                                            registeredPlayers: registerList,
                                             id: id,
                                             pass: pass,
                                             eventName: eventName,
+                                            email: FirebaseAuth
+                                                .instance.currentUser!.email
+                                                .toString(),
                                           ));
                                     }
                                   }

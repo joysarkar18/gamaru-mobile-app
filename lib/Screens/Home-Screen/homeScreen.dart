@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<CarouselItem> itemList = [
     CarouselItem(
-      image: AssetImage("Assets/ref_banner.jpg"),
+      image: const AssetImage("Assets/ref_banner.jpg"),
       boxDecoration: BoxDecoration(
         gradient: LinearGradient(
           begin: FractionalOffset.bottomCenter,
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onImageTap: (i) {},
     ),
     CarouselItem(
-      image: AssetImage("Assets/coustomer_service.png"),
+      image: const AssetImage("Assets/coustomer_service.png"),
       title: '@coskuncay published flutter_custom_carousel_slider!',
       titleTextStyle: const TextStyle(
         fontSize: 12,

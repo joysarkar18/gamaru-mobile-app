@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyExtra.dart';
 import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:gamaru_mobile_app/Screens/Profile-Screen/profileScreen.dart';
+import 'package:gamaru_mobile_app/Screens/app_update/update_screen.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
@@ -32,14 +33,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => mainController.is_loading.value
-        ? Scaffold(
-            backgroundColor: Colors.black,
-            body: Center(
-                child: LottieBuilder.asset(
-              "Assets/loading_home.json",
-              frameRate: FrameRate.max,
-            )),
-          )
+        ? UpdateScreen()
         : Scaffold(
             backgroundColor: Colors.black,
             body: _pages[mainController.navBarIndex.value],

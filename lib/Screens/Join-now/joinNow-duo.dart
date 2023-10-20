@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Event-controller/eventController.dart';
-import 'package:gamaru_mobile_app/game_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -47,7 +46,7 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
       ),
       body: Stack(
         children: [
-          Container(
+          SizedBox(
               height: Get.height,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -159,14 +158,14 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                                     });
                                   },
                                 ),
-                                Text(
+                                const Text(
                                   "SAVE FOR FURTHER USE",
                                   style: TextStyle(color: Colors.white),
                                 )
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           ElevatedButton(
@@ -175,11 +174,12 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
-                                        side: BorderSide(color: Colors.green))),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.green),
-                                foregroundColor:
-                                    MaterialStatePropertyAll(Colors.white),
+                                        side: const BorderSide(
+                                            color: Colors.green))),
+                                backgroundColor: const MaterialStatePropertyAll(
+                                    Colors.green),
+                                foregroundColor: const MaterialStatePropertyAll(
+                                    Colors.white),
                               ),
                               onPressed: () {
                                 final from = fromKey.currentState!;
@@ -221,18 +221,18 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("JOIN NOW ("),
+                                    const Text("JOIN NOW ("),
                                     LottieBuilder.asset(
                                       "Assets/coin.json",
                                       animate: false,
                                     ),
                                     Text(
                                       widget.entryFee.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color.fromARGB(
                                               255, 255, 234, 45)),
                                     ),
-                                    Text(")")
+                                    const Text(")")
                                   ],
                                 ),
                               ))
@@ -240,7 +240,7 @@ class _JoinNowDuoState extends State<JoinNowDuo> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   const Padding(
