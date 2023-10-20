@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   static MainController get instance => Get.find();
   RxInt navBarIndex = 1.obs;
-  RxBool is_loading = true.obs;
+  RxBool is_loading = false.obs;
 
   loadData() async {
     await FirebaseFirestore.instance

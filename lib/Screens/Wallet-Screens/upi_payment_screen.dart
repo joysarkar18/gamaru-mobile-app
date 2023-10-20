@@ -1,8 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:upi_payment_qrcode_generator/upi_payment_qrcode_generator.dart';
 
@@ -15,6 +19,7 @@ class UpiScreen extends StatefulWidget {
 }
 
 class _UpiScreenState extends State<UpiScreen> {
+  ScreenshotController sc = ScreenshotController();
   final walletController = Get.put(WalletController());
   final fromKey = GlobalKey<FormState>();
   UPIDetails? upiDetails = null;
@@ -103,20 +108,23 @@ class _UpiScreenState extends State<UpiScreen> {
                     Get.off(MainScreen());
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Center(
-                    child: UPIPaymentQRCode(
-                      embeddedImagePath: "Assets/gQr.png",
-                      embeddedImageSize:
-                          Size(Get.width * 0.17, Get.width * 0.17),
-                      upiDetails: upiDetails!,
-                      size: Get.width * 0.7,
+                Screenshot(
+                  controller: sc,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Center(
+                      child: UPIPaymentQRCode(
+                        embeddedImagePath: "Assets/gQr.png",
+                        embeddedImageSize:
+                            Size(Get.width * 0.17, Get.width * 0.17),
+                        upiDetails: upiDetails!,
+                        size: Get.width * 0.7,
+                      ),
                     ),
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 20.0),
+                  padding: EdgeInsets.only(top: 10.0),
                   child: Text(
                     'Scan to pay with UPI apps',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 19),
@@ -135,7 +143,11 @@ class _UpiScreenState extends State<UpiScreen> {
                     height: 50,
                     width: 200,
                     child: FloatingActionButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        sc.capture().then((value) {
+                          print(value);
+                        });
+                      },
                       child: const Text(
                         'Download QR code',
                         style: TextStyle(
