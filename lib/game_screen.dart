@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Event-controller/eventController.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/Game-Screen/event.dart';
+import 'package:gamaru_mobile_app/Screens/result-screen/result_card.dart';
+import 'package:gamaru_mobile_app/Screens/result-screen/result_screen.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:lottie/lottie.dart';
 
@@ -146,18 +150,7 @@ class _GameScreenState extends State<GameScreen> {
                           )),
 
                       // FOR RESULT PAGE
-
-                      Container(
-                        color: Colors.black,
-                        child: const Center(
-                            child: Text(
-                          "No Data Available",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        )),
-                      ),
+                      const ResultScreen(),
                     ],
                   )),
       ),

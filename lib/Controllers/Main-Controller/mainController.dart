@@ -9,15 +9,36 @@ class MainController extends GetxController {
   RxInt navBarIndex = 1.obs;
   RxBool is_loading = false.obs;
 
+  RxList allResults = [].obs;
+
   loadData() async {
     await FirebaseFirestore.instance
         .collection("loading")
         .doc("gamaru")
         .get()
         .then((value) {
-      Timer(const Duration(microseconds: 500), () {
-        is_loading.value = value["is_loading"];
-      });
+      is_loading.value = value["is_loading"];
+    });
+  }
+
+  loadAllResult() async {
+    await FirebaseFirestore.instance
+        .collection("result")
+        .doc("allResult")
+        .get()
+        .then((value) {
+      List temp = value["res"];
+      List temp2 = [];
+
+      for (int i = 0; i < temp.length; i++) {
+        List nam = temp[i]["names"];
+        List p = temp[i]["prize"];
+        if (nam.length == 3 && p.length == 3) {
+          temp2.add(temp[i]);
+        }
+      }
+      allResults.value = temp2;
+      print(allResults.value);
     });
   }
 }
