@@ -5,7 +5,9 @@ import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/Wallet-Controller/walletController.dart';
 import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
 import 'package:get/get.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:upi_payment_qrcode_generator/upi_payment_qrcode_generator.dart';
@@ -22,7 +24,9 @@ class _UpiScreenState extends State<UpiScreen> {
   ScreenshotController sc = ScreenshotController();
   final walletController = Get.put(WalletController());
   final fromKey = GlobalKey<FormState>();
-  UPIDetails? upiDetails = null;
+  UPIDetails? upiDetails;
+  Uint8List? _imageFile;
+  var qr;
   @override
   void initState() {
     // TODO: implement initState
@@ -33,7 +37,30 @@ class _UpiScreenState extends State<UpiScreen> {
         transactionNote: "Recharge for Gamaru",
         transactionID: "906498347323");
 
+    qr = Builder(
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(10),
+          child: Center(
+            child: UPIPaymentQRCode(
+              embeddedImagePath: "Assets/gQr.png",
+              embeddedImageSize: Size(Get.width * 0.17, Get.width * 0.17),
+              upiDetails: upiDetails!,
+              size: Get.width * 0.7,
+            ),
+          ),
+        );
+      },
+    );
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    walletController.refNoController.text = "";
+    super.dispose();
   }
 
   @override
@@ -108,21 +135,22 @@ class _UpiScreenState extends State<UpiScreen> {
                     Get.off(MainScreen());
                   },
                 ),
-                Screenshot(
-                  controller: sc,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Center(
-                      child: UPIPaymentQRCode(
-                        embeddedImagePath: "Assets/gQr.png",
-                        embeddedImageSize:
-                            Size(Get.width * 0.17, Get.width * 0.17),
-                        upiDetails: upiDetails!,
-                        size: Get.width * 0.7,
-                      ),
-                    ),
-                  ),
-                ),
+                qr,
+                // Screenshot(
+                //   controller: sc,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(10),
+                //     child: Center(
+                //       child: UPIPaymentQRCode(
+                //         // embeddedImagePath: "Assets/gQr.png",
+                //         // embeddedImageSize:
+                //         //     Size(Get.width * 0.17, Get.width * 0.17),
+                //         upiDetails: upiDetails!,
+                //         size: Get.width * 0.7,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 const Padding(
                   padding: EdgeInsets.only(top: 10.0),
                   child: Text(
@@ -143,10 +171,66 @@ class _UpiScreenState extends State<UpiScreen> {
                     height: 50,
                     width: 200,
                     child: FloatingActionButton(
-                      onPressed: () {
-                        sc.capture().then((value) {
-                          print(value);
+                      onPressed: () async {
+                        sc
+                            .captureFromLongWidget(
+                          InheritedTheme.captureAll(
+                            context,
+                            Material(
+                              child: qr,
+                            ),
+                          ),
+                          delay: Duration(milliseconds: 100),
+                          context: context,
+
+                          ///
+                          /// Additionally you can define constraint for your image.
+                          ///
+                          /// constraints: BoxConstraints(
+                          ///   maxHeight: 1000,
+                          ///   maxWidth: 1000,
+                          /// )
+                        )
+                            .then((capturedImage) async {
+                          // Handle captured image
+                          _imageFile = capturedImage;
+                          // Request permission to write to external storage
+
+                          // print("hiiii");
+                          var status =
+                              await Permission.manageExternalStorage.request();
+                          if (status != PermissionStatus.granted) {
+                            // Permission denied
+                            print("hiiii");
+                            return;
+                          }
+
+                          // Save image to gallery
+                          final result =
+                              await ImageGallerySaver.saveImage(_imageFile!);
+                          print(
+                              result); // Result is a boolean indicating whether the operati
                         });
+
+                        // sc.capture().then((value) async {
+                        //   _imageFile = value;
+                        //   // Request permission to write to external storage
+
+                        //   // print("hiiii");
+                        //   var status =
+                        //       await Permission.manageExternalStorage.request();
+                        //   if (status != PermissionStatus.granted) {
+                        //     // Permission denied
+                        //     print("hiiii");
+                        //     return;
+                        //   }
+
+                        //   // Save image to gallery
+                        //   final result =
+                        //       await ImageGallerySaver.saveImage(_imageFile!);
+                        //   print(
+                        //       result); // Result is a boolean indicating whether the operati
+                        // });
                       },
                       child: const Text(
                         'Download QR code',
@@ -169,39 +253,56 @@ class _UpiScreenState extends State<UpiScreen> {
                   padding: const EdgeInsets.only(
                       top: 20.0, left: 50, right: 50, bottom: 5),
                   child: GlossyCard(
-                    borderRadius: 15.0,
+                    borderRadius: 8.0,
                     borderWith: 1.0,
                     height: 60.0,
                     width: Get.width * 0.8,
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(0),
                       ),
                       child: Form(
                         key: fromKey,
                         child: TextFormField(
+                          controller: walletController.refNoController,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return "Please Enter the Reference No";
-                            } else if (value.length < 14 || value.length > 14) {
-                              return "Invalid Reference No";
+                              return "Please Enter your transaction Id";
                             } else {
                               return null;
                             }
                           },
-                          controller: walletController.refNoController,
-                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.number,
+                          style: const TextStyle(
+                              color: Colors.black87,
+                              decoration: TextDecoration.none,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
                           decoration: const InputDecoration(
-                            hintText: "Enter your refarence No",
-                            hintStyle: TextStyle(
-                              letterSpacing: 2.0,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 17,
+                            fillColor: Colors.transparent,
+                            hintText: "Enter UPI transaction ID",
+                            hintStyle:
+                                TextStyle(color: Colors.black87, fontSize: 16),
+                            prefixIcon: Icon(
+                              Icons.arrow_circle_right_rounded,
+                              color: Colors.black87,
+                              size: 28,
                             ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
+                            errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.red)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(
+                                  color: Colors.black87,
+                                )),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.purple)),
                           ),
                         ),
                       ),

@@ -61,6 +61,7 @@ dependencies:
   timer_count_down: ^2.2.2
   shimmer: ^3.0.0
   screenshot: ^2.1.0
+  image_gallery_saver: ^2.0.3
 
   
 
