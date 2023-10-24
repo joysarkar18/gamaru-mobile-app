@@ -1,13 +1,23 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
   static MainController get instance => Get.find();
+  final _db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser;
   RxInt navBarIndex = 1.obs;
   RxBool is_loading = false.obs;
+
+  RxBool exchangeLoading = false.obs;
+
+  TextEditingController winCoins = TextEditingController();
+  RxString palyCoins = "".obs;
 
   RxList allResults = [].obs;
 
@@ -18,6 +28,32 @@ class MainController extends GetxController {
         .get()
         .then((value) {
       is_loading.value = value["is_loading"];
+    });
+  }
+
+  void exchangeCoins(int amount) async {
+    exchangeLoading.value = true;
+    await _db
+        .collection("user")
+        .doc(user!.email.toString())
+        .get()
+        .then((value) async {
+      int playCoins = value["coins"];
+      int winCoins = value["winCoins"];
+
+      if (amount > winCoins) {
+        return;
+      }
+
+      winCoins = winCoins - amount;
+      playCoins = playCoins + amount;
+      await _db
+          .collection("user")
+          .doc(user!.email.toString())
+          .update({"coins": playCoins, "winCoins": winCoins}).then((value) {
+        exchangeLoading.value = false;
+        Get.offAll(MainScreen());
+      });
     });
   }
 

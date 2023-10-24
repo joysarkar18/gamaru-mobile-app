@@ -70,17 +70,7 @@ class RechargeDone extends StatelessWidget {
                           color: Colors.white70, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
-                      height: Get.height * 0.0,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 18.0, bottom: 8.0),
-                      child: Text(
-                        "Tue,22 Aug",
-                        style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white70,
-                            fontWeight: FontWeight.w700),
-                      ),
+                      height: 20,
                     ),
                     InkWell(
                       highlightColor: Colors.black,
@@ -118,18 +108,6 @@ class RechargeDone extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              ),
-            ),
-            Positioned(
-              left: 220,
-              child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.cancel,
-                  color: Colors.white70,
                 ),
               ),
             ),

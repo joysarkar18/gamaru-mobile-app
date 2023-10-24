@@ -90,6 +90,11 @@ class EarnScreen extends StatelessWidget {
                           child: InkWell(
                             onTap: () {
                               // Get.to(UpiScreen());
+                              Get.snackbar(
+                                "No Data Available",
+                                "Please ry again later",
+                                colorText: Colors.white,
+                              );
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

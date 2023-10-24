@@ -47,7 +47,9 @@ class _GameScreenState extends State<GameScreen> {
               title: Text(
                 widget.gameName,
                 style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
               leading: const BackButton(
                 color: Colors.white,

@@ -7,6 +7,7 @@ import 'package:gamaru_mobile_app/Screens/Wallet-Screens/addMoney.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/transaction-screen.dart';
 import 'package:gamaru_mobile_app/Screens/Wallet-Screens/withdrawl.dart';
 import 'package:gamaru_mobile_app/Screens/app_update/update_screen.dart';
+import 'package:gamaru_mobile_app/Screens/coins-exchange-screen/exchange_screen.dart';
 import 'package:gamaru_mobile_app/Screens/notifications-screen/notification.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -91,7 +92,7 @@ class ProfileScreen1 extends StatelessWidget {
                         borderRadius: 10.0,
                         borderWith: 1.0,
                         height: walletController.myWalletStatus.value
-                            ? 200.0
+                            ? 250.0
                             : 50.0,
                         width: Get.width,
                         child: Column(
@@ -165,6 +166,35 @@ class ProfileScreen1 extends StatelessWidget {
                                             ),
                                             Text(
                                               "Recharge",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(() => const ExchangeScreen());
+                                        },
+                                        child: const Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Icon(
+                                              HeroIcons.forward,
+                                              color: Colors.white70,
+                                              size: 35,
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              "Exchange",
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 20),
@@ -382,37 +412,6 @@ class ProfileScreen1 extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 15,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(UpdateScreen());
-                      },
-                      child: GlossyCard(
-                        borderRadius: 10.0,
-                        borderWith: 1.0,
-                        height: 50.0,
-                        width: Get.width,
-                        child: const Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(
-                              Icons.update,
-                              color: Colors.white70,
-                              size: 35,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "Check Update",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
                   ]),
             ),

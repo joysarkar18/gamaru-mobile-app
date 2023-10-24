@@ -28,7 +28,7 @@ class ResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlossyCard(
-        height: 250.0,
+        height: 260.0,
         width: Get.width * 0.95,
         borderRadius: 10.0,
         borderWith: 2.0,
@@ -240,6 +240,29 @@ class ResultCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.snackbar(
+                  "No Data Available",
+                  "Please ry again later",
+                  colorText: Colors.white,
+                );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "View all",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.blue,
+                    size: 18,
+                  )
                 ],
               ),
             )
