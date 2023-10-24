@@ -54,27 +54,12 @@ class WithdrawComplete extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      "Your payment of rs100 was paid to",
-                      style: TextStyle(
-                          color: Colors.white70, fontWeight: FontWeight.w700),
-                    ),
-                    const Text(
-                      "tanmoysarkar06@ybl.",
+                      "Your Withdraw is successful and your payment will be credited soon to your bank account",
                       style: TextStyle(
                           color: Colors.white70, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
                       height: Get.height * 0.04,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 18.0, bottom: 8.0),
-                      child: Text(
-                        "Tue,22 Aug",
-                        style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white70,
-                            fontWeight: FontWeight.w700),
-                      ),
                     ),
                     InkWell(
                       highlightColor: Colors.black,
@@ -112,18 +97,6 @@ class WithdrawComplete extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              ),
-            ),
-            Positioned(
-              right: 0,
-              child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.cancel,
-                  color: Colors.white70,
                 ),
               ),
             ),

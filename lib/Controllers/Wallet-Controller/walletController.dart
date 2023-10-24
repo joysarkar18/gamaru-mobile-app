@@ -32,6 +32,7 @@ class WalletController extends GetxController {
   var bankCardDetails = null;
   RxBool is_withdrawing = false.obs;
   RxString upiId = "".obs;
+  RxBool qrRecharge = false.obs;
 
   getUpiId(String phNo) {
     _db.collection("upi").doc("upiId").get().then((value) {
