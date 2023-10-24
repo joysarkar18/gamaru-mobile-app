@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:gamaru_mobile_app/Controllers/User-Controller/userController.dart';
 import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
 import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
@@ -19,6 +20,7 @@ class Authentication extends GetxController {
   // ignore: non_constant_identifier_names
   var is_loading = false.obs;
   final userController = Get.put(UserController());
+  final mainController = Get.put(MainController());
 
   @override
   void onReady() {
@@ -29,13 +31,13 @@ class Authentication extends GetxController {
     ever(firebaseUser, _setInitScreen);
   }
 
-  _setInitScreen(User? user) {
+  _setInitScreen(User? user) async {
     if (user == null) {
       Get.offAll(() => const Login());
     } else {
+      await mainController.loadData();
       userEmail.value = _auth.currentUser!.email.toString();
-
-      Get.offAll(() => MainScreen());
+      // Get.offAll(() => MainScreen());
     }
   }
 

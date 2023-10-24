@@ -1,9 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/login-singup-screen/login_page.dart';
+import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
-class HomeShimmer extends StatelessWidget {
+class HomeShimmer extends StatefulWidget {
   const HomeShimmer({super.key});
+
+  @override
+  State<HomeShimmer> createState() => _HomeShimmerState();
+}
+
+class _HomeShimmerState extends State<HomeShimmer> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+// Here you can write your code
+      if (FirebaseAuth.instance.currentUser == null) {
+        Get.offAll(const Login());
+      } else {
+        Get.offAll(MainScreen());
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

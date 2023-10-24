@@ -208,8 +208,11 @@ class _UpiScreenState extends State<UpiScreen> {
                           // Save image to gallery
                           final result =
                               await ImageGallerySaver.saveImage(_imageFile!);
-                          print(
-                              result); // Result is a boolean indicating whether the operati
+                          print(result);
+                          if (result["isSuccess"]) {
+                            Get.snackbar("Photo Saved to Gallery",
+                                "Open your payment app and complete the payment");
+                          } // Result is a boolean indicating whether the operati
                         });
 
                         // sc.capture().then((value) async {

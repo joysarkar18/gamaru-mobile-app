@@ -193,7 +193,7 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
 I'm loving "Gamaru" – it's a blast! 🎮
 play BGMI, Free Fire and many more and win real cash!💸🔥
 
-Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just use my referral link: www.gamaru.online and code: ${referalController.refId.value} .
+Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just download Gamaru apk : www.gamaru.online and use my code: ${referalController.refId.value} .
 
 Game on!''';
                                                   FocusManager
@@ -225,24 +225,12 @@ Game on!''';
 I'm loving "Gamaru" – it's a blast! 🎮
 play BGMI, Free Fire and many more and win real cash!💸🔥
 
-Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just use my referral link: www.gamaru.online and code: ${referalController.refId.value} .
+Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just download Gamaru apk : www.gamaru.online and use my code: ${referalController.refId.value} .
 
 Game on!''';
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                  final message =
-                                                      Uri.encodeFull(
-                                                          refMessage);
-
-                                                  final smsUri =
-                                                      "sms:?body=$message";
-                                                  try {
-                                                    launch(smsUri);
-                                                  } catch (e) {
-                                                    //To handle error and display error message
-                                                    print("error");
-                                                  }
+                                                  Share.share(refMessage,
+                                                      subject:
+                                                          'Gamaru Referal');
                                                 },
                                                 child: Logo(
                                                   Logos.facebook_messenger,
@@ -256,24 +244,12 @@ Game on!''';
 I'm loving "Gamaru" – it's a blast! 🎮
 play BGMI, Free Fire and many more and win real cash!💸🔥
 
-Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just use my referral link: www.gamaru.online and code: ${referalController.refId.value} .
+Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just download Gamaru apk : www.gamaru.online and use my code: ${referalController.refId.value} .
 
 Game on!''';
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                  final message =
-                                                      Uri.encodeFull(
-                                                          refMessage);
-
-                                                  final telegramUrl =
-                                                      "https://t.me/share/url?url=&text=$message";
-                                                  try {
-                                                    launch(telegramUrl);
-                                                  } catch (e) {
-                                                    //To handle error and display error message
-                                                    print("error");
-                                                  }
+                                                  Share.share(refMessage,
+                                                      subject:
+                                                          'Gamaru Referal');
                                                 },
                                                 child: Logo(
                                                   Logos.telegram,
@@ -295,7 +271,7 @@ Game on!''';
 I'm loving "Gamaru" – it's a blast! 🎮
 play BGMI, Free Fire and many more and win real cash!💸🔥
 
-Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just use my referral link: www.gamaru.online and code: ${referalController.refId.value} .
+Join Gamaru and let's both get ${referalController.refAmount.value.toString()} play coins. Just download Gamaru apk : www.gamaru.online and use my code: ${referalController.refId.value} .
 
 Game on!''';
                                                         Share.share(refMessage,

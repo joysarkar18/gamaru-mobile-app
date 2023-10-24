@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/Home-Screen/home_shimmer.dart';
 import 'package:get/get.dart';
 
 import 'autehntication.dart';
@@ -20,10 +21,17 @@ class SignupController extends GetxController {
 
   void registerUser(String email, String password, String referal) {
     Authentication.instance
-        .createUserWithEmailPassword(email, password, referal);
+        .createUserWithEmailPassword(email, password, referal)
+        .then((value) {
+      Get.offAll(const HomeShimmer());
+    });
   }
 
   void loginUser(String email, String password) async {
-    await Authentication.instance.loginUserWithEmailPassword(email, password);
+    await Authentication.instance
+        .loginUserWithEmailPassword(email, password)
+        .then((value) {
+      Get.offAll(const HomeShimmer());
+    });
   }
 }

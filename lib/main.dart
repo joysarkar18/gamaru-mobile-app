@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:gamaru_mobile_app/Screens/Home-Screen/homeScreen.dart';
+import 'package:gamaru_mobile_app/Screens/Home-Screen/home_shimmer.dart';
 import 'package:gamaru_mobile_app/Screens/navigation_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MainScreen(),
+      home: const HomeShimmer(),
     );
   }
 }

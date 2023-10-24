@@ -26,14 +26,12 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-
-    mainController.loadData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => mainController.is_loading.value
-        ? UpdateScreen()
+        ? const UpdateScreen()
         : Scaffold(
             backgroundColor: Colors.black,
             body: _pages[mainController.navBarIndex.value],
