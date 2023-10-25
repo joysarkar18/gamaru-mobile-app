@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SupportScreen extends StatelessWidget {
+class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
 
+  @override
+  State<SupportScreen> createState() => _SupportScreenState();
+}
+
+class _SupportScreenState extends State<SupportScreen> {
+  MainController mainController = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +83,8 @@ class SupportScreen extends StatelessWidget {
                       //To remove the keyboard when button is pressed
                       FocusManager.instance.primaryFocus?.unfocus();
 
-                      var whatsappUrl = "whatsapp://send?phone=+919064983473";
+                      var whatsappUrl =
+                          "whatsapp://send?phone=+91${mainController.urls["wpNo"]}";
                       try {
                         launch(whatsappUrl);
                       } catch (e) {
@@ -111,8 +119,8 @@ class SupportScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () async {
-                      String email =
-                          Uri.encodeComponent("joysarkar8171@gmail.com");
+                      String email = Uri.encodeComponent(
+                          "${mainController.urls["email"]}");
                       String subject = Uri.encodeComponent("Gamaru Support");
                       String body = Uri.encodeComponent("");
                       print(subject); //output: Hello%20Flutter
@@ -193,35 +201,35 @@ class SupportScreen extends StatelessWidget {
                     InkWell(
                         onTap: () async {
                           var url = Uri.parse(
-                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                              "${mainController.urls["facebookUrl"]}");
                           await launchUrl(url);
                         },
                         child: Logo(Logos.facebook_logo)),
                     InkWell(
                         onTap: () async {
-                          var url = Uri.parse(
-                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          var url =
+                              Uri.parse("${mainController.urls["instaUrl"]}");
                           await launchUrl(url);
                         },
                         child: Logo(Logos.instagram)),
                     InkWell(
                         onTap: () async {
                           var url = Uri.parse(
-                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                              "${mainController.urls["linkedinUrl"]}");
                           await launchUrl(url);
                         },
                         child: Logo(Logos.linkedin)),
                     InkWell(
                         onTap: () async {
-                          var url = Uri.parse(
-                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          var url =
+                              Uri.parse("${mainController.urls["twitterUrl"]}");
                           await launchUrl(url);
                         },
                         child: Logo(Logos.twitter)),
                     InkWell(
                         onTap: () async {
-                          var url = Uri.parse(
-                              "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                          var url =
+                              Uri.parse("${mainController.urls["youtubeUrl"]}");
                           await launchUrl(url);
                         },
                         child: Logo(Logos.youtube)),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_carousel_slider/flutter_custom_carousel_slider.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
+import 'package:gamaru_mobile_app/Controllers/Main-Controller/mainController.dart';
 import 'package:gamaru_mobile_app/Screens/Home-Screen/home_shimmer.dart';
 import 'package:gamaru_mobile_app/Screens/refer_screen/refer_earn_screen.dart';
 import 'package:gamaru_mobile_app/game_screen.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Customer Support/SupportScreen.dart';
 import '../Top-section-every/top-part.dart';
@@ -18,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  MainController mainController = Get.put(MainController());
   List<CarouselItem> itemList = [
     CarouselItem(
       image: const AssetImage("Assets/ref_banner.jpg"),
@@ -258,8 +261,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             InkWell(
-                              onTap: () {
-                                print('I love you');
+                              onTap: () async {
+                                var url = Uri.parse(
+                                    "${mainController.urls["howToJoin"]}");
+                                await launchUrl(url);
                               },
                               child: Column(
                                 mainAxisAlignment:
@@ -280,8 +285,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
-                                print('I love you');
+                              onTap: () async {
+                                var url = Uri.parse(
+                                    "${mainController.urls["howToPlay"]}");
+                                await launchUrl(url);
                               },
                               child: Column(
                                 mainAxisAlignment:
@@ -302,8 +309,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
-                                print('I love you');
+                              onTap: () async {
+                                var url = Uri.parse(
+                                    "${mainController.urls["howToEarn"]}");
+                                await launchUrl(url);
                               },
                               child: Column(
                                 mainAxisAlignment:
