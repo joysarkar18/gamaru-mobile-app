@@ -16,6 +16,8 @@ class MainController extends GetxController {
 
   RxBool exchangeLoading = false.obs;
 
+  RxMap urls = {}.obs;
+
   TextEditingController winCoins = TextEditingController();
   RxString palyCoins = "".obs;
 
@@ -75,6 +77,12 @@ class MainController extends GetxController {
       }
       allResults.value = temp2;
       print(allResults.value);
+    });
+  }
+
+  getUrls() async {
+    await _db.collection("urls").doc("url").get().then((value) {
+      urls.value = value["allUrls"];
     });
   }
 }

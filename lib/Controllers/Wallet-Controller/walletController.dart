@@ -72,14 +72,12 @@ class WalletController extends GetxController {
     _db.collection("user").doc(user!.email.toString()).get().then((value) {
       List l = value["bankCards"];
       bankCardList.value = l;
-      print(bankCardList.value);
     });
   }
 
   withdrawAmount(int amount, var card, int fee) async {
     is_withdrawing.value = true;
     try {
-      print("in coin");
       await _db
           .collection("user")
           .doc(user!.email.toString())
@@ -87,7 +85,6 @@ class WalletController extends GetxController {
           .then((value) async {
         int winCoins = value["winCoins"];
         winCoins = winCoins - amount;
-        print("in tranctions");
         await _db
             .collection("user")
             .doc(user!.email)
@@ -98,7 +95,6 @@ class WalletController extends GetxController {
               .doc(user!.email)
               .get()
               .then((v) async {
-            print("in update");
             List transactionList = v["transactions"];
             transactionList.insert(0, {
               "amount": (amount - fee),
@@ -112,14 +108,33 @@ class WalletController extends GetxController {
             await _db
                 .collection("user transactions")
                 .doc(user!.email.toString())
-                .update({"transactions": transactionList});
-            await _db
-                .collection("withdraw")
-                .doc("all transactions")
-                .update({"transactions": transactionList}).then((_) {
-              Timer(Duration(milliseconds: 800), () {
-                is_withdrawing.value = false;
-                Get.to(WithdrawComplete());
+                .update({"transactions": transactionList}).then((value) async {
+              await _db
+                  .collection("withdraw")
+                  .doc("all transactions")
+                  .get()
+                  .then((value) async {
+                transactionList = value["transactions"];
+                transactionList.insert(0, {
+                  "amount": (amount - fee),
+                  "card": card,
+                  "email": user!.email,
+                  "reason": "Withdraw",
+                  "time": DateTime.now(),
+                  "fee": fee,
+                  "add": false,
+                  "paid": false,
+                });
+
+                await _db
+                    .collection("withdraw")
+                    .doc("all transactions")
+                    .update({"transactions": transactionList}).then((_) {
+                  Timer(const Duration(milliseconds: 800), () {
+                    is_withdrawing.value = false;
+                    Get.to(const WithdrawComplete());
+                  });
+                });
               });
             });
           });

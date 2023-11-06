@@ -324,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 70,
                                     repeat: true,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Earn",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
