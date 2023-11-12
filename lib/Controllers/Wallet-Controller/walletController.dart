@@ -168,7 +168,7 @@ class WalletController extends GetxController {
           .collection("recharges")
           .doc("allRecharges")
           .update({"all": l}).then((value) {
-        Get.off(RechargeDone());
+        Get.off(const RechargeDone());
       });
     });
   }
