@@ -59,7 +59,7 @@ class WithdrawComplete extends StatelessWidget {
                           color: Colors.white70, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
-                      height: Get.height * 0.04,
+                      height: Get.height * 0.04, 
                     ),
                     InkWell(
                       highlightColor: Colors.black,
