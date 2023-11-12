@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gamaru_mobile_app/Componants/glossyEffect.dart';
 import 'package:gamaru_mobile_app/Controllers/ReferalController/referalController.dart';
+import 'package:gamaru_mobile_app/Screens/refer_screen/referrals_list.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
@@ -49,7 +50,7 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GlossyCard(
-                    height: 640.0,
+                    height: Get.height * .82,
                     width: Get.width * 0.95,
                     borderRadius: 10.0,
                     borderWith: 1.0,
@@ -159,7 +160,7 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 22.0),
                                 child: GlossyCard(
-                                  height: Get.height * .30,
+                                  height: Get.height * .36,
                                   width: Get.width,
                                   borderRadius: 10.0,
                                   borderWith: 1.0,
@@ -167,7 +168,7 @@ class _ReferAndEarnState extends State<ReferAndEarn> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         color: Color.fromARGB(180, 21, 20, 20)),
-                                    height: Get.height * .30,
+                                    height: Get.height * .36,
                                     width: Get.width,
                                     child: Column(
                                       children: [
@@ -355,6 +356,28 @@ Game on!''';
                                             )),
                                           ),
                                         ),
+                                        Spacer(),
+                                        InkWell(onTap: () {
+                                          Get.to(ReferralsList());
+                                        },
+                                          child: Container(
+                                              width: Get.width * 0.59,
+                                              height: 50,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.blue,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10))),
+                                              child: const Center(
+                                                  child: Text(
+                                                "YOUR REFERRALS",
+                                                style: TextStyle(
+                                                  letterSpacing: 0,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 18),
+                                              )),
+                                            ),
+                                        ),Spacer(),
                                       ],
                                     ),
                                   ),
